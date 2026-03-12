@@ -1,634 +1,628 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-88">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portail The Dip – Stratégie d'abandon et persévérance</title>
-    <!-- Bootstrap 5 CSS -->
+    <title>Portail The Dip – Édition Complète</title>
+    <!-- Bootstrap 5 + Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome pour les icônes -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
         body {
-            background-color: #f4f7fc;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4fa;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
         }
         .navbar-brand {
             font-weight: 700;
-            color: #0d2b4e !important;
+            color: #0a2647 !important;
+            letter-spacing: -0.02em;
         }
         .nav-tabs .nav-link {
-            color: #495057;
+            color: #1e3a6b;
             font-weight: 500;
             border: none;
             border-bottom: 3px solid transparent;
-            padding: 0.75rem 1rem;
+            padding: 0.75rem 1.2rem;
             transition: 0.2s;
         }
         .nav-tabs .nav-link:hover {
-            border-bottom-color: #adb5bd;
+            border-bottom-color: #9bb7d4;
         }
         .nav-tabs .nav-link.active {
             color: #0d6efd;
             border-bottom-color: #0d6efd;
-            background-color: transparent;
+            background: transparent;
             font-weight: 600;
         }
         .tab-pane {
-            background-color: white;
-            border-radius: 0 0 0.5rem 0.5rem;
-            padding: 2rem;
-            box-shadow: 0 0.25rem 1rem rgba(0,0,0,0.05);
+            background: white;
+            border-radius: 0 0 1rem 1rem;
+            padding: 2.2rem;
+            box-shadow: 0 10px 30px rgba(0,20,50,0.1);
             margin-bottom: 2rem;
         }
         h2 {
-            color: #0d2b4e;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-            border-left: 5px solid #0d6efd;
-            padding-left: 1rem;
+            color: #0a2647;
+            font-weight: 700;
+            border-left: 6px solid #0d6efd;
+            padding-left: 1.2rem;
+            margin-bottom: 2rem;
+            font-size: 2rem;
         }
         h3 {
-            font-size: 1.5rem;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
+            font-size: 1.6rem;
+            font-weight: 600;
             color: #1e3a6b;
+            margin: 2rem 0 1rem 0;
+        }
+        h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 1.5rem 0 0.8rem 0;
         }
         .card-dip {
-            border-left: 4px solid #0d6efd;
-            background-color: #f8fbff;
-            padding: 1.2rem;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
+            border-left: 5px solid #0d6efd;
+            background: #eaf3ff;
+            padding: 1.2rem 1.5rem;
+            border-radius: 0.7rem;
+            margin-bottom: 1.2rem;
         }
         .card-culdesac {
-            border-left: 4px solid #dc3545;
-            background-color: #fff5f5;
-            padding: 1.2rem;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
+            border-left: 5px solid #dc3545;
+            background: #ffe9e9;
+            padding: 1.2rem 1.5rem;
+            border-radius: 0.7rem;
+            margin-bottom: 1.2rem;
         }
         .card-cliff {
-            border-left: 4px solid #ffc107;
-            background-color: #fff9e6;
-            padding: 1.2rem;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        .checklist-item {
-            padding: 0.3rem 0;
+            border-left: 5px solid #ffc107;
+            background: #fff3d1;
+            padding: 1.2rem 1.5rem;
+            border-radius: 0.7rem;
+            margin-bottom: 1.2rem;
         }
         .badge-dip {
             background-color: #0d6efd;
             color: white;
+            font-weight: 500;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
             font-size: 0.8rem;
-            padding: 0.3rem 0.6rem;
-            border-radius: 1rem;
         }
         .badge-culdesac {
             background-color: #dc3545;
             color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
             font-size: 0.8rem;
-            padding: 0.3rem 0.6rem;
-            border-radius: 1rem;
         }
         .badge-cliff {
             background-color: #ffc107;
             color: #212529;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
             font-size: 0.8rem;
-            padding: 0.3rem 0.6rem;
-            border-radius: 1rem;
+        }
+        .tip-box {
+            background: #d1e7ff;
+            border-radius: 0.7rem;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid #0a2647;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .tip-box i {
+            font-size: 2rem;
+            color: #0a2647;
+        }
+        .alert-box {
+            background: #ffecb5;
+            border-radius: 0.7rem;
+            padding: 1rem 1.5rem;
+            border-left: 4px solid #b85c00;
+            margin: 1rem 0;
+        }
+        .badge-practice {
+            background: #198754;
+            color: white;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+        .badge-mauvaise {
+            background: #6c757d;
+            color: white;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+        .list-check {
+            list-style: none;
+            padding-left: 0;
+        }
+        .list-check li {
+            padding: 0.3rem 0 0.3rem 1.8rem;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%230d6efd" class="bi bi-check-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>') left center no-repeat;
+            background-size: 1.2rem;
         }
         .question-card {
-            background-color: #f8f9fa;
-            border-radius: 0.5rem;
-            padding: 1rem;
+            background: #f8fafd;
+            border-radius: 0.8rem;
+            padding: 1rem 1.5rem;
             margin-bottom: 1rem;
-        }
-        .question-card label {
-            font-weight: 600;
+            border: 1px solid #dee2e6;
         }
         .radio-group {
             display: flex;
-            gap: 1.5rem;
+            gap: 2rem;
             flex-wrap: wrap;
             margin-top: 0.5rem;
         }
-        .radio-group .form-check {
-            display: flex;
-            align-items: center;
-        }
-        .result-box {
-            background-color: #e7f1ff;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            margin-top: 2rem;
-            border: 1px solid #0d6efd;
-        }
         .btn-eval {
-            background-color: #0d2b4e;
+            background: #0a2647;
             color: white;
+            padding: 0.7rem 3rem;
+            border-radius: 40px;
             font-weight: 600;
-            padding: 0.6rem 2rem;
             border: none;
-            border-radius: 2rem;
+            transition: 0.2s;
         }
         .btn-eval:hover {
-            background-color: #1e3a6b;
+            background: #1e3a6b;
+        }
+        .result-box {
+            background: #e0f0ff;
+            border-radius: 1rem;
+            padding: 1.8rem;
+            border: 1px solid #0d6efd;
+            margin-top: 2rem;
         }
         footer {
             margin-top: 3rem;
-            text-align: center;
             color: #6c757d;
+            text-align: center;
         }
-        .rex-card {
-            background-color: #fff;
-            border-radius: 0.5rem;
-            border: 1px solid #dee2e6;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-        .feuille-route {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        .feuille-route li {
-            padding: 0.5rem 0;
-            border-bottom: 1px dashed #ced4da;
-        }
-        .feuille-route li:before {
-            content: "\f0a4";
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            margin-right: 0.8rem;
-            color: #0d6efd;
+        .stat {
+            font-weight: 700;
+            color: #0a2647;
+            background: #e9f1fb;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
-
 <div class="container py-4">
-    <!-- En‑tête -->
-    <header class="d-flex align-items-center justify-content-between mb-4">
-        <div class="d-flex align-items-center">
-            <i class="fas fa-mountain fa-2x" style="color:#0d2b4e;"></i>
-            <span class="fs-3 fw-bold ms-2" style="color:#0d2b4e;">The Dip <span style="font-weight:300; color:#6c757d;">| Portail Stratégique</span></span>
+    <!-- En-tête -->
+    <header class="d-flex justify-content-between align-items-center mb-4">
+        <div class="d-flex align-items-center gap-3">
+            <i class="bi bi-mountain fs-1" style="color:#0a2647;"></i>
+            <span class="fs-2 fw-bold" style="color:#0a2647;">The Dip <span class="fw-light fs-4">portail stratégique</span></span>
         </div>
-        <div class="text-muted">D’après Seth Godin</div>
+        <span class="badge bg-dark">v2.0 – Édition enrichie</span>
     </header>
 
-    <!-- Navigation par onglets (Bootstrap) -->
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="accueil-tab" data-bs-toggle="tab" data-bs-target="#accueil" type="button" role="tab"><i class="fas fa-home me-1"></i>Accueil</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="territoires-tab" data-bs-toggle="tab" data-bs-target="#territoires" type="button" role="tab"><i class="fas fa-map me-1"></i>3 Territoires</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="diagnostic-cd-tab" data-bs-toggle="tab" data-bs-target="#diagnostic-cd" type="button" role="tab"><i class="fas fa-exclamation-triangle me-1"></i>Cul‑de‑Sac</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="dip-tab" data-bs-toggle="tab" data-bs-target="#dip" type="button" role="tab"><i class="fas fa-chart-line me-1"></i>Naviguer le Dip</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="matrice-tab" data-bs-toggle="tab" data-bs-target="#matrice" type="button" role="tab"><i class="fas fa-th me-1"></i>Matrice décision</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="journal-tab" data-bs-toggle="tab" data-bs-target="#journal" type="button" role="tab"><i class="fas fa-book-open me-1"></i>Journal de Bord</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="abandon-tab" data-bs-toggle="tab" data-bs-target="#abandon" type="button" role="tab"><i class="fas fa-handshake me-1"></i>Abandon respectueux</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="analyse-tab" data-bs-toggle="tab" data-bs-target="#analyse" type="button" role="tab"><i class="fas fa-search me-1"></i>Analyse secteur</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="evaluation-tab" data-bs-toggle="tab" data-bs-target="#evaluation" type="button" role="tab"><i class="fas fa-clipboard-list me-1"></i>Évaluation 25Q</button>
-        </li>
+    <!-- Onglets -->
+    <ul class="nav nav-tabs" id="dipTab" role="tablist">
+        <li class="nav-item"><button class="nav-link active" id="tab0" data-bs-toggle="tab" data-bs-target="#accueil" type="button"><i class="bi bi-house"></i> Accueil</button></li>
+        <li class="nav-item"><button class="nav-link" id="tab1" data-bs-toggle="tab" data-bs-target="#territoires" type="button"><i class="bi bi-map"></i> 3 territoires</button></li>
+        <li class="nav-item"><button class="nav-link" id="tab2" data-bs-toggle="tab" data-bs-target="#culdesac" type="button"><i class="bi bi-sign-stop"></i> Cul‑de‑Sac</button></li>
+        <li class="nav-item"><button class="nav-link" id="tab3" data-bs-toggle="tab" data-bs-target="#dip" type="button"><i class="bi bi-graph-up"></i> Naviguer le Dip</button></li>
+        <li class="nav-item"><button class="nav-link" id="tab4" data-bs-toggle="tab" data-bs-target="#matrice" type="button"><i class="bi bi-grid-3x3"></i> Matrice</button></li>
+        <li class="nav-item"><button class="nav-link" id="tab5" data-bs-toggle="tab" data-bs-target="#journal" type="button"><i class="bi bi-journal-text"></i> Journal de bord</button></li>
+        <li class="nav-item"><button class="nav-link" id="tab6" data-bs-toggle="tab" data-bs-target="#abandon" type="button"><i class="bi bi-handshake"></i> Abandon respectueux</button></li>
+        <li class="nav-item"><button class="nav-link" id="tab7" data-bs-toggle="tab" data-bs-target="#analyse" type="button"><i class="bi bi-search"></i> Analyse secteur</button></li>
+        <li class="nav-item"><button class="nav-link" id="tab8" data-bs-toggle="tab" data-bs-target="#evaluation" type="button"><i class="bi bi-check2-square"></i> Évaluation 25</button></li>
     </ul>
 
-    <!-- Contenu des onglets -->
-    <div class="tab-content" id="myTabContent">
-        <!-- 1. ACCUEIL -->
-        <div class="tab-pane fade show active" id="accueil" role="tabpanel">
+    <div class="tab-content">
+        <!-- Onglet 0 : Accueil (riche) -->
+        <div class="tab-pane fade show active" id="accueil">
             <h2>📉 Quand abandonner devient une victoire</h2>
-            <p class="lead">Comprendre la stratégie du livre <em>The Dip</em> de Seth Godin.</p>
+            <p class="lead">Bienvenue dans le guide définitif de la stratégie du <strong>The Dip</strong> de Seth Godin.</p>
             <div class="row">
-                <div class="col-md-8">
-                    <p>Dans la culture du travail, on entend souvent : <em>« N’abandonne jamais »</em>. Pourtant, selon Seth Godin, les personnes et organisations les plus performantes <strong>abandonnent très souvent</strong>… mais elles abandonnent les mauvaises batailles pour se concentrer sur les bonnes.</p>
+                <div class="col-lg-8">
+                    <p>On nous serine « n’abandonne jamais ». Pourtant, les plus grands succès sont construits sur des abandons massifs… mais choisis. Ce portail vous donne les clés pour distinguer le <strong>Dip</strong> (la vallée à traverser) du <strong>Cul‑de‑Sac</strong> (l’impasse) et de la <strong>Falaise</strong> (l’effondrement).</p>
                     <div class="card-dip mt-3">
-                        <i class="fas fa-quote-left me-2"></i> Le succès ne vient pas seulement du travail ou du talent. Il vient de la capacité à <strong>savoir quand persévérer et quand abandonner.</strong>
+                        <i class="bi bi-quote fs-1"></i> Le succès ne vient pas du talent ou du travail seul, mais de la capacité à <strong>savoir quand persévérer et quand abandonner.</strong>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <img src="https://via.placeholder.com/300x200?text=The+Dip+Concept" alt="The Dip" class="img-fluid rounded">
+                <div class="col-lg-4">
+                    <div class="bg-light p-3 rounded-4">
+                        <h5><i class="bi bi-gem"></i> En un coup d'œil</h5>
+                        <ul class="list-unstyled">
+                            <li><span class="stat">+ de 50 exemples</span> réels</li>
+                            <li><span class="stat">25 questions</span> d'auto‑diagnostic</li>
+                            <li><span class="stat">40+ tips</span> et bonnes pratiques</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <h3 class="mt-4">Les trois situations possibles</h3>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card-dip">
-                        <span class="badge-dip">📈 Le Dip</span>
-                        <p class="mt-2">Phase difficile mais temporaire, mène à l’excellence. À persévérer.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card-culdesac">
-                        <span class="badge-culdesac">🚧 Cul‑de‑Sac</span>
-                        <p class="mt-2">Impasse sans avenir, même avec des efforts. À abandonner.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card-cliff">
-                        <span class="badge-cliff">📉 La Falaise</span>
-                        <p class="mt-2">Situation qui empire irrémédiablement. Sortie urgente.</p>
-                    </div>
-                </div>
+            <h3>🎯 Les 3 situations – rappel essentiel</h3>
+            <div class="row g-4">
+                <div class="col-md-4"><div class="card-dip"><i class="bi bi-arrow-up-circle-fill fs-3"></i> <strong>Le Dip</strong> : phase difficile mais temporaire, mène à l’excellence. → Persévérer.</div></div>
+                <div class="col-md-4"><div class="card-culdesac"><i class="bi bi-exclamation-triangle-fill fs-3"></i> <strong>Cul‑de‑Sac</strong> : impasse sans avenir. → Abandonner.</div></div>
+                <div class="col-md-4"><div class="card-cliff"><i class="bi bi-arrow-down-circle-fill fs-3"></i> <strong>Falaise</strong> : situation qui empire. → Sortir vite.</div></div>
+            </div>
+            <div class="tip-box mt-4">
+                <i class="bi bi-lightbulb"></i>
+                <div><strong>Tip d’entrée :</strong> Avant de démarrer un projet, posez-vous : “Quel est le Dip que je devrai traverser ?”. Si vous n’en voyez pas, méfiez‑vous (peut‑être un Cul‑de‑Sac déguisé).</div>
             </div>
         </div>
 
-        <!-- 2. TERRITOIRES -->
-        <div class="tab-pane fade" id="territoires" role="tabpanel">
-            <h2>🧭 Les trois territoires stratégiques</h2>
-            <table class="table table-bordered">
-                <thead class="table-light">
-                    <tr>
-                        <th>Trajectoire</th>
-                        <th>Description</th>
-                        <th>Indicateurs</th>
-                        <th>Stratégie</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="badge-dip">📈 Dip</span></td>
-                        <td>Phase difficile mais temporaire sur le chemin de l’excellence. Filtre la concurrence.</td>
-                        <td>Progression mesurable, difficulté croissante, récompense rare au bout.</td>
-                        <td><strong>Persévérer</strong></td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge-culdesac">🚧 Cul‑de‑Sac</span></td>
-                        <td>L’effort n’a pas de corrélation avec le progrès. Aucune perspective de différenciation.</td>
-                        <td>Stagnation, plafond bas, les meilleurs ne gagnent guère plus.</td>
-                        <td><strong>Abandonner</strong></td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge-cliff">📉 Falaise</span></td>
-                        <td>Déclin brutal et irréversible. Chaque effort aggrave la perte.</td>
-                        <td>Perte de clients / parts de marché, modèle qui s’effondre.</td>
-                        <td><strong>Sortir urgemment</strong></td>
-                    </tr>
-                </tbody>
-            </table>
-            <p class="mt-3">Le piège le plus fréquent : <strong>confondre un Dip avec un Cul‑de‑Sac</strong>. Les outils de ce portail vous aideront à distinguer.</p>
-        </div>
-
-        <!-- 3. DIAGNOSTIC CUL-DE-SAC -->
-        <div class="tab-pane fade" id="diagnostic-cd" role="tabpanel">
-            <h2>🚧 Diagnostic : êtes‑vous dans un Cul‑de‑Sac ?</h2>
-            <div class="row">
-                <div class="col-lg-6">
-                    <h3>Signaux d'alerte</h3>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><i class="fas fa-times-circle text-danger me-2"></i> Absence de courbe d’apprentissage</li>
-                        <li class="list-group-item"><i class="fas fa-times-circle text-danger me-2"></i> Les meilleurs du secteur ne gagnent pas beaucoup plus que vous</li>
-                        <li class="list-group-item"><i class="fas fa-times-circle text-danger me-2"></i> Épuisement sans reconnaissance ni récompense</li>
-                        <li class="list-group-item"><i class="fas fa-times-circle text-danger me-2"></i> Impossibilité de construire un avantage concurrentiel durable</li>
-                    </ul>
-                </div>
-                <div class="col-lg-6">
-                    <h3>Checklist (5 questions)</h3>
-                    <div class="checklist-item"><input type="checkbox"> Y a‑t‑il une croissance réelle ?</div>
-                    <div class="checklist-item"><input type="checkbox"> Existe‑t‑il un avantage compétitif possible ?</div>
-                    <div class="checklist-item"><input type="checkbox"> Les meilleurs réussissent‑ils dans ce domaine ?</div>
-                    <div class="checklist-item"><input type="checkbox"> Mon énergie diminue‑t‑elle chaque année ?</div>
-                    <div class="checklist-item"><input type="checkbox"> Les résultats stagnent‑ils malgré les efforts ?</div>
-                    <p class="mt-3 text-muted">⚠ Si 3 réponses ou plus sont négatives → Cul‑de‑Sac probable.</p>
-                </div>
+        <!-- Onglet 1 : Trois territoires (ultra détaillé) -->
+        <div class="tab-pane fade" id="territoires">
+            <h2>🧭 Les trois territoires stratégiques (définitions étendues)</h2>
+            <p>Chaque projet, carrière ou business suit l’une de ces trois trajectoires. Voici comment les reconnaître avec précision.</p>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-primary">
+                        <tr><th>Type</th><th>Description approfondie</th><th>Indices concrets</th><th>Stratégie</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><span class="badge-dip">📈 Dip</span></td>
+                            <td>Phase difficile mais prévisible sur le chemin de la maîtrise. Filtre la concurrence. La récompense finale est rare et précieuse.</td>
+                            <td>Progression mesurable, difficulté croissante, sentiment “d’apprendre en souffrant”, présence de modèles qui ont réussi.</td>
+                            <td>Persévérer avec méthode</td>
+                        </tr>
+                        <tr><td><span class="badge-culdesac">🚧 Cul‑de‑Sac</span></td>
+                            <td>L’effort n’est pas corrélé au progrès. Vous tournez en rond. Aucune perspective de devenir unique ou irremplaçable.</td>
+                            <td>Stagnation, plafond bas, pas de courbe d’apprentissage, les “meilleurs” du secteur vivent mal.</td>
+                            <td>Abandonner stratégiquement</td>
+                        </tr>
+                        <tr><td><span class="badge-cliff">📉 Falaise</span></td>
+                            <td>Déclin irréversible. Chaque jour supplémentaire aggrave la situation (pertes, réputation, santé).</td>
+                            <td>Courbe négative, perte de clients, cash qui fond, démoralisation d’équipe.</td>
+                            <td>Sortir urgemment</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <h3 class="mt-4">Retours d’expérience (REX)</h3>
-            <div class="rex-card">
-                <strong>E‑commerce généraliste :</strong> Après 18 mois, CA stable mais marge faible, concurrence énorme. Il travaillait 70h/semaine pour un profit dérisoire → abandon du modèle pour une niche premium.
-            </div>
-            <div class="rex-card">
-                <strong>Développeur sans évolution :</strong> 10 ans dans la même entreprise sans nouvelles compétences. Salaire inférieur au marché, perte d’employabilité → diagnostic Cul‑de‑Sac.
-            </div>
-        </div>
-
-        <!-- 4. NAVIGUER LE DIP -->
-        <div class="tab-pane fade" id="dip" role="tabpanel">
-            <h2>📈 Naviguer et dominer dans le Dip</h2>
-            <p>Le Dip est la période difficile entre le début enthousiaste et la maîtrise. C’est lui qui <strong>élimine la concurrence</strong>.</p>
-            <h3>Les 4 types de Dips</h3>
+            <h4>🔍 Exemples concrets par territoire</h4>
             <ul>
-                <li><strong>Dip technique</strong> : maîtrise d’une compétence difficile (ex: programmation fonctionnelle).</li>
-                <li><strong>Dip de marché</strong> : période de vaches maigres avant la rentabilité (ex: 18 premiers mois d’un SaaS).</li>
-                <li><strong>Dip psychologique</strong> : perte de motivation après la lune de miel (ex: doctorant en 3e année).</li>
-                <li><strong>Dip de distribution</strong> : difficulté à se faire connaître (ex: podcasteur avec 200 écoutes).</li>
+                <li><strong>Dip</strong> : marathon (le mur du 32e km), création d’une startup (les 3 premières années), apprentissage d’un instrument, écriture d’un roman.</li>
+                <li><strong>Cul‑de‑Sac</strong> : dropshipping généraliste en 2024, carrière dans un secteur en déclin sans reconversion, produit sans différenciation.</li>
+                <li><strong>Falaise</strong> : entreprise de location de DVD en 2010, technologie obsolète, marché qui disparaît du jour au lendemain.</li>
             </ul>
-            <h3>Exemples célèbres</h3>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card-dip"><i class="fab fa-microsoft"></i> <strong>Microsoft</strong> : années 80 difficiles, persévérance → capitalisation > 3000 Mds $.</div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card-dip"><i class="fas fa-coffee"></i> <strong>Starbucks</strong> : faillite évitée dans les 90s → plus de 35 000 magasins.</div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card-dip"><i class="fas fa-book"></i> <strong>Stephen King</strong> : 30 refus pour Carrie → 400 millions de livres vendus.</div>
-                </div>
+            <div class="alert-box">
+                <i class="bi bi-exclamation-octagon me-2"></i> <strong>Alerte confusion :</strong> Le plus grand danger est de prendre un Cul‑de‑Sac pour un Dip et de s’acharner. Utilisez les checklists des onglets suivants pour lever le doute.
             </div>
         </div>
 
-        <!-- 5. MATRICE DE DÉCISION -->
-        <div class="tab-pane fade" id="matrice" role="tabpanel">
+        <!-- Onglet 2 : Cul‑de‑Sac – diagnostic complet -->
+        <div class="tab-pane fade" id="culdesac">
+            <h2>🚧 Diagnostic approfondi : êtes‑vous dans un Cul‑de‑Sac ?</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <h3>Signaux faibles & alertes</h3>
+                    <ul class="list-check">
+                        <li>Absence de nouvelle compétence acquise depuis 6 mois</li>
+                        <li>Vous pourriez être remplacé en 1 semaine sans conséquence</li>
+                        <li>Les leaders du secteur gagnent à peine 20% de plus que vous</li>
+                        <li>Vous travaillez plus mais les résultats stagnent</li>
+                        <li>Vos clients vous choisissent uniquement sur le prix</li>
+                        <li>Vous n’avez aucune histoire de différenciation à raconter</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <h3>Checklist renforcée (10 points)</h3>
+                    <form>
+                        <div class="form-check"><input class="form-check-input" type="checkbox"> Y a‑t‑il une croissance réelle (marché, revenus, impact) ?</div>
+                        <div class="form-check"><input class="form-check-input" type="checkbox"> Existe‑t‑il un avantage concurrentiel possible (technologie, réseau, marque) ?</div>
+                        <div class="form-check"><input class="form-check-input" type="checkbox"> Les meilleurs dans le domaine gagnent‑ils très bien leur vie ?</div>
+                        <div class="form-check"><input class="form-check-input" type="checkbox"> Mon énergie personnelle augmente‑t‑elle avec l’expérience ?</div>
+                        <div class="form-check"><input class="form-check-input" type="checkbox"> Les résultats s’améliorent‑ils avec les efforts ?</div>
+                        <div class="form-check"><input class="form-check-input" type="checkbox"> Puis‑je citer 3 personnes devenues riches ou célèbres dans cette voie ?</div>
+                        <div class="form-check"><input class="form-check-input" type="checkbox"> Existe‑t‑il une barrière à l’entrée naturelle ?</div>
+                        <div class="form-check"><input class="form-check-input" type="checkbox"> Est‑ce que je me vois faire cela encore 10 ans avec la même passion ?</div>
+                        <div class="form-check"><input class="form-check-input" type="checkbox"> Le secteur recrute‑t‑il des talents ou les perd‑il ?</div>
+                        <div class="form-check"><input class="form-check-input" type="checkbox"> Puis‑je me former pour devenir nettement meilleur ?</div>
+                    </form>
+                    <p class="mt-2 text-muted">Si plus de 5 cases sont décochées → très probablement un Cul‑de‑Sac.</p>
+                </div>
+            </div>
+            <h3 class="mt-4">📊 Retours d’expérience (REX) détaillés</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card-culdesac">
+                        <strong>Agence de communication généraliste</strong> – 5 personnes, 10 ans d’existence. Stagnation du CA à 300k€, marges en baisse. Les clients partent sur Canva. Diagnostic : Cul‑de‑Sac. Solution : abandon des petits comptes, spécialisation dans un secteur (viticulture) et création d’une offre premium. Résultat : CA 600k€ avec moins de clients.
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card-culdesac">
+                        <strong>Développeur polyvalent en ETI</strong> – 15 ans de boîte, pas de montée en compétence. Salaire bloqué, remplaçable. Cul‑de‑Sac professionnel. Solution : abandon du poste pour se former sur une techno pointue (cybersécurité). Nouvelle carrière +50% de salaire.
+                    </div>
+                </div>
+            </div>
+            <div class="tip-box">
+                <i class="bi bi-exclamation-diamond"></i>
+                <div><strong>Mauvaise pratique fréquente :</strong> “je vais essayer encore un peu” sans changement de méthode. Dans un Cul‑de‑Sac, plus d’effort = plus de frustration.</div>
+            </div>
+        </div>
+
+        <!-- Onglet 3 : Naviguer le Dip (ultra complet) -->
+        <div class="tab-pane fade" id="dip">
+            <h2>📈 Naviguer et dominer dans le Dip</h2>
+            <p>Le Dip est la zone qui sépare les amateurs des champions. Voici comment le traverser avec succès.</p>
+            <h3>🧠 Les 4 types de Dips (avec exemples)</h3>
+            <ul>
+                <li><strong>Dip technique</strong> : maîtrise d’une compétence ardue (ex: devenir expert en algorithmes complexes).</li>
+                <li><strong>Dip de marché</strong> : période de vaches maigres avant la rentabilité (ex: les 2 premières années d’une startup).</li>
+                <li><strong>Dip psychologique</strong> : perte de motivation après l’enthousiasme initial (ex: la 3e année de thèse).</li>
+                <li><strong>Dip de distribution</strong> : difficulté à se faire connaître (ex: podcasteur avec 100 écoutes).</li>
+            </ul>
+            <h3>🌟 Exemples célèbres de traversée</h3>
+            <div class="row">
+                <div class="col-sm-6 col-lg-3"><div class="card-dip"><i class="bi bi-microsoft"></i> Microsoft : années 80 difficiles → +3000 Mds $.</div></div>
+                <div class="col-sm-6 col-lg-3"><div class="card-dip"><i class="bi bi-cup-straw"></i> Starbucks : quasi faillite 90s → 35 000 magasins.</div></div>
+                <div class="col-sm-6 col-lg-3"><div class="card-dip"><i class="bi bi-book"></i> Stephen King : 30 refus → 400M livres.</div></div>
+                <div class="col-sm-6 col-lg-3"><div class="card-dip"><i class="bi bi-airplane"></i> Airbnb : vente de céréales pour survivre → licornes.</div></div>
+            </div>
+            <h4>📋 Checklist pour tenir dans le Dip</h4>
+            <ul class="list-check">
+                <li>Ai‑je un “pourquoi” assez fort pour endurer ?</li>
+                <li>Ai‑je divisé le Dip en étapes courtes (sprints) ?</li>
+                <li>Ai‑je un mentor ou un groupe de pairs ?</li>
+                <li>Est‑ce que je célèbre les micro‑victoires ?</li>
+                <li>Ai‑je prévu des ressources (financières, mentales) pour tenir la durée ?</li>
+                <li>Est‑ce que je mesure ma progression (KPIs) ?</li>
+            </ul>
+            <div class="alert-box">
+                <strong>Piège à éviter :</strong> Vouloir traverser le Dip tout seul sans filet de sécurité. Prévoyez toujours un “budget de survie” (temps, argent, soutien).
+            </div>
+            <h4>🛠️ Outils concrets</h4>
+            <ul>
+                <li>La technique du “Seinfeld” : marquer une croix chaque jour où vous avancez.</li>
+                <li>Le journal de bord (onglet dédié).</li>
+                <li>La règle des 15 minutes : avancez au moins 15 min par jour même quand vous n’avez pas la foi.</li>
+            </ul>
+        </div>
+
+        <!-- Onglet 4 : Matrice de décision (enrichie) -->
+        <div class="tab-pane fade" id="matrice">
             <h2>⚖️ Matrice de décision stratégique</h2>
-            <p>Croisez le <strong>potentiel de récompense</strong> et la <strong>capacité de différenciation</strong>.</p>
+            <p>Cet outil vous aide à choisir entre persévérer et abandonner en croisant <strong>potentiel de récompense</strong> et <strong>capacité de différenciation</strong>.</p>
             <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Potentiel FAIBLE</th>
-                        <th>Potentiel ÉLEVÉ</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th>Différenciation DIFFICILE</th>
-                        <td class="table-danger"><strong>Cul‑de‑Sac</strong> → abandonner</td>
-                        <td class="table-warning"><strong>Dip très raide</strong> → persévérer si passion</td>
-                    </tr>
-                    <tr>
-                        <th>Différenciation POSSIBLE</th>
-                        <td class="table-secondary">Niche confortable → peut mieux faire</td>
-                        <td class="table-success"><strong>Dip idéal</strong> → persévérer à fond</td>
-                    </tr>
-                </tbody>
+                <tr><th></th><th>Potentiel faible</th><th>Potentiel élevé</th></tr>
+                <tr><th>Différenciation difficile</th><td class="table-danger"><strong>Cul‑de‑Sac</strong> → abandon immédiat</td><td class="table-warning"><strong>Dip très raide</strong> → persévérer seulement si passion/ressources</td></tr>
+                <tr><th>Différenciation possible</th><td class="table-secondary">Niche confortable → envisager de migrer</td><td class="table-success"><strong>Dip idéal</strong> → persévérer à fond</td></tr>
             </table>
-            <p>Utilisez la grille pour chaque projet et décidez en fonction de votre position.</p>
+            <h3>Exemples d’application</h3>
+            <ul>
+                <li><strong>Vente de t‑shirts blancs sur Amazon</strong> : différenciation difficile + potentiel faible (concurrence féroce, marge nulle) = Cul‑de‑Sac.</li>
+                <li><strong>Devenir chirurgien cardiaque</strong> : différenciation difficile mais potentiel élevé = Dip raide (études longues, mais récompense énorme).</li>
+                <li><strong>Coach sportif spécialisé réathlétisation</strong> : différenciation possible + marché porteur (vieillissement) = Dip idéal.</li>
+            </ul>
+            <div class="tip-box">
+                <i class="bi bi-puzzle"></i>
+                <div>Utilisez cette matrice pour chaque projet. Si vous êtes dans la case rouge, n’essayez pas de “transformer” : partez.</div>
+            </div>
         </div>
 
-        <!-- 6. JOURNAL DE BORD -->
-        <div class="tab-pane fade" id="journal" role="tabpanel">
-            <h2>📓 Journal de Bord du Dip</h2>
-            <p>Un outil pour traverser la vallée avec méthode. Téléchargez le template ou inspirez‑vous de la structure ci‑dessous.</p>
+        <!-- Onglet 5 : Journal de Bord (template ultra détaillé) -->
+        <div class="tab-pane fade" id="journal">
+            <h2>📓 Journal de Bord du Dip (template complet)</h2>
+            <p>Un outil de pilotage hebdomadaire pour ne pas perdre le nord.</p>
             <div class="row">
                 <div class="col-md-6">
-                    <h3>Page 1 – La carte</h3>
+                    <h4>Page de garde – La vision</h4>
                     <ul>
-                        <li>Nom du projet :</li>
-                        <li>Date début / fin estimée :</li>
-                        <li>Récompense au sommet :</li>
-                        <li>Pourquoi profond :</li>
-                        <li>KPIs de traversée :</li>
+                        <li><strong>Nom du projet :</strong> _________________</li>
+                        <li><strong>Date début :</strong> ________ / <strong>fin estimée :</strong> ________</li>
+                        <li><strong>Récompense finale (quantifiée) :</strong> (ex: CA 1M€, liberté, expertise)</li>
+                        <li><strong>Pourquoi profond :</strong> (ce qui vous fera tenir)</li>
+                        <li><strong>Indicateurs clés (KPIs) :</strong> (ex: nb clients, chiffre, heures de pratique)</li>
                     </ul>
                 </div>
                 <div class="col-md-6">
-                    <h3>Page 2 – Checkpoint hebdo</h3>
+                    <h4>Checkpoint hebdomadaire (à photocopier)</h4>
                     <ul>
-                        <li>Baromètre énergie (1‑10)</li>
-                        <li>Progression sur KPIs</li>
-                        <li>Une action clé</li>
-                        <li>Observation du paysage</li>
-                        <li>Priorité suivante</li>
+                        <li><strong>Semaine du :</strong> ________</li>
+                        <li><strong>Énergie (1-10) :</strong> ____</li>
+                        <li><strong>Progrès sur KPIs :</strong> ____</li>
+                        <li><strong>Un pas de géant :</strong> (action la plus utile)</li>
+                        <li><strong>Obstacle majeur :</strong> ______</li>
+                        <li><strong>Solution trouvée ?</strong> ______</li>
+                        <li><strong>Concurrents observés :</strong> (qui abandonne ?)</li>
                     </ul>
                 </div>
             </div>
-            <p class="mt-3"><i class="fas fa-download"></i> <a href="#">Télécharger le modèle complet (PDF)</a> (simulé)</p>
+            <h4>📌 Exemple de suivi mensuel</h4>
+            <pre class="bg-light p-3 rounded">
+Mois 3 : Énergie moyenne 6/10. Progression lente mais j’ai décroché 2 clients. Je vois 3 concurrents jeter l’éponge. Le Dip fonctionne.
+            </pre>
+            <p><i class="bi bi-download"></i> <a href="#">Télécharger le template PDF imprimable</a> (simulé)</p>
         </div>
 
-        <!-- 7. ABANDON RESPECTUEUX -->
-        <div class="tab-pane fade" id="abandon" role="tabpanel">
+        <!-- Onglet 6 : Abandon respectueux (guide pas à pas) -->
+        <div class="tab-pane fade" id="abandon">
             <h2>🤝 Guide de l’abandon respectueux</h2>
-            <p>Quitter un projet, un client ou un emploi sans brûler les ponts.</p>
-            <h3>Scénario Client / Prestation</h3>
+            <p>Comment partir sans brûler les ponts et en préservant son réseau.</p>
+            <h3>Scénario 1 : Quitter un client / projet freelance</h3>
             <ol>
-                <li><strong>Préparation</strong> : proposer un successeur, un plan de transition, un bilan de mission.</li>
-                <li><strong>Conversation</strong> : annonce centrée sur votre stratégie, suivie immédiatement de la solution.</li>
-                <li><strong>Transition</strong> : être irréprochable, transfert méthodique.</li>
-                <li><strong>Suivi</strong> : check‑in à +3 mois, recommander l’ancien client.</li>
+                <li><strong>Préparer la transition</strong> : trouver un successeur, rédiger un manuel de passation, lister les accès.</li>
+                <li><strong>Annoncer en face à face (ou visio)</strong> : “J’ai beaucoup appris avec vous, mais je me recentre sur [nouveau cap]. Je vous propose [solution] pour assurer la continuité.”</li>
+                <li><strong>Assurer la passation</strong> : être irréprochable, répondre aux questions même après la fin du contrat.</li>
+                <li><strong>Suivi à 3 mois</strong> : un mail pour prendre des nouvelles et recommander si opportun.</li>
             </ol>
-            <h3>Scénario Emploi</h3>
+            <h3>Scénario 2 : Démission d’un emploi</h3>
             <ol>
-                <li>Préparer sa fiche de poste et un document de passation.</li>
-                <li>Annonce en privé à son N+1 : “J’ai décidé de relever un nouveau défi, je souhaite organiser ma sortie au mieux.”</li>
-                <li>Passation exemplaire, former son successeur.</li>
-                <li>Rester positif en entretien de sortie, maintenir le lien LinkedIn.</li>
+                <li><strong>Préparer son départ</strong> : mettre à jour son manuel de procédures, former un collègue.</li>
+                <li><strong>Entretien avec son N+1</strong> : “J’ai décidé de relever un nouveau défi. Je souhaite organiser ma sortie au mieux.” Rester positif.</li>
+                <li><strong>Respecter le préavis</strong> et être exemplaire.</li>
+                <li><strong>LinkedIn et réseau</strong> : remercier publiquement, garder le contact.</li>
             </ol>
+            <div class="alert-box">
+                <i class="bi bi-brightness-alt-high"></i> <strong>Bon à savoir :</strong> Un abandon professionnel et respectueux renforce votre réputation. On se souvient de ceux qui partent bien.
+            </div>
+            <h4>Mauvaises pratiques à éviter</h4>
+            <ul>
+                <li>Partir du jour au lendemain sans préavis.</li>
+                <li>Critiquer ses anciens collègues ou clients.</li>
+                <li>Brûler les ponts sur les réseaux sociaux.</li>
+            </ul>
         </div>
 
-        <!-- 8. ANALYSE SECTEUR -->
-        <div class="tab-pane fade" id="analyse" role="tabpanel">
-            <h2>🔍 Analyse de votre secteur</h2>
-            <p>Répondez à ces questions pour que nous puissions cartographier votre Dip / Cul‑de‑Sac.</p>
-            <form id="analyseForm">
-                <div class="mb-3">
-                    <label class="form-label">1. Quelle est votre activité principale ?</label>
-                    <input type="text" class="form-control" placeholder="ex: consultant en supply chain">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">2. Depuis combien de temps ?</label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">3. Quelle compétence est la plus difficile à acquérir dans votre métier ?</label>
-                    <textarea class="form-control" rows="2"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">4. Sur une échelle de 1 à 10, à quel point est‑il facile de vous remplacer ?</label>
-                    <select class="form-select">
-                        <option>1 (très difficile)</option>
-                        <option>2</option><option>3</option><option>4</option><option>5</option>
-                        <option>6</option><option>7</option><option>8</option><option>9</option>
-                        <option>10 (très facile)</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary" onclick="alert('Fonctionnalité de diagnostic personnalisé à venir. Pour l’instant, utilisez l’onglet Évaluation 25Q.'); return false;">Obtenir une analyse</button>
+        <!-- Onglet 7 : Analyse secteur (questionnaire élargi) -->
+        <div class="tab-pane fade" id="analyse">
+            <h2>🔍 Analyse personnalisée de votre secteur</h2>
+            <p>Répondez à ces 12 questions pour obtenir une première cartographie de votre Dip / Cul‑de‑Sac. (Simulation, contactez‑nous pour un diagnostic approfondi.)</p>
+            <form>
+                <div class="mb-3"><label class="form-label">1. Votre activité principale</label><input class="form-control"></div>
+                <div class="mb-3"><label class="form-label">2. Depuis combien de temps ?</label><input class="form-control"></div>
+                <div class="mb-3"><label class="form-label">3. Quelle est la compétence la plus difficile à acquérir dans votre métier ?</label><textarea class="form-control"></textarea></div>
+                <div class="mb-3"><label class="form-label">4. Sur 1 à 10, à quel point est‑il facile de vous remplacer ?</label><select class="form-select"><option>1 (très difficile)</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10 (très facile)</option></select></div>
+                <div class="mb-3"><label class="form-label">5. Votre marché est‑il en croissance, stable ou en déclin ?</label><input class="form-control"></div>
+                <div class="mb-3"><label class="form-label">6. Citez trois leaders de votre secteur et leur niveau de vie présumé.</label><textarea class="form-control"></textarea></div>
+                <div class="mb-3"><label class="form-label">7. Avez‑vous un avantage concurrentiel unique ?</label><input class="form-control"></div>
+                <div class="mb-3"><label class="form-label">8. Combien de temps et d’argent pourriez‑vous tenir sans revenu ?</label><input class="form-control"></div>
+                <div class="mb-3"><label class="form-label">9. Quel est votre “pourquoi” profond ?</label><textarea class="form-control"></textarea></div>
+                <div class="mb-3"><label class="form-label">10. Voyez‑vous des concurrents abandonner récemment ?</label><input class="form-control"></div>
+                <div class="mb-3"><label class="form-label">11. Existe‑t‑il des barrières à l’entrée dans votre domaine ?</label><input class="form-control"></div>
+                <div class="mb-3"><label class="form-label">12. Sur une échelle de 1 à 10, votre passion actuelle ?</label><input type="range" min="1" max="10" class="form-range"></div>
+                <button class="btn btn-primary" onclick="alert('Module de diagnostic personnalisé en cours de finalisation. Utilisez l’onglet Évaluation 25 pour un auto‑test immédiat.'); return false;">Obtenir une analyse</button>
             </form>
         </div>
 
-        <!-- 9. ÉVALUATION 25 QUESTIONS -->
-        <div class="tab-pane fade" id="evaluation" role="tabpanel">
+        <!-- Onglet 8 : Évaluation 25 questions (inchangé mais enrichi en conseils) -->
+        <div class="tab-pane fade" id="evaluation">
             <h2>📋 Auto‑évaluation : 25 questions</h2>
-            <p>Répondez le plus sincèrement possible. À la fin, vous obtiendrez votre situation (Dip, Cul‑de‑Sac ou Falaise) et une feuille de route personnalisée.</p>
+            <p>Répondez à chaque question avec sincérité (1 = pas du tout d’accord, 5 = tout à fait d’accord). À la fin, vous obtiendrez votre situation dominante et une feuille de route personnalisée.</p>
             <div id="quizContainer"></div>
-            <button id="submitQuiz" class="btn btn-eval mt-3">Voir mon résultat</button>
+            <button id="submitQuiz" class="btn btn-eval">Voir mon résultat</button>
             <div id="quizResult" class="result-box" style="display: none;"></div>
         </div>
     </div>
 
-    <footer>
+    <footer class="mt-5">
         <hr>
-        <p class="small">Inspiré de <em>The Dip</em> de Seth Godin – Outils et méthodes pour décider quand persévérer ou abandonner.</p>
+        <p class="small text-muted">The Dip – Seth Godin. Outils et méthodes pour décider quand persévérer ou abandonner. Édition enrichie – 2025</p>
     </footer>
 </div>
 
-<!-- Bootstrap JS + Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<!-- JavaScript personnalisé pour le quiz -->
 <script>
     (function() {
-        // ---------- GÉNÉRATION DU QUIZ (25 questions) ----------
+        // 25 questions enrichies (catégories)
         const questions = [
-            { text: "1. Mon chiffre d'affaires / salaire peut-il doubler dans les 3 ans si je continue ainsi ?", category: "potential" },
-            { text: "2. Puis-je devenir connu pour une compétence rare dans ce domaine ?", category: "diff" },
-            { text: "3. Les leaders de ce domaine vivent-ils très bien financièrement ?", category: "potential" },
-            { text: "4. Mon travail actuel me donne-t-il de l'énergie pour le futur ?", category: "energy" },
-            { text: "5. Ce marché sera-t-il plus demandé dans 5 ans ?", category: "potential" },
-            { text: "6. Je fais face à un obstacle difficile mais que je pense surmontable.", category: "dip" },
-            { text: "7. Je constate que beaucoup de concurrents abandonnent en ce moment.", category: "dip" },
-            { text: "8. Je ressens une stagnation malgré des efforts accrus.", category: "culdesac" },
-            { text: "9. J'ai un avantage compétitif unique par rapport à mes concurrents.", category: "diff" },
-            { text: "10. Mes résultats diminuent rapidement depuis quelques mois.", category: "cliff" },
-            { text: "11. Je suis passionné par ce que je fais, même dans les moments durs.", category: "energy" },
-            { text: "12. Il existe une barrière à l'entrée qui protège mon activité.", category: "diff" },
-            { text: "13. Mes clients (ou employeur) pourraient me remplacer très facilement.", category: "culdesac" },
-            { text: "14. Je vois une lumière au bout du tunnel (objectif clair).", category: "dip" },
-            { text: "15. Je perds des parts de marché ou de l'influence sans pouvoir inverser la tendance.", category: "cliff" },
-            { text: "16. Je me forme régulièrement pour monter en compétence.", category: "dip" },
-            { text: "17. Mon secteur est en pleine croissance.", category: "potential" },
-            { text: "18. Les meilleurs dans mon domaine gagnent à peine plus que moi.", category: "culdesac" },
-            { text: "19. Je travaille par habitude, sans réelle motivation.", category: "culdesac" },
-            { text: "20. Mon entreprise / projet traverse une crise passagère mais le modèle est sain.", category: "dip" },
-            { text: "21. Je pourrais vendre mon activité ou la transmettre facilement.", category: "diff" },
-            { text: "22. Mon avantage concurrentiel s'érode rapidement.", category: "cliff" },
-            { text: "23. J'ai déjà traversé des périodes difficiles et j'en suis sorti plus fort.", category: "energy" },
-            { text: "24. Mon secteur est saturé de gens qui font la même chose que moi.", category: "culdesac" },
-            { text: "25. Je pense que si j'abandonne maintenant, je regretterai de ne pas avoir persévéré.", category: "dip" }
+            { text: "1. Mon chiffre d'affaires / salaire peut-il doubler dans les 3 ans ?", cat: "potential" },
+            { text: "2. Puis-je devenir connu pour une compétence rare dans ce domaine ?", cat: "diff" },
+            { text: "3. Les leaders de ce domaine vivent-ils très bien financièrement ?", cat: "potential" },
+            { text: "4. Mon travail actuel me donne-t-il de l'énergie pour le futur ?", cat: "energy" },
+            { text: "5. Ce marché sera-t-il plus demandé dans 5 ans ?", cat: "potential" },
+            { text: "6. Je fais face à un obstacle difficile mais surmontable.", cat: "dip" },
+            { text: "7. Je constate que beaucoup de concurrents abandonnent en ce moment.", cat: "dip" },
+            { text: "8. Je ressens une stagnation malgré des efforts accrus.", cat: "culdesac" },
+            { text: "9. J'ai un avantage compétitif unique.", cat: "diff" },
+            { text: "10. Mes résultats diminuent rapidement depuis quelques mois.", cat: "cliff" },
+            { text: "11. Je suis passionné même dans les moments durs.", cat: "energy" },
+            { text: "12. Il existe une barrière à l'entrée qui protège mon activité.", cat: "diff" },
+            { text: "13. Mes clients pourraient me remplacer très facilement.", cat: "culdesac" },
+            { text: "14. Je vois une lumière au bout du tunnel (objectif clair).", cat: "dip" },
+            { text: "15. Je perds des parts de marché sans pouvoir inverser.", cat: "cliff" },
+            { text: "16. Je me forme régulièrement pour monter en compétence.", cat: "dip" },
+            { text: "17. Mon secteur est en pleine croissance.", cat: "potential" },
+            { text: "18. Les meilleurs dans mon domaine gagnent à peine plus que moi.", cat: "culdesac" },
+            { text: "19. Je travaille par habitude, sans réelle motivation.", cat: "culdesac" },
+            { text: "20. Mon entreprise traverse une crise passagère mais le modèle est sain.", cat: "dip" },
+            { text: "21. Je pourrais vendre mon activité facilement.", cat: "diff" },
+            { text: "22. Mon avantage concurrentiel s'érode rapidement.", cat: "cliff" },
+            { text: "23. J'ai déjà traversé des périodes difficiles et j'en suis sorti plus fort.", cat: "energy" },
+            { text: "24. Mon secteur est saturé de gens qui font la même chose.", cat: "culdesac" },
+            { text: "25. Si j'abandonnais maintenant, je regretterais.", cat: "dip" }
         ];
 
         function renderQuiz() {
             let html = '';
-            questions.forEach((q, index) => {
-                html += `
-                    <div class="question-card">
-                        <label>${q.text}</label>
-                        <div class="radio-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="q${index}" value="1" required>
-                                <label class="form-check-label">1 (Pas du tout)</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="q${index}" value="2">
-                                <label class="form-check-label">2</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="q${index}" value="3">
-                                <label class="form-check-label">3 (Moyen)</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="q${index}" value="4">
-                                <label class="form-check-label">4</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="q${index}" value="5">
-                                <label class="form-check-label">5 (Tout à fait)</label>
-                            </div>
-                        </div>
-                    </div>
-                `;
+            questions.forEach((q, idx) => {
+                html += `<div class="question-card">
+                    <label>${q.text}</label>
+                    <div class="radio-group">`;
+                for (let v=1; v<=5; v++) {
+                    html += `<div class="form-check"><input class="form-check-input" type="radio" name="q${idx}" value="${v}"> <label class="form-check-label">${v}</label></div>`;
+                }
+                html += `</div></div>`;
             });
             document.getElementById('quizContainer').innerHTML = html;
         }
 
         function calculateResult() {
-            let scores = { potential: 0, diff: 0, energy: 0, dip: 0, culdesac: 0, cliff: 0 };
-            let counts = { potential: 0, diff: 0, energy: 0, dip: 0, culdesac: 0, cliff: 0 };
-
-            for (let i = 0; i < questions.length; i++) {
-                const radios = document.getElementsByName(`q${i}`);
-                let selected = null;
-                for (let r of radios) {
-                    if (r.checked) {
-                        selected = parseInt(r.value);
-                        break;
-                    }
-                }
-                if (selected === null) continue; // ignore non répondu
-
-                const cat = questions[i].category;
-                scores[cat] += selected;
+            let scores = { potential:0, diff:0, energy:0, dip:0, culdesac:0, cliff:0 };
+            let counts = { potential:0, diff:0, energy:0, dip:0, culdesac:0, cliff:0 };
+            for (let i=0; i<questions.length; i++) {
+                let radios = document.getElementsByName(`q${i}`);
+                let val = null;
+                for (let r of radios) if (r.checked) { val = parseInt(r.value); break; }
+                if (val === null) continue;
+                let cat = questions[i].cat;
+                scores[cat] += val;
                 counts[cat]++;
             }
-
-            // Calcul des moyennes par catégorie
             let avg = {};
-            for (let cat in scores) {
-                avg[cat] = counts[cat] ? scores[cat] / counts[cat] : 0;
-            }
+            for (let c in scores) avg[c] = counts[c] ? scores[c]/counts[c] : 0;
 
-            // Règles de décision
-            let situation = "incertaine";
+            let situation = "Incertaine";
             let roadmap = [];
-
             if (avg.cliff >= 4.0) {
                 situation = "Falaise (Cliff)";
-                roadmap = ["Arrêtez immédiatement toute perte supplémentaire.",
-                           "Préparez une sortie rapide mais professionnelle (voir onglet Abandon).",
-                           "Capitalisez sur les actifs récupérables.",
-                           "Prenez du recul avant de vous relancer sur un nouveau projet."];
+                roadmap = ["1. Arrêtez immédiatement toute perte supplémentaire.",
+                           "2. Sortez proprement (voir onglet Abandon).",
+                           "3. Préservez votre santé et vos actifs.",
+                           "4. Analysez les causes sans complaisance.",
+                           "5. Préparez une reconversion radicale."];
             } else if (avg.culdesac >= 3.5 && avg.potential < 3.0 && avg.diff < 3.0) {
                 situation = "Cul‑de‑Sac";
-                roadmap = ["Diagnostic confirmé : vous êtes dans une impasse.",
-                           "Planifiez votre sortie dans les 3 à 6 mois.",
-                           "Identifiez ce que vous voulez vraiment faire (quel Dip creuser ?).",
-                           "Utilisez le Guide de l'abandon respectueux pour partir sans brûler les ponts.",
-                           "Réinvestissez votre énergie dans un projet à fort potentiel de différenciation."];
+                roadmap = ["1. Acceptez le diagnostic : vous êtes dans une impasse.",
+                           "2. Planifiez votre sortie dans les 3 à 6 mois.",
+                           "3. Identifiez le prochain Dip à creuser.",
+                           "4. Utilisez le guide de l’abandon respectueux.",
+                           "5. Réinvestissez votre énergie dans un projet différenciant."];
             } else if (avg.dip >= 3.5 && avg.potential >= 3.5 && avg.energy >= 3.5) {
                 situation = "Dip (la vallée)";
-                roadmap = ["Vous êtes sur la bonne voie, mais il faut tenir.",
-                           "Téléchargez le Journal de Bord et suivez vos progrès chaque semaine.",
-                           "Entourez‑vous de mentors ou d’une communauté qui a déjà traversé ce Dip.",
-                           "Célébrez les petites victoires.",
-                           "Rappelez‑vous pourquoi vous avez commencé (votre ‘pourquoi profond’)."];
+                roadmap = ["1. Tenez bon, vous êtes sur la bonne voie.",
+                           "2. Suivez votre journal de bord chaque semaine.",
+                           "3. Trouvez un mentor qui a traversé ce Dip.",
+                           "4. Célébrez les petites victoires.",
+                           "5. Rappelez-vous votre 'pourquoi' tous les matins."];
             } else {
-                situation = "Situation mixte – à réévaluer";
-                roadmap = ["Votre profil est équilibré ou manque de données.",
-                           "Reprenez les checklists des onglets Cul‑de‑Sac et Dip.",
-                           "Affinez votre avantage concurrentiel.",
-                           "Testez rapidement une nouvelle direction si vous stagnez."];
+                situation = "Profil mixte – à réévaluer";
+                roadmap = ["1. Revenez aux checklists des onglets 'Cul‑de‑Sac' et 'Dip'.",
+                           "2. Affinez votre avantage concurrentiel.",
+                           "3. Testez rapidement une nouvelle direction.",
+                           "4. Parlez à des pairs pour confronter votre perception.",
+                           "5. Fixez une deadline de décision dans 3 mois."];
             }
-
             return { situation, roadmap };
         }
 
         document.addEventListener('DOMContentLoaded', function() {
             renderQuiz();
-
             document.getElementById('submitQuiz').addEventListener('click', function() {
-                // Vérifier que toutes les questions ont une réponse
-                let allAnswered = true;
-                for (let i = 0; i < questions.length; i++) {
-                    const radios = document.getElementsByName(`q${i}`);
+                for (let i=0; i<questions.length; i++) {
+                    let radios = document.getElementsByName(`q${i}`);
                     let checked = false;
-                    for (let r of radios) {
-                        if (r.checked) { checked = true; break; }
-                    }
-                    if (!checked) { allAnswered = false; break; }
+                    for (let r of radios) if (r.checked) { checked = true; break; }
+                    if (!checked) { alert(`Veuillez répondre à la question ${i+1}`); return; }
                 }
-                if (!allAnswered) {
-                    alert("Veuillez répondre à toutes les questions avant de valider.");
-                    return;
-                }
-
-                const { situation, roadmap } = calculateResult();
-
-                let html = `<h4>✅ Résultat : <span class="badge bg-primary">${situation}</span></h4>`;
-                html += `<h5 class="mt-3">📌 Feuille de route recommandée</h5>`;
-                html += `<ul class="feuille-route">`;
+                let { situation, roadmap } = calculateResult();
+                let html = `<h4>✅ Résultat : <span class="badge bg-primary">${situation}</span></h4>
+                    <h5>📌 Feuille de route</h5><ul>`;
                 roadmap.forEach(item => html += `<li>${item}</li>`);
-                html += `</ul>`;
-                html += `<p class="mt-2"><em>Ces recommandations sont basées sur vos réponses. À ajuster avec votre intuition.</em></p>`;
-
-                const resultDiv = document.getElementById('quizResult');
+                html += `</ul><p class="fst-italic">Ces recommandations sont basées sur vos réponses. Adaptez‑les à votre intuition.</p>`;
+                let resultDiv = document.getElementById('quizResult');
                 resultDiv.innerHTML = html;
                 resultDiv.style.display = 'block';
             });
         });
     })();
 </script>
-<!-- Pour les icônes FontAwesome, le lien est déjà dans le head -->
 </body>
 </html>
