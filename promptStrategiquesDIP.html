@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21 Prompts Stratégiques · The Dip · Format R0TCCDF</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f4fa 0%, #e6ecf5 100%);
+            color: #1e293b;
+            padding: 2rem 1rem;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .header h1 {
+            font-weight: 800;
+            background: linear-gradient(135deg, #0a2647, #0d6efd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.8rem;
+        }
+        .header p {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            max-width: 800px;
+            margin: 1rem auto;
+        }
+        .category-btn {
+            border-radius: 40px;
+            padding: 0.6rem 1.8rem;
+            font-weight: 600;
+            margin: 0.3rem;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .category-btn.active {
+            background: #0a2647;
+            color: white;
+            border-color: #0a2647;
+        }
+        .category-btn:not(.active) {
+            background: white;
+            color: #0a2647;
+            border-color: #ced4da;
+        }
+        .category-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        .prompt-accordion {
+            margin-top: 2rem;
+        }
+        .accordion-item {
+            border: none;
+            margin-bottom: 1rem;
+            border-radius: 16px !important;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid rgba(13, 110, 253, 0.2);
+        }
+        .accordion-header {
+            background: white;
+        }
+        .accordion-button {
+            font-weight: 700;
+            color: #0a2647;
+            padding: 1.3rem 1.5rem;
+            background: white;
+            font-size: 1.2rem;
+        }
+        .accordion-button:not(.collapsed) {
+            background: linear-gradient(135deg, #f8fbff, #eef6ff);
+            color: #0a2647;
+            box-shadow: none;
+        }
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: #0d6efd;
+        }
+        .prompt-body {
+            background: #f9fcff;
+            padding: 1.8rem;
+        }
+        .field-group {
+            background: white;
+            border-radius: 14px;
+            padding: 1.2rem;
+            margin-bottom: 1.2rem;
+            border: 1px solid #e9ecef;
+        }
+        .field-group label {
+            font-weight: 600;
+            color: #0a2647;
+            margin-bottom: 0.4rem;
+            font-size: 1rem;
+        }
+        .field-group .form-control, .field-group .form-select {
+            border-radius: 12px;
+            border: 1px solid #ced4da;
+            padding: 0.75rem 1rem;
+            font-size: 0.95rem;
+        }
+        .field-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .btn-outline-primary {
+            border-radius: 30px;
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            border-width: 2px;
+        }
+        .btn-outline-primary:hover {
+            background: #0a2647;
+            color: white;
+        }
+        .badge-cat {
+            background: #0d6efd;
+            color: white;
+            font-size: 0.8rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            margin-left: 1rem;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: #5e6f8d;
+        }
+        .modal-content {
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+        }
+        .modal-header {
+            background: linear-gradient(135deg, #0a2647, #0d6efd);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            padding: 1.5rem;
+        }
+        .modal-title {
+            font-weight: 700;
+        }
+        .modal-body {
+            padding: 2rem;
+            background: #f9fcff;
+        }
+        .modal-body pre {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            font-family: 'Inter', monospace;
+            font-size: 0.95rem;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .copy-btn {
+            background: #0a2647;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 0.5rem 2rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .copy-btn:hover {
+            background: #0d6efd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="fas fa-mountain me-2"></i>21 Prompts Stratégiques R0TCCDF</h1>
+            <p class="lead">Inspiré de <strong>The Dip</strong> de Seth Godin — des canevas prêts à l'emploi, modifiables, avec affichage structuré pour vos outils d'IA.</p>
+            <div class="mt-4">
+                <button class="btn category-btn active" data-category="diagnostic">🔍 Diagnostic & Choix</button>
+                <button class="btn category-btn" data-category="miseoeuvre">⚙️ Mise en œuvre</button>
+                <button class="btn category-btn" data-category="suivi">📊 Suivi & Ajustement</button>
+            </div>
+        </div>
+
+        <!-- Accordéon des prompts -->
+        <div id="promptAccordion" class="accordion prompt-accordion">
+            <!-- Généré par JS -->
+        </div>
+    </div>
+
+    <!-- Modal pour afficher le prompt structuré -->
+    <div class="modal fade" id="promptModal" tabindex="-1" aria-labelledby="promptModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="promptModalLabel"><i class="fas fa-prompt me-2"></i>Prompt structuré (R0TCCDF)</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <pre id="modalPromptContent" class="p-3"></pre>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="button" class="copy-btn" id="copyPromptBtn"><i class="fas fa-copy me-2"></i>Copier</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p class="small">Cliquez sur un prompt pour ouvrir le template — modifiez les champs, puis utilisez le bouton "Voir le prompt structuré".</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // ---------- DONNÉES DES PROMPTS ----------
+        const promptsData = {
+            diagnostic: [
+                {
+                    title: "1. Diagnostic : Dip, Cul‑de‑Sac ou Falaise ?",
+                    description: "Déterminez la nature de votre situation actuelle.",
+                    fields: [
+                        { label: "Nom du projet / activité", type: "text", placeholder: "ex: Application de coaching sportif", default: "Application de coaching sportif" },
+                        { label: "Depuis combien de temps ?", type: "text", placeholder: "ex: 18 mois", default: "18 mois" },
+                        { label: "Tendance du marché", type: "select", options: ["En croissance", "Stable", "En déclin"], default: "En croissance" },
+                        { label: "Mon avantage concurrentiel", type: "textarea", placeholder: "ex: Algorithme unique de personnalisation", default: "Algorithme unique de personnalisation" },
+                        { label: "Niveau de passion (1-10)", type: "number", min: 1, max: 10, default: "8" },
+                        { label: "Résultats des 6 derniers mois", type: "textarea", placeholder: "ex: CA stable, utilisateurs stagnent", default: "CA stable, utilisateurs stagnent" },
+                        { label: "Concurrents directs", type: "textarea", placeholder: "ex: 3 applis similaires bien financées", default: "3 applis similaires bien financées" }
+                    ]
+                },
+                {
+                    title: "2. Matrice potentiel / différenciation",
+                    description: "Placez votre projet sur la matrice de décision.",
+                    fields: [
+                        { label: "Description du projet", type: "textarea", default: "Formation en ligne pour développeurs" },
+                        { label: "Taille du marché estimée (€)", type: "text", default: "10 M€" },
+                        { label: "Croissance du marché", type: "select", options: ["Forte", "Moyenne", "Faible"], default: "Forte" },
+                        { label: "Capacité à me différencier", type: "select", options: ["Facile", "Moyenne", "Difficile"], default: "Moyenne" },
+                        { label: "Avantage spécifique", type: "textarea", default: "Réseau de formateurs reconnus" },
+                        { label: "Résultat de la matrice", type: "text", default: "Dip idéal (persévérer)" }
+                    ]
+                },
+                {
+                    title: "3. Analyse des ressources",
+                    description: "Évaluez vos moyens pour traverser le Dip.",
+                    fields: [
+                        { label: "Trésorerie disponible (€)", type: "text", default: "50 000 €" },
+                        { label: "Durée estimée du Dip (mois)", type: "number", default: "12" },
+                        { label: "Équipe mobilisable", type: "text", default: "2 associés + 1 freelance" },
+                        { label: "Compétences manquantes", type: "textarea", default: "Marketing digital" },
+                        { label: "Soutien externe (mentor, réseau)", type: "textarea", default: "Accélérateur, 2 mentors" },
+                        { label: "Capacité à tenir sans revenu (mois)", type: "number", default: "6" }
+                    ]
+                },
+                {
+                    title: "4. Détection d’un Cul‑de‑Sac",
+                    description: "Vérifiez si vous êtes dans une impasse.",
+                    fields: [
+                        { label: "Stagnation des résultats depuis ?", type: "text", default: "2 ans" },
+                        { label: "Les leaders du secteur gagnent‑ils bien leur vie ?", type: "select", options: ["Oui", "Non", "Ne sait pas"], default: "Non" },
+                        { label: "Puis‑je citer 3 exemples de réussite dans ce domaine ?", type: "textarea", default: "Non, je ne connais personne" },
+                        { label: "Mon travail me procure‑t‑il de l'énergie ?", type: "select", options: ["Oui", "Non", "Parfois"], default: "Non" },
+                        { label: "Ai‑je appris une nouvelle compétence récemment ?", type: "select", options: ["Oui", "Non"], default: "Non" },
+                        { label: "Conclusion", type: "text", default: "Probable Cul‑de‑Sac" }
+                    ]
+                },
+                {
+                    title: "5. Évaluation de la Falaise",
+                    description: "Identifiez si la situation se dégrade irrémédiablement.",
+                    fields: [
+                        { label: "Baisse des revenus sur les 3 derniers mois (%)", type: "text", default: "30 %" },
+                        { label: "Perte de clients ou de parts de marché", type: "textarea", default: "Perte de 2 clients majeurs" },
+                        { label: "Délais de paiement allongés ?", type: "select", options: ["Oui", "Non"], default: "Oui" },
+                        { label: "Moral de l’équipe", type: "select", options: ["Bon", "Moyen", "Mauvais"], default: "Mauvais" },
+                        { label: "Existe‑t‑il une chance de retournement ?", type: "select", options: ["Oui", "Non", "Incertain"], default: "Non" },
+                        { label: "Décision urgente", type: "text", default: "Préparer sortie immédiate" }
+                    ]
+                },
+                {
+                    title: "6. Analyse des parties prenantes",
+                    description: "Qui est impacté par votre décision ?",
+                    fields: [
+                        { label: "Liste des parties prenantes (clients, équipe, famille…)", type: "textarea", default: "2 associés, 3 employés, 10 clients réguliers" },
+                        { label: "Leur intérêt dans la réussite", type: "textarea", default: "Associés : survie ; employés : emploi ; clients : service" },
+                        { label: "Leur pouvoir d'influence", type: "textarea", default: "Associés peuvent bloquer, clients peuvent partir" },
+                        { label: "Comment les impliquer dans la décision ?", type: "textarea", default: "Réunion de crise, transparence" }
+                    ]
+                },
+                {
+                    title: "7. Synthèse décisionnelle",
+                    description: "Rassemblez tous les éléments pour trancher.",
+                    fields: [
+                        { label: "Situation probable", type: "select", options: ["Dip", "Cul‑de‑Sac", "Falaise", "Incertain"], default: "Dip" },
+                        { label: "Preuves / indicateurs", type: "textarea", default: "Marché en croissance, mais stagnation personnelle" },
+                        { label: "Ressources pour persévérer", type: "textarea", default: "Trésorerie 6 mois, mentor" },
+                        { label: "Coût de l'abandon", type: "textarea", default: "Perte de réputation, chômage" },
+                        { label: "Décision", type: "select", options: ["Persévérer", "Abandonner", "Pivoter", "Analyser encore"], default: "Persévérer" }
+                    ]
+                }
+            ],
+            miseoeuvre: [
+                {
+                    title: "8. Plan d’action pour traverser un Dip",
+                    description: "Détaillez les étapes concrètes.",
+                    fields: [
+                        { label: "Objectif à 6 mois", type: "textarea", default: "Atteindre 100 clients payants" },
+                        { label: "Principaux obstacles", type: "textarea", default: "Notoriété faible, concurrence agressive" },
+                        { label: "Actions clés (3‑5)", type: "textarea", default: "1. Campagne de content marketing\n2. Partenariats avec influenceurs\n3. Amélioration du produit" },
+                        { label: "Responsable(s)", type: "text", default: "Moi + freelance marketing" },
+                        { label: "Budget alloué (€)", type: "text", default: "15 000 €" },
+                        { label: "Échéances", type: "text", default: "T0+3 mois : 50 clients" }
+                    ]
+                },
+                {
+                    title: "9. Stratégie d’abandon respectueux",
+                    description: "Comment arrêter sans brûler les ponts.",
+                    fields: [
+                        { label: "Projet / relation à abandonner", type: "text", default: "Client difficile (e‑commerce)" },
+                        { label: "Raisons de l’abandon", type: "textarea", default: "Temps excessif, faible rentabilité" },
+                        { label: "Plan de transition", type: "textarea", default: "Proposer un successeur, finir les missions en cours" },
+                        { label: "Message à l’autre partie", type: "textarea", default: "Expliquer que je me recentre sur une offre plus pointue" },
+                        { label: "Suivi post‑abandon", type: "textarea", default: "Recommander, rester en contact LinkedIn" },
+                        { label: "Date de sortie", type: "text", default: "31/12/2025" }
+                    ]
+                },
+                {
+                    title: "10. Plan de pivot",
+                    description: "Changer de cap tout en capitalisant sur l’existant.",
+                    fields: [
+                        { label: "Activité actuelle", type: "text", default: "Vente de formations en présentiel" },
+                        { label: "Nouvelle direction", type: "text", default: "Formation en ligne + abonnement" },
+                        { label: "Atouts réutilisables", type: "textarea", default: "Contenu pédagogique, liste de clients" },
+                        { label: "Compétences à acquérir", type: "textarea", default: "Marketing digital, production vidéo" },
+                        { label: "Coût du pivot", type: "text", default: "5 000 €" },
+                        { label: "Délai de mise en œuvre", type: "text", default: "4 mois" }
+                    ]
+                },
+                {
+                    title: "11. Gestion des risques",
+                    description: "Anticiper ce qui pourrait mal tourner.",
+                    fields: [
+                        { label: "Risque n°1", type: "textarea", default: "Nouveau concurrent arrive" },
+                        { label: "Probabilité (1‑5)", type: "number", min:1, max:5, default: "3" },
+                        { label: "Impact (1‑5)", type: "number", min:1, max:5, default: "4" },
+                        { label: "Plan de mitigation", type: "textarea", default: "Se différencier par le service client" },
+                        { label: "Risque n°2", type: "textarea", default: "Tensions de trésorerie" },
+                        { label: "Probabilité (1‑5)", default: "4" },
+                        { label: "Impact (1‑5)", default: "5" },
+                        { label: "Plan de mitigation", type: "textarea", default: "Ligne de crédit, report d'investissements" }
+                    ]
+                },
+                {
+                    title: "12. Budget prévisionnel",
+                    description: "Détail des coûts et revenus attendus.",
+                    fields: [
+                        { label: "Coûts fixes mensuels (€)", type: "text", default: "3 000 € (loyer, salaires)" },
+                        { label: "Coûts variables (par unité)", type: "text", default: "10 € / client (SAAS)" },
+                        { label: "Investissements ponctuels", type: "text", default: "8 000 € (dev site)" },
+                        { label: "Revenu mensuel actuel", type: "text", default: "2 500 €" },
+                        { label: "Seuil de rentabilité", type: "text", default: "50 clients / mois" },
+                        { label: "Cash disponible (€)", type: "text", default: "25 000 €" }
+                    ]
+                },
+                {
+                    title: "13. Communication de la décision",
+                    description: "Comment annoncer votre choix (persévérer ou abandonner) aux parties prenantes.",
+                    fields: [
+                        { label: "Public cible", type: "textarea", default: "Équipe, clients, partenaires" },
+                        { label: "Message principal", type: "textarea", default: "Nous recentrons nos efforts sur notre offre premium" },
+                        { label: "Canaux de communication", type: "textarea", default: "Email, réunion, réseaux sociaux" },
+                        { label: "Calendrier", type: "text", default: "Annonce le 15 du mois" },
+                        { label: "Gestion des objections", type: "textarea", default: "Prévoir FAQ, hotline" }
+                    ]
+                },
+                {
+                    title: "14. Plan B (filet de sécurité)",
+                    description: "Que faire si le plan A échoue ?",
+                    fields: [
+                        { label: "Scénario d’échec envisagé", type: "textarea", default: "Ventes < 20 clients après 6 mois" },
+                        { label: "Déclencheur", type: "text", default: "Seuil à 6 mois" },
+                        { label: "Plan B", type: "textarea", default: "Se reconvertir en freelance / vendre la base de données" },
+                        { label: "Ressources nécessaires", type: "textarea", default: "Réseau, CV à jour" }
+                    ]
+                }
+            ],
+            suivi: [
+                {
+                    title: "15. Revue mensuelle de progression",
+                    description: "Mesurez l’avancement et ajustez.",
+                    fields: [
+                        { label: "Mois", type: "text", default: "Mars 2025" },
+                        { label: "Objectifs du mois", type: "textarea", default: "Acquérir 10 clients, lancer la newsletter" },
+                        { label: "Réalisé", type: "textarea", default: "8 clients, newsletter créée mais pas envoyée" },
+                        { label: "Écarts / raisons", type: "textarea", default: "Surcharge de travail, besoin d'automatisation" },
+                        { label: "Actions correctives", type: "textarea", default: "Embaucher un assistant à temps partiel" },
+                        { label: "Budget consommé", type: "text", default: "2 300 € sur 3 000 €" }
+                    ]
+                },
+                {
+                    title: "16. Indicateurs clés (KPIs)",
+                    description: "Définissez et suivez vos KPIs.",
+                    fields: [
+                        { label: "KPI n°1", type: "text", default: "Nombre de clients actifs" },
+                        { label: "Valeur actuelle", type: "text", default: "45" },
+                        { label: "Objectif fin de période", type: "text", default: "80" },
+                        { label: "KPI n°2", type: "text", default: "Chiffre d'affaires mensuel" },
+                        { label: "Valeur actuelle", type: "text", default: "4 500 €" },
+                        { label: "Objectif", type: "text", default: "8 000 €" },
+                        { label: "KPI n°3 (qualitatif)", type: "text", default: "Taux de satisfaction client" },
+                        { label: "Valeur actuelle", type: "text", default: "4,2/5" },
+                        { label: "Objectif", type: "text", default: "4,5/5" }
+                    ]
+                },
+                {
+                    title: "17. Analyse des écarts",
+                    description: "Comparez prévisions et réalité.",
+                    fields: [
+                        { label: "Écart sur le CA (€)", type: "text", default: "-1 200 €" },
+                        { label: "Cause principale", type: "textarea", default: "Moins de commandes que prévu" },
+                        { label: "Actions pour réduire l’écart", type: "textarea", default: "Relancer les prospects, offrir une promo" },
+                        { label: "Nouvelle prévision", type: "text", default: "CA = 5 800 € le mois prochain" }
+                    ]
+                },
+                {
+                    title: "18. Réévaluation de la stratégie",
+                    description: "La situation a‑t‑elle changé ? Faut‑il ajuster le cap ?",
+                    fields: [
+                        { label: "Évolution du marché", type: "textarea", default: "Nouveau concurrent low‑cost" },
+                        { label: "Notre position actuelle", type: "textarea", default: "Leader sur la qualité, mais prix élevé" },
+                        { label: "Forces / faiblesses", type: "textarea", default: "Force : réputation ; faiblesse : coût de production" },
+                        { label: "Opportunités / menaces", type: "textarea", default: "Opportunité : segment premium ; menace : guerre des prix" },
+                        { label: "Ajustement stratégique", type: "textarea", default: "Renforcer le service client, pas de baisse de prix" }
+                    ]
+                },
+                {
+                    title: "19. Bilan d’étape (3 mois)",
+                    description: "Faites le point après un trimestre.",
+                    fields: [
+                        { label: "Objectifs initiaux", type: "textarea", default: "50 clients, CA 10 k€" },
+                        { label: "Résultats", type: "textarea", default: "42 clients, CA 8,5 k€" },
+                        { label: "Ce qui a fonctionné", type: "textarea", default: "Bouche‑à‑oreille" },
+                        { label: "Ce qui n’a pas fonctionné", type: "textarea", default: "Campagne Ads trop chère" },
+                        { label: "Leçons apprises", type: "textarea", default: "Miser sur le contenu plutôt que la pub" },
+                        { label: "Prochains objectifs", type: "textarea", default: "60 clients, CA 12 k€" }
+                    ]
+                },
+                {
+                    title: "20. Test de résilience",
+                    description: "Simulez une crise pour vérifier la robustesse.",
+                    fields: [
+                        { label: "Scénario de crise", type: "textarea", default: "Perte du client principal (30 % CA)" },
+                        { label: "Impact immédiat", type: "textarea", default: "Trésorerie négative en 2 mois" },
+                        { label: "Mesures d’urgence", type: "textarea", default: "Réduction des coûts fixes, recherche de financement" },
+                        { label: "Délai de récupération", type: "text", default: "4 mois" },
+                        { label: "Leçons pour l’avenir", type: "textarea", default: "Diversifier la clientèle" }
+                    ]
+                },
+                {
+                    title: "21. Décision finale : continuer ou arrêter ?",
+                    description: "Synthèse de tous les éléments pour trancher.",
+                    fields: [
+                        { label: "Situation actuelle", type: "textarea", default: "Toujours dans le Dip, mais progrès lents" },
+                        { label: "Ressources restantes", type: "text", default: "Trésorerie 3 mois" },
+                        { label: "Probabilité de succès estimée", type: "select", options: ["Faible", "Moyenne", "Élevée"], default: "Moyenne" },
+                        { label: "Coût de l’arrêt", type: "textarea", default: "Perte d’image, liquidation" },
+                        { label: "Coût de la poursuite", type: "textarea", default: "Stress, investissement supplémentaire" },
+                        { label: "Décision", type: "select", options: ["Continuer", "Arrêter", "Pivoter"], default: "Continuer" },
+                        { label: "Justification", type: "textarea", default: "Les indicateurs s’améliorent, un gros contrat en vue" }
+                    ]
+                }
+            ]
+        };
+
+        // ---------- FONCTIONS DE GÉNÉRATION ----------
+        function generatePromptHTML(prompt, index, category) {
+            const accordionItem = document.createElement('div');
+            accordionItem.className = 'accordion-item';
+
+            const headerId = `heading-${category}-${index}`;
+            const collapseId = `collapse-${category}-${index}`;
+
+            accordionItem.innerHTML = `
+                <h2 class="accordion-header" id="${headerId}">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="false" aria-controls="${collapseId}">
+                        ${prompt.title}
+                        <span class="badge-cat ms-3">${category === 'diagnostic' ? '🔍' : category === 'miseoeuvre' ? '⚙️' : '📊'}</span>
+                    </button>
+                </h2>
+                <div id="${collapseId}" class="accordion-collapse collapse" aria-labelledby="${headerId}" data-bs-parent="#promptAccordion">
+                    <div class="prompt-body">
+                        <p class="text-muted mb-4"><i class="fas fa-info-circle me-1"></i> ${prompt.description}</p>
+                        <div id="fields-${category}-${index}"></div>
+                        <div class="action-buttons">
+                            <button class="btn btn-outline-primary" onclick="showPromptModal('${category}', ${index})">
+                                <i class="fas fa-eye me-1"></i> Voir le prompt structuré
+                            </button>
+                            <button class="btn reset-btn" onclick="resetPrompt('${category}', ${index})">
+                                <i class="fas fa-undo-alt me-1"></i> Réinitialiser
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            return accordionItem;
+        }
+
+        function renderFields(container, fields, values) {
+            container.innerHTML = '';
+            fields.forEach((field, i) => {
+                const fieldDiv = document.createElement('div');
+                fieldDiv.className = 'field-group';
+                fieldDiv.setAttribute('data-field-index', i);
+                
+                let inputHtml = '';
+                if (field.type === 'select') {
+                    let optionsHtml = '';
+                    field.options.forEach(opt => {
+                        const selected = (opt === values[i]) ? 'selected' : '';
+                        optionsHtml += `<option value="${opt}" ${selected}>${opt}</option>`;
+                    });
+                    inputHtml = `<select class="form-control" id="input-${field.label}">${optionsHtml}</select>`;
+                } else if (field.type === 'textarea') {
+                    inputHtml = `<textarea class="form-control" rows="3">${values[i]}</textarea>`;
+                } else if (field.type === 'number') {
+                    inputHtml = `<input type="number" class="form-control" value="${values[i]}" min="${field.min || 0}" max="${field.max || 100}">`;
+                } else {
+                    inputHtml = `<input type="text" class="form-control" value="${values[i]}">`;
+                }
+                
+                fieldDiv.innerHTML = `
+                    <label>${field.label}</label>
+                    ${inputHtml}
+                `;
+                container.appendChild(fieldDiv);
+            });
+        }
+
+        function resetPrompt(category, index) {
+            const prompt = promptsData[category][index];
+            const container = document.getElementById(`fields-${category}-${index}`);
+            if (!container) return;
+            
+            const defaultValues = prompt.fields.map(f => f.default || '');
+            renderFields(container, prompt.fields, defaultValues);
+        }
+
+        function renderCategory(category) {
+            const accordion = document.getElementById('promptAccordion');
+            accordion.innerHTML = '';
+
+            promptsData[category].forEach((prompt, idx) => {
+                const accordionItem = generatePromptHTML(prompt, idx, category);
+                accordion.appendChild(accordionItem);
+
+                // Après ajout au DOM, remplir les champs
+                setTimeout(() => {
+                    const container = document.getElementById(`fields-${category}-${idx}`);
+                    if (container) {
+                        const defaultValues = prompt.fields.map(f => f.default || '');
+                        renderFields(container, prompt.fields, defaultValues);
+                    }
+                }, 0);
+            });
+        }
+
+        // ---------- FONCTION POUR AFFICHER LE MODAL PROMPT ----------
+        function showPromptModal(category, index) {
+            const prompt = promptsData[category][index];
+            const container = document.getElementById(`fields-${category}-${index}`);
+            if (!container) return;
+
+            // Récupérer les valeurs actuelles des champs
+            const fieldGroups = container.querySelectorAll('.field-group');
+            const fieldValues = [];
+            fieldGroups.forEach(group => {
+                const input = group.querySelector('input, textarea, select');
+                if (input) {
+                    fieldValues.push(input.value);
+                } else {
+                    fieldValues.push('');
+                }
+            });
+
+            // Construire le texte structuré R0TCCDF
+            const lines = [
+                `**Rôle** : Analyste stratégique / Décideur pour le projet "${prompt.title}"`,
+                `**Objectifs** : ${prompt.description}`,
+                `**Tâche** : À partir des informations ci-dessous, déterminer la meilleure décision stratégique (persévérer, pivoter, abandonner) et proposer un plan d'action.`,
+                `**Contexte** :`,
+            ];
+
+            // Ajouter chaque champ comme une ligne de contexte
+            prompt.fields.forEach((field, i) => {
+                const value = fieldValues[i] || '(non renseigné)';
+                lines.push(`   - ${field.label} : ${value}`);
+            });
+
+            lines.push(`**Contraintes** : (déduites des données : budget, temps, ressources, concurrence, etc.)`);
+            lines.push(`**Dirigeabilité** : L'utilisateur peut modifier les paramètres et re‑exécuter l'analyse.`);
+            lines.push(`**Format** : Réponse structurée avec recommandations claires, risques et étapes.`);
+
+            const finalText = lines.join('\n');
+
+            // Mettre à jour le modal
+            document.getElementById('modalPromptContent').textContent = finalText;
+
+            // Afficher le modal
+            const modal = new bootstrap.Modal(document.getElementById('promptModal'));
+            modal.show();
+        }
+
+        // Copier le contenu du modal dans le presse-papier
+        document.getElementById('copyPromptBtn').addEventListener('click', function() {
+            const content = document.getElementById('modalPromptContent').textContent;
+            navigator.clipboard.writeText(content).then(() => {
+                alert('Prompt copié dans le presse-papier !');
+            }).catch(() => {
+                alert('Erreur de copie');
+            });
+        });
+
+        // ---------- GESTION DES CATÉGORIES ----------
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        let currentCategory = 'diagnostic';
+
+        categoryButtons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const cat = this.dataset.category;
+                if (!cat) return;
+
+                categoryButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                currentCategory = cat;
+                renderCategory(cat);
+            });
+        });
+
+        // Initialisation avec la première catégorie
+        renderCategory('diagnostic');
+    </script>
+</body>
+</html>
