@@ -1,0 +1,2093 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz The Dip · Seth Godin · Stratégie & Persévérance</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --dip-color: #0ea5e9;
+            --culdesac-color: #dc3545;
+            --cliff-color: #f59e0b;
+            --matrice-color: #8b5cf6;
+            --strategie-color: #10b981;
+            --cas-color: #6366f1;
+            --light-bg: #f8fafc;
+            --dark-bg: #0f172a;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding-top: 1rem;
+            background-attachment: fixed;
+        }
+
+        .quiz-container {
+            max-width: 1000px;
+            margin: auto;
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1e293b 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            margin-top: -1rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .quiz-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10 L40 30 L30 50 L20 30 Z' fill='%23ffffff' fill-opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        .quiz-header h1 {
+            font-weight: 800;
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .quiz-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .year-badge {
+            background: linear-gradient(135deg, var(--matrice-color) 0%, var(--dip-color) 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: inline-block;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .progress-container {
+            margin-bottom: 2rem;
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid #e2e8f0;
+        }
+
+        #question-counter {
+            font-weight: 600;
+            color: var(--dip-color);
+            font-size: 1.1rem;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        #current-score {
+            font-weight: 600;
+            color: var(--strategie-color);
+            font-size: 1.1rem;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .progress {
+            height: 12px;
+            border-radius: 10px;
+            background-color: #e2e8f0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            border-radius: 10px;
+            background: linear-gradient(90deg, var(--matrice-color) 0%, var(--dip-color) 100%);
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(14, 165, 233, 0.3);
+        }
+
+        #question-card {
+            border: none;
+            border-radius: 15px;
+            padding: 2rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--dip-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #question-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%);
+        }
+        
+        #question-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+
+        .thematic-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            border: 2px solid;
+        }
+
+        .badge-dip { background-color: rgba(14, 165, 233, 0.1); border-color: var(--dip-color); color: var(--dip-color); }
+        .badge-culdesac { background-color: rgba(220, 53, 69, 0.1); border-color: var(--culdesac-color); color: var(--culdesac-color); }
+        .badge-cliff { background-color: rgba(245, 158, 11, 0.1); border-color: var(--cliff-color); color: var(--cliff-color); }
+        .badge-matrice { background-color: rgba(139, 92, 246, 0.1); border-color: var(--matrice-color); color: var(--matrice-color); }
+        .badge-strategie { background-color: rgba(16, 185, 129, 0.1); border-color: var(--strategie-color); color: var(--strategie-color); }
+        .badge-cas { background-color: rgba(99, 102, 241, 0.1); border-color: var(--cas-color); color: var(--cas-color); }
+
+        .option-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 1rem 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            background-color: white;
+            transition: all 0.3s ease;
+            font-family: 'Roboto Mono', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-btn:hover:not([disabled]) {
+            border-color: var(--dip-color);
+            background-color: #eff6ff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(14, 165, 233, 0.15);
+        }
+        
+        .option-btn.correct {
+            background-color: #f0fdf4;
+            border-color: var(--strategie-color);
+            color: #065f46;
+            font-weight: 600;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+        }
+
+        .option-btn.incorrect {
+            background-color: #fef2f2;
+            border-color: var(--culdesac-color);
+            color: #7f1d1d;
+            font-weight: 600;
+        }
+
+        #explanation-box {
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            animation: fadeIn 0.5s ease;
+            border-left: 4px solid;
+        }
+        
+        #explanation-box h5 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .explanation-correct {
+            background-color: #f0fdf4;
+            border-left-color: var(--strategie-color);
+        }
+
+        .explanation-incorrect {
+            background-color: #fef2f2;
+            border-left-color: var(--culdesac-color);
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+            border-left: 4px solid var(--dip-color);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+        
+        .tip-box h6 {
+            color: var(--dip-color);
+            font-weight: 600;
+        }
+
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-dip {
+            background: linear-gradient(135deg, var(--dip-color) 0%, var(--matrice-color) 100%);
+            color: white;
+            border: none;
+        }
+
+        .theme-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .theme-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--dip-color);
+        }
+        
+        .theme-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--dip-color) 0%, var(--strategie-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1e293b 100%);
+            color: white;
+            border-radius: 0;
+        }
+
+        .modal-title-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+        
+        .final-score {
+            font-size: 4rem;
+            font-weight: 800;
+            margin: 1rem 0;
+            background: linear-gradient(135deg, var(--matrice-color) 0%, var(--strategie-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .score-text {
+            font-size: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .skill-meter {
+            background: var(--light-bg);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(14, 165, 233, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); }
+        }
+
+        @media (max-width: 768px) {
+            .quiz-container {
+                padding: 1rem;
+            }
+            .quiz-header h1 {
+                font-size: 2rem;
+            }
+            .quiz-navigation {
+                flex-direction: column;
+            }
+            .nav-btn {
+                width: 100%;
+            }
+        }
+
+        .finance-badge {
+            background: linear-gradient(135deg, var(--matrice-color) 0%, var(--strategie-color) 100%);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <h1><i class="fas fa-mountain"></i> The Dip · Stratégie du Choix</h1>
+                <p>Maîtrisez l'art de savoir quand persévérer et quand abandonner – 80 cas pratiques inspirés de Seth Godin</p>
+                <div class="year-badge">
+                    Apprentissage actif | 80 questions
+                </div>
+            </div>
+            
+            <!-- Configuration Panel -->
+            <div id="settings-panel" class="settings-panel">
+                <h4 class="text-center mb-4"><i class="fas fa-cogs"></i> Configuration du quiz</h4>
+                
+                <div class="row mb-4">
+                    <div class="col-md-8">
+                        <label for="question-count" class="form-label">Nombre de questions :</label>
+                        <select id="question-count" class="form-select">
+                            <option value="20">20 questions (Découverte)</option>
+                            <option value="40" selected>40 questions (Standard)</option>
+                            <option value="60">60 questions (Approfondi)</option>
+                            <option value="80">80 questions (Expert – Tous les cas)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button id="start-quiz-btn" class="btn btn-dip w-100 pulse-animation">
+                            <i class="fas fa-rocket"></i> Démarrer le Quiz
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <h5><i class="fas fa-filter"></i> Domaines à évaluer</h5>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="domain-dip" checked>
+                                <label class="form-check-label" for="domain-dip">
+                                    <i class="fas fa-chart-line text-primary me-2"></i>Le Dip (Vallée)
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="domain-culdesac" checked>
+                                <label class="form-check-label" for="domain-culdesac">
+                                    <i class="fas fa-sign-stop-alt text-danger me-2"></i>Cul-de-Sac (Impasse)
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="domain-cliff" checked>
+                                <label class="form-check-label" for="domain-cliff">
+                                    <i class="fas fa-arrow-down text-warning me-2"></i>Falaise (Cliff)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="domain-matrice" checked>
+                                <label class="form-check-label" for="domain-matrice">
+                                    <i class="fas fa-th text-purple me-2"></i>Matrice de décision
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="domain-strategie" checked>
+                                <label class="form-check-label" for="domain-strategie">
+                                    <i class="fas fa-handshake text-success me-2"></i>Stratégies d'abandon
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="domain-cas" checked>
+                                <label class="form-check-label" for="domain-cas">
+                                    <i class="fas fa-users text-indigo me-2"></i>Cas pratiques & REX
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Thematic cards -->
+                <div class="mt-4">
+                    <h5><i class="fas fa-brain"></i> 6 piliers de la stratégie du Dip</h5>
+                    <div class="row mt-3">
+                        <div class="col-md-4 mb-3">
+                            <div class="theme-card">
+                                <div class="theme-icon"><i class="fas fa-chart-line"></i></div>
+                                <h6>Le Dip</h6>
+                                <p class="small mb-2">Reconnaître la vallée, la traverser, dominer.</p>
+                                <div><span class="finance-badge">persévérance</span><span class="finance-badge">excellence</span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="theme-card">
+                                <div class="theme-icon"><i class="fas fa-ban"></i></div>
+                                <h6>Cul-de-Sac</h6>
+                                <p class="small mb-2">Identifier les impasses, savoir les quitter.</p>
+                                <div><span class="finance-badge">stagnation</span><span class="finance-badge">réorientation</span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="theme-card">
+                                <div class="theme-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                                <h6>Falaise</h6>
+                                <p class="small mb-2">Situations de déclin irréversible, sortie urgente.</p>
+                                <div><span class="finance-badge">crise</span><span class="finance-badge">effondrement</span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="theme-card">
+                                <div class="theme-icon"><i class="fas fa-th"></i></div>
+                                <h6>Matrice</h6>
+                                <p class="small mb-2">Potentiel vs différenciation : l'outil clé.</p>
+                                <div><span class="finance-badge">décision</span><span class="finance-badge">stratégie</span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="theme-card">
+                                <div class="theme-icon"><i class="fas fa-handshake"></i></div>
+                                <h6>Abandon stratégique</h6>
+                                <p class="small mb-2">Quitter avec élégance pour mieux rebondir.</p>
+                                <div><span class="finance-badge">quitter</span><span class="finance-badge">réseau</span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="theme-card">
+                                <div class="theme-icon"><i class="fas fa-comment-dots"></i></div>
+                                <h6>Cas & REX</h6>
+                                <p class="small mb-2">Exemples concrets et retours d'expérience.</p>
+                                <div><span class="finance-badge">témoignages</span><span class="finance-badge">leçons</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Content -->
+            <div id="quiz-content" class="d-none">
+                <div class="progress-container">
+                     <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span id="question-counter">Question 1 / 40</span>
+                        <span id="current-score">Score: 0</span>
+                     </div>
+                    <div class="progress">
+                        <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 2.5%;" aria-valuenow="2.5" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+
+                <div id="question-card" class="card">
+                    <div class="card-body">
+                        <div class="thematic-badge" id="thematic-badge">Dip</div>
+                        <h2 id="question-text">Chargement de la question...</h2>
+                        <div id="options-container">
+                            <!-- Options will be inserted here -->
+                        </div>
+                        <div id="explanation-box" class="d-none">
+                            <h5 id="explanation-title"></h5>
+                            <p id="explanation-text"></p>
+                            <div id="tip-box" class="tip-box d-none">
+                                <h6><i class="fas fa-lightbulb"></i> Conseil stratégique</h6>
+                                <p id="tip-text"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-navigation">
+                    <button id="prev-btn" class="btn btn-outline-secondary nav-btn" disabled>
+                        <i class="fas fa-arrow-left"></i> Précédent
+                    </button>
+                    <button id="next-btn" class="btn btn-dip nav-btn">
+                        Suivant <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button id="finish-btn" class="btn btn-success nav-btn d-none">
+                        <i class="fas fa-trophy"></i> Terminer & Voir les Résultats
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Résultats -->
+    <div class="modal fade" id="resultsModal" tabindex="-1" aria-labelledby="resultsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resultsModalLabel">
+                        <i class="fas fa-chart-pie modal-title-icon"></i>Résultats – Maîtrise du Dip
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="text-center mb-4">
+                        <h4 class="score-text">Votre niveau stratégique :</h4>
+                        <p class="final-score" id="final-score-percentage">0%</p>
+                        <p class="text-muted fs-5">
+                            <span id="final-score-correct">0</span> bonnes réponses sur 
+                            <span id="final-score-total">0</span> questions
+                        </p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="skill-meter">
+                                <h6><i class="fas fa-eye"></i> Capacité à reconnaître un Dip</h6>
+                                <div class="progress mt-2" style="height: 20px;">
+                                    <div id="dip-skill" class="progress-bar bg-primary" style="width: 0%;"></div>
+                                </div>
+                                <p id="dip-skill-text" class="mt-2 small">...</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="skill-meter">
+                                <h6><i class="fas fa-ban"></i> Détection des Culs-de-Sac</h6>
+                                <div class="progress mt-2" style="height: 20px;">
+                                    <div id="culdesac-skill" class="progress-bar bg-danger" style="width: 0%;"></div>
+                                </div>
+                                <p id="culdesac-skill-text" class="mt-2 small">...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr class="my-4">
+                    
+                    <div id="final-recommendations">
+                        <!-- Recommendations -->
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h5><i class="fas fa-road"></i> Votre feuille de route</h5>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="alert alert-primary">
+                                    <h6><i class="fas fa-graduation-cap"></i> Court terme</h6>
+                                    <p id="short-term" class="small mb-0">...</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="alert alert-success">
+                                    <h6><i class="fas fa-rocket"></i> Long terme</h6>
+                                    <p id="long-term" class="small mb-0">...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Fermer
+                    </button>
+                    <button type="button" class="btn btn-dip" id="restart-quiz-btn">
+                        <i class="fas fa-redo"></i> Recommencer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // --------------------------------------------------------------
+        // 80 QUESTIONS SUR LE DIP (SETH GODIN) – MODE LEARN
+        // chaque question = cas pratique (5+ phrases) + explication (7+ phrases) + tip
+        // --------------------------------------------------------------
+        const quizData = {
+            questions: [
+                // ========== DIP (12 questions) ==========
+                {
+                    thematic: "Le Dip",
+                    question: "Sophie est freelance en communication depuis 5 ans. Depuis 6 mois, elle a de moins en moins de missions, ses tarifs stagnent et elle se sent dépassée par de nouveaux outils digitaux. Elle se demande si elle doit persévérer ou changer de métier. Que devrait‑elle faire ?",
+                    options: [
+                        "Abandonner immédiatement et se reconvertir dans un secteur porteur",
+                        "Analyser si elle est dans un Dip ou un Cul‑de‑Sac en étudiant le marché et ses compétences",
+                        "Continuer comme avant en espérant que la situation s'améliore",
+                        "Diminuer ses tarifs pour attirer plus de clients"
+                    ],
+                    correctAnswer: "Analyser si elle est dans un Dip ou un Cul‑de‑Sac en étudiant le marché et ses compétences",
+                    explanation: "Sophie doit d'abord diagnostiquer sa situation. Un Dip se caractérise par une difficulté temporaire sur un marché qui reste porteur, avec une possibilité de se différencier. Si elle constate que la demande pour ses compétences est toujours là mais qu'elle doit se former aux nouveaux outils, elle est dans un Dip. En revanche, si son métier est structurellement en déclin (ex: remplacé par l'IA), elle serait dans un Cul‑de‑Sac. L'analyse du marché (tendances, besoins clients) et de ses propres atouts (formation, réseau) est cruciale. Beaucoup de freelances confondent difficulté passagère et impasse, et abandonnent trop tôt. À l'inverse, certains s'entêtent dans un Cul‑de‑Sac. La bonne démarche est de prendre du recul, consulter des pairs, et évaluer objectivement le potentiel.",
+                    tip: "Utilisez la matrice de décision : placez votre activité sur l'axe 'potentiel de récompense' et 'capacité de différenciation'. Si les deux sont élevés, vous êtes dans un Dip. Si le potentiel est faible et la différenciation difficile, vous êtes dans un Cul‑de‑Sac."
+                },
+                {
+                    thematic: "Le Dip",
+                    question: "Une startup a levé des fonds et développé une application de coaching sportif. Après 18 mois, ils n'ont que 500 utilisateurs actifs, loin de l'objectif de 5000. Les fondateurs sont épuisés et le cash commence à manquer. Comment devraient‑ils interpréter cette situation ?",
+                    options: [
+                        "C'est un Dip, il faut redoubler d'efforts marketing",
+                        "C'est probablement un Cul‑de‑Sac, car le marché du coaching sportif est saturé",
+                        "C'est une Falaise, ils doivent tout arrêter immédiatement",
+                        "Ils doivent pivoter vers un autre secteur sans analyser"
+                    ],
+                    correctAnswer: "C'est probablement un Cul‑de‑Sac, car le marché du coaching sportif est saturé",
+                    explanation: "Le marché des applications de fitness est extrêmement concurrentiel (MyFitnessPal, Strava, etc.). Sans différenciation forte (ex: IA hyper‑personnalisée, partenariats exclusifs), il est difficile de percer. Le faible nombre d'utilisateurs après 18 mois et le manque de cash indiquent que la startup n'a pas réussi à créer un avantage concurrentiel. C'est typique d'un Cul‑de‑Sac : l'effort ne produit pas de résultats, et la courbe d'apprentissage est plate. Ils doivent envisager un abandon stratégique ou un pivot radical vers un créneau très spécifique (ex: coaching pour personnes âgées). Persévérer sans changement les mènerait à la Falaise.",
+                    tip: "Avant de lancer une startup, posez-vous la question : 'Pourquoi serais‑je dans le top 10 % ?' Si vous n'avez pas de réponse claire, vous êtes probablement dans un Cul‑de‑Sac."
+                },
+                {
+                    thematic: "Le Dip",
+                    question: "Marc est développeur web full‑stack depuis 10 ans. Il maîtrise parfaitement son métier, mais ne progresse plus : les missions sont routinières, les salaires plafonnent. Il envisage de se former à l'intelligence artificielle, un domaine en plein essor. Comment qualifier sa situation ?",
+                    options: [
+                        "C'est un Cul‑de‑Sac, car son métier actuel n'a pas d'avenir",
+                        "C'est un Dip, car l'IA est un nouveau domaine difficile mais prometteur",
+                        "C'est une Falaise, car les développeurs full‑stack sont en voie de disparition",
+                        "Il devrait rester dans sa zone de confort"
+                    ],
+                    correctAnswer: "C'est un Dip, car l'IA est un nouveau domaine difficile mais prometteur",
+                    explanation: "Marc a atteint un plateau dans son domaine actuel (confortable mais sans croissance). Se former à l'IA représente un nouveau Dip : les débuts seront difficiles (courbe d'apprentissage raide), mais le potentiel de récompense est élevé (demande forte, salaires élevés). Il ne s'agit pas d'un Cul‑de‑Sac car son métier de développeur n'est pas voué à disparaître, mais pour retrouver de la motivation et de la progression, il doit traverser un nouveau Dip. La difficulté est temporaire et mène à l'excellence. C'est exactement le moment de choisir un nouveau combat.",
+                    tip: "Dans une carrière, on traverse plusieurs Dips. Le confort est l'ennemi de l'excellence. Si vous stagnez, cherchez un nouveau Dip à escalader."
+                },
+                {
+                    thematic: "Le Dip",
+                    question: "Une entreprise de services B2B voit son chiffre d'affaires baisser depuis deux trimestres. Une analyse montre que ses concurrents proposent des outils digitaux qu'elle n'a pas. La direction hésite à investir dans la transformation numérique. Que devraient‑ils faire ?",
+                    options: [
+                        "Ignorer la tendance et se concentrer sur le service traditionnel",
+                        "Investir dans le digital, sachant que cela demandera du temps et des ressources, mais que le marché le demande",
+                        "Vendre l'entreprise tant qu'elle a encore de la valeur",
+                        "Réduire les prix pour garder les clients"
+                    ],
+                    correctAnswer: "Investir dans le digital, sachant que cela demandera du temps et des ressources, mais que le marché le demande",
+                    explanation: "La baisse de CA est un signal que l'entreprise est peut‑être en train de rater une transition. Si le marché évolue vers le digital, c'est un Dip à traverser : l'investissement initial sera difficile, mais permettra de rester compétitif. Ignorer la tendance, c'est risquer le Cul‑de‑Sac. Réduire les prix est une solution à court terme qui ne résout pas le problème structurel. Vendre peut être une option si l'entreprise n'a pas les moyens de traverser le Dip, mais l'idéal est d'analyser le potentiel : si le marché reste porteur et que la digitalisation est un levier de différenciation, alors il faut persévérer.",
+                    tip: "Avant d'investir, faites une étude de marché : combien de clients sont prêts à payer pour une offre digitale ? Quelle est la marge ? Si les réponses sont positives, le Dip est justifié."
+                },
+                {
+                    thematic: "Le Dip",
+                    question: "Un étudiant en médecine est en 3e année, en pleine période de concours. Il dort peu, doute de ses capacités, et voit certains camarades abandonner. Comment devrait‑il interpréter cette phase ?",
+                    options: [
+                        "C'est un signe qu'il n'est pas fait pour la médecine",
+                        "C'est le Dip : la période la plus difficile avant la spécialisation, mais la récompense est au bout",
+                        "Il devrait changer de filière vers quelque chose de plus facile",
+                        "Il doit prendre une année sabbatique"
+                    ],
+                    correctAnswer: "C'est le Dip : la période la plus difficile avant la spécialisation, mais la récompense est au bout",
+                    explanation: "Les études de médecine sont un exemple typique de Dip long et exigeant. La 3e année est souvent un creux : les cours sont ardus, la motivation initiale s'émousse, et le bout du tunnel paraît loin. Pourtant, ceux qui tiennent bon deviennent médecins, un métier rare et valorisé. Le doute et la fatigue sont normaux ; ils filtrent ceux qui ne sont pas assez déterminés. L'étudiant doit se rappeler pourquoi il a commencé, chercher du soutien (groupes de travail, tuteurs) et se fixer des objectifs à court terme. Abandonner maintenant serait céder à un Dip qui est justement le prix à payer pour l'excellence.",
+                    tip: "Dans un Dip long, divisez le parcours en étapes : validez chaque semestre comme une victoire. Visualisez le médecin que vous serez."
+                },
+                {
+                    thematic: "Le Dip",
+                    question: "Une association caritative peine à collecter des dons depuis un an. Les bénévoles sont fatigués. La présidente se demande si l'association a encore sa place. Que devrait‑elle faire ?",
+                    options: [
+                        "Dissoudre l'association car le temps des associations est révolu",
+                        "Analyser si la cause est toujours pertinente et si les méthodes de collecte peuvent être modernisées (en ligne, réseaux sociaux)",
+                        "Forcer les bénévoles à travailler plus",
+                        "Changer complètement d'objet social"
+                    ],
+                    correctAnswer: "Analyser si la cause est toujours pertinente et si les méthodes de collecte peuvent être modernisées (en ligne, réseaux sociaux)",
+                    explanation: "Une association peut traverser un Dip si sa cause reste importante mais que ses moyens de communication sont obsolètes. Le déclin des dons n'est pas forcément une Falaise : peut‑être que le public est toujours sensible, mais qu'il faut aller le chercher différemment (campagnes digitales, appels aux dons en ligne). La présidente doit étudier le secteur : d'autres associations similaires réussissent‑elles ? Si oui, c'est que le problème est interne et peut être résolu (Dip). Si la cause elle‑même n'intéresse plus, alors c'est un Cul‑de‑Sac. Il faut éviter de forcer les bénévoles, cela ne ferait qu'aggraver l'épuisement.",
+                    tip: "Pour une association, le Dip peut être modernisé en faisant appel à des compétences bénévoles en marketing digital. Ne sous‑estimez pas le pouvoir du storytelling."
+                },
+                {
+                    thematic: "Le Dip",
+                    question: "Un écrivain a envoyé son manuscrit à 20 maisons d'édition. Il a reçu 18 refus et 2 non‑réponses. Il commence à douter de son talent. Comment interpréter cette situation ?",
+                    options: [
+                        "C'est un signe qu'il doit arrêter d'écrire",
+                        "C'est un Dip : de nombreux grands auteurs ont essuyé des refus avant d'être publiés",
+                        "Il devrait s'auto‑éditer immédiatement",
+                        "Il doit réécrire entièrement son livre"
+                    ],
+                    correctAnswer: "C'est un Dip : de nombreux grands auteurs ont essuyé des refus avant d'être publiés",
+                    explanation: "L'histoire de la littérature est remplie d'auteurs refusés (Stephen King, J.K. Rowling). Les refus sont un filtre : ils éliminent ceux qui n'ont pas la persévérance nécessaire. L'écrivain est dans un Dip : la difficulté est de continuer à croire en son œuvre, de l'améliorer, et de multiplier les contacts. Il doit aussi considérer que les refus peuvent être liés à des critères commerciaux et non à la qualité intrinsèque. S'il est passionné, il doit persévérer, peut‑être en s'adressant à des petites maisons ou en améliorant son manuscrit. Abandonner maintenant serait dommage si le potentiel est là.",
+                    tip: "Fixez‑vous un nombre d'envois (ex: 50) avant de reconsidérer. Chaque refus est une étape vers le oui. Améliorez votre manuscrit en fonction des retours."
+                },
+                {
+                    thematic: "Le Dip",
+                    question: "Un artisan chocolatier a ouvert sa boutique il y a un an. Le premier trimestre a été bon, mais depuis 6 mois, les ventes stagnent. Il se demande s'il doit diversifier son offre ou baisser ses prix. Quelle est la bonne approche ?",
+                    options: [
+                        "Baisser les prix pour attirer plus de clients",
+                        "Analyser pourquoi les ventes stagnent : manque de notoriété, concurrence, saisonnalité ?",
+                        "Fermer la boutique et vendre en ligne uniquement",
+                        "Augmenter les prix pour créer une image premium"
+                    ],
+                    correctAnswer: "Analyser pourquoi les ventes stagnent : manque de notoriété, concurrence, saisonnalité ?",
+                    explanation: "La stagnation après une bonne période initiale est fréquente dans un Dip. L'artisan doit comprendre la cause : est‑ce que les clients réguliers ne reviennent pas ? La concurrence est‑elle plus agressive ? La communication est‑elle insuffisante ? Baisser les prix peut attirer du monde mais dégrader la marge et l'image. Une analyse fine (enquête clients, observation de la concurrence) permettra de décider si le problème est temporaire (Dip) ou structurel (Cul‑de‑Sac). Par exemple, s'il y a une baisse saisonnière normale, il faut tenir. Si la rue est moins passante, peut‑être faut‑il améliorer la visibilité en ligne. La persévérance doit être éclairée.",
+                    tip: "Tenez un journal de bord des ventes et des actions marketing. Corrélez les pics avec les événements. Cela vous aidera à identifier les vrais leviers."
+                },
+                {
+                    thematic: "Le Dip",
+                    question: "Un chef de projet dans une grande entreprise se voit confier un projet complexe avec une équipe peu expérimentée. Il craint l'échec et envisage de refuser la mission. Que devrait‑il faire ?",
+                    options: [
+                        "Refuser pour préserver sa réputation",
+                        "Accepter, car c'est une opportunité de développer des compétences rares (management de crise, leadership)",
+                        "Demander à changer d'équipe",
+                        "Faire le minimum pour ne pas se fatiguer"
+                    ],
+                    correctAnswer: "Accepter, car c'est une opportunité de développer des compétences rares (management de crise, leadership)",
+                    explanation: "Un projet difficile avec une équipe junior est un Dip professionnel. Le chef de projet va devoir investir beaucoup d'énergie, former, gérer les imprévus, mais en sortant de cette épreuve, il aura acquis une expérience précieuse et rare. Dans les grandes organisations, ceux qui savent mener des projets complexes sont très recherchés. Refuser, c'est rester dans sa zone de confort et stagner. Le risque est de vivre un échec, mais même un échec peut être formateur si on en tire des leçons. C'est typiquement le genre de situation où la difficulté mène à la différenciation.",
+                    tip: "Avant d'accepter, demandez un soutien (mentor, budget formation). Entourez‑vous de personnes qui ont déjà réussi des projets similaires. Cela réduit le risque."
+                },
+                {
+                    thematic: "Le Dip",
+                    question: "Un musicien compose depuis des années sans rencontrer de succès commercial. Il a un petit cercle de fans fidèles mais ne vit pas de sa musique. Doit‑il persévérer ?",
+                    options: [
+                        "Non, car le marché de la musique est trop concurrentiel",
+                        "Oui, mais en cherchant à monétiser autrement (concerts, licensing, mécénat) et en restant authentique",
+                        "Il doit changer de style pour plaire au grand public",
+                        "Il doit arrêter la musique et trouver un vrai travail"
+                    ],
+                    correctAnswer: "Oui, mais en cherchant à monétiser autrement (concerts, licensing, mécénat) et en restant authentique",
+                    explanation: "Le succès commercial n'est pas le seul indicateur de valeur. Le musicien est dans un Dip : il a un public fidèle mais pas de rentabilité. Il doit explorer d'autres sources de revenus (concerts privés, synchronisation avec des films, plateformes de crowdfunding). Beaucoup d'artistes ont traversé de longues périodes de vaches maigres avant de percer. L'important est de savoir si sa passion est suffisante pour continuer. Si oui, il faut diversifier les canaux. Abandonner serait peut‑être une erreur si son art est unique. Mais il doit aussi être réaliste : si après 10 ans il n'y a aucune évolution, c'est peut‑être un Cul‑de‑Sac. L'analyse de la tendance (nombre de fans, engagement) est clé.",
+                    tip: "Créez une newsletter pour garder le lien avec vos fans. Proposez du contenu exclusif payant. Testez plusieurs modèles économiques à petite échelle."
+                },
+                {
+                    thematic: "Le Dip",
+                    question: "Un entrepreneur a lancé une plateforme de mise en relation pour des services à domicile. Après 3 ans, il est à l'équilibre mais ne décolle pas. Ses concurrents ont levé des fonds. Que faire ?",
+                    options: [
+                        "Vendre l'entreprise à un concurrent",
+                        "Chercher des investisseurs pour accélérer, mais en sachant que la concurrence est rude",
+                        "Abandonner, car il ne pourra jamais rivaliser",
+                        "Continuer tranquillement sans changer de stratégie"
+                    ],
+                    correctAnswer: "Chercher des investisseurs pour accélérer, mais en sachant que la concurrence est rude",
+                    explanation: "Être à l'équilibre sans croissance dans un marché concurrentiel est souvent un signe de Dip ou de Cul‑de‑Sac selon le potentiel. Si le marché est vaste et que la plateforme a une proposition unique (qualité des prestataires, garanties), il est possible de traverser le Dip en levant des fonds pour acquérir des clients. Mais il faut être honnête : si les concurrents sont trop puissants et que la différenciation est faible, c'est peut‑être un Cul‑de‑Sac. L'entrepreneur doit évaluer son avantage concurrentiel et la taille du marché. S'il décide de persévérer, il doit changer de braquet (investissement massif) ou trouver une niche oubliée.",
+                    tip: "Avant de lever des fonds, validez que votre produit est 10 fois meilleur que la concurrence sur un point précis. Sinon, l'argent ne fera que retarder l'échec."
+                },
+                {
+                    thematic: "Le Dip",
+                    question: "Un professeur de yoga voit sa fréquentation baisser depuis l'ouverture de deux nouveaux studios dans son quartier. Il se demande s'il doit baisser ses prix ou proposer des cours en ligne. Quelle est la meilleure option ?",
+                    options: [
+                        "Baisser ses prix pour rester compétitif",
+                        "Se différencier par une spécialisation (yoga pour seniors, yoga thérapeutique) et développer l'offre en ligne",
+                        "Fermer et ouvrir ailleurs",
+                        "Attendre que les concurrents ferment"
+                    ],
+                    correctAnswer: "Se différencier par une spécialisation (yoga pour seniors, yoga thérapeutique) et développer l'offre en ligne",
+                    explanation: "La concurrence accrue est un classique. Baisser les prix est une pente glissante vers le Cul‑de‑Sac. La meilleure réponse est de traverser le Dip en se spécialisant : trouver un créneau où les concurrents ne sont pas présents (ex: yoga pour femmes enceintes, yoga pour personnes âgées) et offrir une valeur unique. Les cours en ligne permettent aussi d'élargir la clientèle au‑delà du quartier. Cela demande des efforts (formation, marketing) mais crée un avantage concurrentiel durable. Le professeur est dans un Dip : la difficulté actuelle peut le mener à une position plus forte s'il s'adapte.",
+                    tip: "Faites une analyse de la concurrence : que font‑ils mal ? Que pourriez‑vous faire mieux ? Interviewez vos clients pour connaître leurs besoins non satisfaits."
+                },
+                // ========== CUL-DE-SAC (14 questions) ==========
+                {
+                    thematic: "Cul-de-Sac",
+                    question: "Jean est agent immobilier dans une petite ville depuis 20 ans. Avec la digitalisation, les clients passent par des plateformes en ligne. Son agence traditionnelle perd des parts de marché. Il refuse d'utiliser internet et continue à prospecter par téléphone. Comment qualifier sa situation ?",
+                    options: [
+                        "Il est dans un Dip, il doit persévérer",
+                        "Il est dans un Cul‑de‑Sac, car son modèle est obsolète et il refuse de s'adapter",
+                        "Il est dans une Falaise, car il va bientôt faire faillite",
+                        "Il a raison, les gens reviendront au traditionnel"
+                    ],
+                    correctAnswer: "Il est dans un Cul‑de‑Sac, car son modèle est obsolète et il refuse de s'adapter",
+                    explanation: "L'agent immobilier s'accroche à une méthode dépassée alors que le marché a changé. Continuer sans s'adapter, c'est persévérer dans une impasse. Il n'y a pas de progression possible car la tendance est structurelle (digitalisation). Même s'il travaille plus, il ne rattrapera pas le retard. C'est un Cul‑de‑Sac typique : l'effort n'a pas de corrélation avec le succès. Pour sortir, il doit soit apprendre le digital, soit se reconvertir. Persévérer dans son refus mènera à la Falaise.",
+                    tip: "Si vous constatez que votre secteur évolue et que vous êtes le seul à ne pas suivre, posez‑vous la question : 'Mon modèle a‑t‑il encore un avenir ?' Si la réponse est non, c'est un Cul‑de‑Sac."
+                },
+                {
+                    thematic: "Cul-de-Sac",
+                    question: "Une PME fabrique des pièces mécaniques pour l'industrie automobile. Avec l'essor des véhicules électriques, la demande pour ses pièces (moteurs thermiques) diminue. L'entreprise a les compétences pour se tourner vers d'autres secteurs mais hésite. Que devrait‑elle faire ?",
+                    options: [
+                        "Continuer à produire pour l'automobile en espérant un retour",
+                        "Analyser les marchés porteurs (aéronautique, médical) et investir dans la reconversion",
+                        "Fermer purement et simplement",
+                        "Baisser les prix pour garder les clients"
+                    ],
+                    correctAnswer: "Analyser les marchés porteurs (aéronautique, médical) et investir dans la reconversion",
+                    explanation: "La PME est dans un Cul‑de‑Sac si elle reste sur son marché historique en déclin. Mais elle a la chance d'avoir des compétences transférables. La bonne stratégie est d'abandonner progressivement le secteur automobile pour se tourner vers des marchés en croissance où son savoir‑faire peut être valorisé. C'est un abandon stratégique d'une partie de l'activité pour traverser un nouveau Dip. Ne rien faire, c'est se diriger vers la Falaise. La reconversion demande des efforts mais ouvre des perspectives.",
+                    tip: "Faites un audit de vos compétences : quels autres secteurs pourraient en bénéficier ? Contactez des clients potentiels pour valider l'intérêt."
+                },
+                {
+                    thematic: "Cul-de-Sac",
+                    question: "Un graphiste travaille principalement pour des petites entreprises locales. Il réalise des flyers et des logos basiques. Depuis des années, ses tarifs n'augmentent pas et il perd des clients au profit de Canva. Il ne se forme pas aux nouveaux outils. Quelle est sa situation ?",
+                    options: [
+                        "Il est dans un Dip, il doit persévérer",
+                        "Il est dans un Cul‑de‑Sac, car il ne se différencie pas et son marché est commoditisé",
+                        "Il est dans une Falaise, car il va bientôt perdre tous ses clients",
+                        "Il doit augmenter ses prix pour compenser"
+                    ],
+                    correctAnswer: "Il est dans un Cul‑de‑Sac, car il ne se différencie pas et son marché est commoditisé",
+                    explanation: "Le graphiste est remplaçable par un outil en ligne. Il n'a pas développé de compétences rares (animation, UX design, etc.). Il est dans une impasse : même s'il travaille plus, il ne pourra pas rivaliser avec la facilité et le faible coût de Canva. Pour sortir, il doit se spécialiser (ex: design de marque premium, motion design) et se former. Sans changement, il restera dans la médiocrité et perdra ses clients. C'est un Cul‑de‑Sac typique où la persévérance sans évolution est vaine.",
+                    tip: "Identifiez une compétence que 90% de vos concurrents n'ont pas. Investissez 6 mois pour la maîtriser. Vous passerez alors dans un Dip."
+                },
+                {
+                    thematic: "Cul-de-Sac",
+                    question: "Un restaurateur propose une cuisine traditionnelle dans un quartier où de nombreux restaurants ont fermé. Il voit sa clientèle vieillir et ne parvient pas à attirer les jeunes. Il refuse de changer sa carte. Comment analyser sa situation ?",
+                    options: [
+                        "C'est un Dip, il faut tenir bon",
+                        "C'est un Cul‑de‑Sac, car son offre ne correspond plus à la demande",
+                        "C'est une Falaise, il doit fermer immédiatement",
+                        "Il doit baisser ses prix"
+                    ],
+                    correctAnswer: "C'est un Cul‑de‑Sac, car son offre ne correspond plus à la demande",
+                    explanation: "Le restaurateur s'accroche à un modèle qui n'attire plus. La clientèle vieillit et les jeunes cherchent d'autres expériences (cuisine du monde, healthy, etc.). Sans adaptation, il est dans une impasse : il travaille autant mais les résultats baissent. Le fait que d'autres restaurants ferment indique une tendance de fond. Pour sortir, il doit évoluer (nouveau concept, food‑truck, événements). Persévérer sans changement le mènera à la Falaise.",
+                    tip: "Observez les restaurants qui marchent dans d'autres quartiers. Quels plats proposent‑ils ? Quelle ambiance ? Inspirez‑vous en, mais avec votre touche personnelle."
+                },
+                {
+                    thematic: "Cul-de-Sac",
+                    question: "Un commercial dans l'édition vend des encyclopédies papier aux particuliers. Ses ventes s'effondrent depuis l'avènement d'Internet. Son employeur lui demande de redoubler d'efforts. Que devrait‑il faire ?",
+                    options: [
+                        "Redoubler d'efforts comme demandé",
+                        "Chercher un nouveau secteur où ses compétences de vente seront valorisées (logiciels, services)",
+                        "Proposer des encyclopédies moins chères",
+                        "Attendre la retraite"
+                    ],
+                    correctAnswer: "Chercher un nouveau secteur où ses compétences de vente seront valorisées (logiciels, services)",
+                    explanation: "Le marché des encyclopédies papier est mort. C'est un Cul‑de‑Sac structurel. Persévérer, c'est perdre son temps. Le commercial a des compétences transférables (prospection, négociation) qui peuvent être précieuses dans des secteurs porteurs (tech, services B2B). Il doit abandonner ce secteur et se reconvertir. L'entreprise elle‑même devrait pivoter. C'est un exemple typique où la persévérance est une erreur.",
+                    tip: "Ne confondez pas persévérance et obstination. Si le marché disparaît, partez. Vos compétences sont votre vrai capital."
+                },
+                {
+                    thematic: "Cul-de-Sac",
+                    question: "Un coach en développement personnel propose des séances individuelles à 50 € de l'heure. Il a du mal à remplir son agenda, car de nombreux coachs proposent des offres similaires sur internet. Il pense que c'est passager. Qu'en pensez‑vous ?",
+                    options: [
+                        "C'est un Dip, il doit attendre que la concurrence se lasse",
+                        "C'est un Cul‑de‑Sac, car il n'est pas différencié et le marché est saturé",
+                        "Il doit baisser ses prix pour attirer plus de clients",
+                        "Il doit augmenter ses prix pour paraître premium"
+                    ],
+                    correctAnswer: "C'est un Cul‑de‑Sac, car il n'est pas différencié et le marché est saturé",
+                    explanation: "Le coaching personnel est un marché très concurrentiel. Sans niche spécifique, il est difficile de se démarquer. Les clients peuvent trouver des coachs moins chers en ligne. C'est une impasse : l'offre est standardisée, pas de valeur ajoutée unique. Pour en sortir, il doit se spécialiser (coaching pour dirigeants, pour artistes, etc.) ou développer une méthode originale. Baisser les prix aggraverait la situation en réduisant les marges sans résoudre le problème de différenciation.",
+                    tip: "Créez une offre unique : par exemple, 'coaching pour les entrepreneurs en burn‑out' avec une approche spécifique. Ciblez un public précis et devenez LA référence."
+                },
+                {
+                    thematic: "Cul-de-Sac",
+                    question: "Un magasin de disques vinyles survit grâce à une clientèle de collectionneurs, mais les ventes stagnent. Le propriétaire refuse de vendre en ligne car il aime le contact physique. Est‑ce un Dip ou un Cul‑de‑Sac ?",
+                    options: [
+                        "C'est un Dip, car le vinyle a un marché de niche",
+                        "C'est un Cul‑de‑Sac, car il refuse un canal de vente essentiel pour toucher les collectionneurs",
+                        "C'est une Falaise, car le vinyle va disparaître",
+                        "Il a raison, le contact physique est irremplaçable"
+                    ],
+                    correctAnswer: "C'est un Cul‑de‑Sac, car il refuse un canal de vente essentiel pour toucher les collectionneurs",
+                    explanation: "Le marché du vinyle a effectivement un créneau, mais les collectionneurs achètent aussi en ligne. Refuser la vente en ligne, c'est se priver d'une partie de la demande. Le propriétaire est dans une impasse : il limite volontairement sa clientèle. Pour traverser un Dip (et non un Cul‑de‑Sac), il devrait combiner physique et en ligne, créer une communauté, organiser des événements. Son attachement au contact est louable, mais il doit évoluer pour survivre. Sans changement, il stagnera et finira par perdre même les clients locaux.",
+                    tip: "Le commerce physique et en ligne sont complémentaires. Utilisez le site pour promouvoir vos événements et vendre à distance. Le contact humain peut être renforcé par des lives vidéo."
+                },
+                {
+                    thematic: "Cul-de-Sac",
+                    question: "Un développeur spécialisé dans un langage de programmation obsolète (ex: COBOL) voit les offres d'emploi diminuer. Il refuse d'apprendre de nouveaux langages. Comment qualifier sa situation ?",
+                    options: [
+                        "C'est un Dip, car les compétences COBOL sont rares",
+                        "C'est un Cul‑de‑Sac, car le marché se réduit et il ne s'adapte pas",
+                        "C'est une Falaise, car il va bientôt perdre son emploi",
+                        "Il a raison, les banques ont encore besoin de COBOL"
+                    ],
+                    correctAnswer: "C'est un Cul‑de‑Sac, car le marché se réduit et il ne s'adapte pas",
+                    explanation: "Même si COBOL est encore utilisé dans certains secteurs, la tendance est à la baisse. Refuser d'apprendre des technologies modernes, c'est se condamner à un marché de plus en plus étroit. C'est un Cul‑de‑Sac professionnel : les efforts pour rester compétent en COBOL ne mènent pas à une croissance de carrière. Pour sortir, il doit investir dans l'apprentissage de nouveaux langages (Python, Go) ou de domaines connexes (architecture). La rareté peut être un argument, mais elle ne dure pas.",
+                    tip: "Consacrez 20 % de votre temps à apprendre des technologies émergentes. Même si vous gardez COBOL, cela vous ouvrira des portes."
+                },
+                {
+                    thematic: "Cul-de-Sac",
+                    question: "Une entreprise de location de DVD continue d'exploiter ses magasins malgré l'essor du streaming. Les pertes s'accumulent. Que devrait‑elle faire ?",
+                    options: [
+                        "Ouvrir de nouveaux magasins dans des zones rurales",
+                        "Fermer et se reconvertir dans la production de contenu ou une autre activité",
+                        "Baisser les prix des locations",
+                        "Lancer une campagne de fidélisation"
+                    ],
+                    correctAnswer: "Fermer et se reconvertir dans la production de contenu ou une autre activité",
+                    explanation: "C'est l'exemple emblématique de la Falaise (si on attend trop) mais ici, avec des pertes, c'est déjà un Cul‑de‑Sac structurel. Le marché du DVD physique est mort. Persévérer, c'est couler. La seule issue est d'abandonner ce modèle et de se réinventer (comme Netflix l'a fait). L'entreprise doit avoir le courage de fermer les magasins et d'investir dans un nouveau secteur. C'est un abandon stratégique indispensable.",
+                    tip: "Anticipez les tendances. Si votre secteur est en déclin structurel, commencez à pivoter avant que les pertes ne soient trop lourdes."
+                },
+                {
+                    thematic: "Cul-de-Sac",
+                    question: "Un étudiant en philosophie termine son master et souhaite enseigner. Mais les postes sont rares et le concours très sélectif. Il envisage de passer le concours plusieurs fois. Est‑ce un Dip ou un Cul‑de‑Sac ?",
+                    options: [
+                        "C'est un Dip, car enseigner est une vocation et le concours est difficile",
+                        "C'est un Cul‑de‑Sac si le nombre de postes est structurellement bas et qu'il n'a pas de plan B",
+                        "Il doit abandonner immédiatement",
+                        "Il doit postuler dans le privé sans concours"
+                    ],
+                    correctAnswer: "C'est un Cul‑de‑Sac si le nombre de postes est structurellement bas et qu'il n'a pas de plan B",
+                    explanation: "Si le nombre de postes de prof de philo est très faible (ex: 10 postes pour 1000 candidats), persévérer plusieurs années sans alternative peut mener à une impasse. C'est un Cul‑de‑Sac si l'étudiant n'a pas d'autre issue. En revanche, s'il a un plan B (enseignement dans le privé, formation pour adultes, autre métier), tenter le concours une ou deux fois peut être un Dip acceptable. L'important est de ne pas sacrifier toutes ses chances sur une seule voie sans filet de sécurité.",
+                    tip: "Ayez toujours un plan B. Préparez le concours, mais en parallèle, développez des compétences transférables (communication, rédaction) pour d'autres débouchés."
+                },
+                {
+                    thematic: "Cul-de-Sac",
+                    question: "Un artisan ébéniste fabrique des meubles haut de gamme. Avec la concurrence des meubles en kit, ses ventes baissent. Il pense que la qualité finira par l'emporter. Est‑ce un Dip ?",
+                    options: [
+                        "Oui, car la qualité est toujours récompensée",
+                        "Non, c'est un Cul‑de‑Sac si le marché des meubles haut de gamme est trop restreint et qu'il ne communique pas",
+                        "C'est une Falaise, car les gens n'achètent plus de meubles",
+                        "Il doit fabriquer moins cher"
+                    ],
+                    correctAnswer: "Non, c'est un Cul‑de‑Sac si le marché des meubles haut de gamme est trop restreint et qu'il ne communique pas",
+                    explanation: "L'ébéniste peut avoir un marché, mais s'il ne se fait pas connaître (internet, réseaux sociaux, showroom), il restera dans l'ombre. La qualité seule ne suffit pas. C'est un Cul‑de‑Sac s'il n'évolue pas dans sa manière de vendre. Pour traverser un Dip, il doit moderniser sa communication, toucher une clientèle plus large (via Instagram, Pinterest), et peut‑être créer des collaborations avec des architectes. La persévérance dans l'ombre ne mène à rien.",
+                    tip: "Pour un produit de niche, le marketing digital est indispensable. Montrez votre savoir‑faire en vidéo, créez une newsletter. Le bouche‑à‑oreille ne suffit plus."
+                },
+                {
+                    thematic: "Cul-de-Sac",
+                    question: "Un community manager gère les réseaux sociaux de petites entreprises. Il facture au forfait. De nombreux concurrents proposent des tarifs très bas, et il peine à fidéliser ses clients. Comment qualifier sa situation ?",
+                    options: [
+                        "C'est un Dip, il doit améliorer sa productivité",
+                        "C'est un Cul‑de‑Sac, car son service est banalisé et la concurrence par les prix est féroce",
+                        "Il doit baisser ses prix pour garder ses clients",
+                        "Il doit se spécialiser dans un secteur (ex: santé, luxe) pour apporter une valeur ajoutée"
+                    ],
+                    correctAnswer: "C'est un Cul‑de‑Sac, car son service est banalisé et la concurrence par les prix est féroce",
+                    explanation: "Le community management généraliste est devenu une commodité. Sans expertise sectorielle ou compétence rare (stratégie,数据分析), il est difficile de justifier des prix élevés. La concurrence par les prix est une course vers le bas. C'est une impasse. La solution est de se spécialiser pour sortir de la comparaison. Par exemple, devenir expert en community management pour les cabinets médicaux, avec une connaissance des réglementations, crée une différenciation. C'est un abandon du marché généraliste pour un Dip spécialisé.",
+                    tip: "Choisissez un secteur que vous aimez et devenez le spécialiste incontournable. Proposez des services additionnels (formation, audit) pour augmenter la valeur perçue."
+                },
+                {
+                    thematic: "Cul-de-Sac",
+                    question: "Un agriculteur cultive du maïs conventionnel. Les prix sont bas et les charges augmentent. Il hésite à passer au bio, ce qui demande une reconversion de 3 ans sans aide. Que faire ?",
+                    options: [
+                        "Continuer le conventionnel en espérant que les prix remontent",
+                        "Se lancer dans le bio, même si c'est difficile, car la demande est croissante",
+                        "Vendre la ferme",
+                        "Planter autre chose sans changer de méthode"
+                    ],
+                    correctAnswer: "Se lancer dans le bio, même si c'est difficile, car la demande est croissante",
+                    explanation: "Le conventionnel est un Cul‑de‑Sac si les prix sont structurellement bas et que les charges augmentent. Le bio représente un Dip : une transition difficile (3 ans sans aide) mais un marché en croissance et des prix plus stables. C'est une décision stratégique : abandonner le modèle actuel pour en adopter un nouveau avec un fort potentiel. L'agriculteur doit évaluer ses ressources et s'assurer qu'il peut tenir financièrement pendant la transition. Mais persévérer dans le conventionnel, c'est risquer la Falaise.",
+                    tip: "Étudiez les aides à la conversion (subventions, conseils). Formez‑vous aux techniques bio. Parlez à des agriculteurs bio pour comprendre les défis."
+                },
+                {
+                    thematic: "Cul-de-Sac",
+                    question: "Un traducteur se spécialise dans la traduction de documents juridiques. Avec l'avènement des outils de traduction automatique, les tarifs baissent. Il pense que sa qualité justifie ses prix. Est‑ce un Dip ?",
+                    options: [
+                        "Oui, la qualité fera la différence",
+                        "Non, c'est un Cul‑de‑Sac si les clients ne perçoivent pas la valeur ajoutée et préfèrent le low‑cost",
+                        "Il doit baisser ses prix",
+                        "Il doit se tourner vers l'interprétariat"
+                    ],
+                    correctAnswer: "Non, c'est un Cul‑de‑Sac si les clients ne perçoivent pas la valeur ajoutée et préfèrent le low‑cost",
+                    explanation: "La qualité est subjective et souvent ignorée quand le prix est l'argument principal. Si les clients optent pour des solutions automatiques, le traducteur doit se repositionner sur des services que les machines ne savent pas faire : adaptation culturelle, rédaction de contenu marketing, conseil. Sinon, il restera dans un marché en déclin. C'est un Cul‑de‑Sac car l'effort pour améliorer la qualité n'aura pas de retour si le marché ne valorise pas cette qualité. Il doit se réinventer.",
+                    tip: "Offrez des services à plus forte valeur ajoutée : localisation de campagnes marketing, post‑édition de traduction automatique avec garantie humaine, etc."
+                },
+                {
+                    thematic: "Cul-de-Sac",
+                    question: "Un kinésithérapeute exerce en libéral. De nombreux confrères s'installent dans sa ville, et les patients se font plus rares. Il refuse de se spécialiser (sport, périnée) car il aime la polyvalence. Que pensez‑vous de sa stratégie ?",
+                    options: [
+                        "C'est un Dip, il faut tenir",
+                        "C'est un Cul‑de‑Sac, car il ne se différencie pas dans un marché concurrentiel",
+                        "Il doit déménager",
+                        "Il doit baisser ses tarifs"
+                    ],
+                    correctAnswer: "C'est un Cul‑de‑Sac, car il ne se différencie pas dans un marché concurrentiel",
+                    explanation: "La polyvalence, c'est devenir interchangeable. Dans un marché saturé, les patients choisissent sur la proximité ou le prix. Sans spécialisation, le kiné est dans une impasse : il travaille autant mais attire moins. La spécialisation (ex: kiné du sport, rééducation périnéale) crée une rareté et justifie des tarifs plus élevés. C'est la sortie du Cul‑de‑Sac vers un Dip. Refuser de changer, c'est stagner.",
+                    tip: "Suivez une formation complémentaire dans un domaine porteur. Communiquez sur cette spécialité. Vous attirerez une clientèle fidèle et moins sensible au prix."
+                },
+                // ========== FALAISE (12 questions) ==========
+                {
+                    thematic: "Falaise",
+                    question: "Une entreprise de presse papier voit ses ventes chuter de 30 % par an depuis 3 ans. Elle a réduit ses coûts mais continue à perdre de l'argent. Les actionnaires hésitent à injecter des fonds. Que devraient‑ils faire ?",
+                    options: [
+                        "Investir encore pour tenter un rebond",
+                        "Cesser l'activité et vendre les actifs (archives, marque) tant qu'il est temps",
+                        "Lancer une édition numérique sans abandonner le papier",
+                        "Changer de rédacteur en chef"
+                    ],
+                    correctAnswer: "Cesser l'activité et vendre les actifs (archives, marque) tant qu'il est temps",
+                    explanation: "Avec une chute continue de 30 % par an, l'entreprise est dans une Falaise. Chaque jour qui passe, elle perd plus de valeur. Investir de l'argent dans le papier serait jeter de l'argent par les fenêtres. La meilleure option est de sortir proprement, en valorisant ce qui peut l'être (archives, marque, abonnés) pour financer éventuellement une nouvelle activité. C'est le moment d'abandonner, pas de persévérer.",
+                    tip: "Dans une Falaise, le temps est votre ennemi. Agissez vite pour minimiser les pertes. Consultez des experts en cession d'entreprise."
+                },
+                {
+                    thematic: "Falaise",
+                    question: "Un commerçant a ouvert une boutique de souvenirs dans un quartier devenu peu fréquenté à cause de travaux. Les travaux durent depuis 2 ans et le chiffre d'affaires a chuté de 80 %. Il a épuisé ses économies. Que devrait‑il faire ?",
+                    options: [
+                        "Attendre la fin des travaux",
+                        "Déménager la boutique dans un quartier plus passant, même si cela coûte",
+                        "Baisser ses prix pour attirer les rares passants",
+                        "Fermer et chercher un emploi salarié"
+                    ],
+                    correctAnswer: "Fermer et chercher un emploi salarié",
+                    explanation: "La situation est critique : chiffre d'affaires en chute libre, économies épuisées. Même si les travaux s'arrêtent, il faudra du temps pour retrouver une clientèle. Le commerçant n'a plus de trésorerie pour tenir. C'est une Falaise : il doit sortir immédiatement pour ne pas sombrer dans les dettes. Déménager nécessite un investissement qu'il n'a pas. La meilleure solution est de fermer et de se reconvertir, en capitalisant sur son expérience pour un emploi.",
+                    tip: "Ne laissez pas les dettes s'accumuler. Si vous n'avez plus de cash, il vaut mieux arrêter maintenant et préserver votre santé financière."
+                },
+                {
+                    thematic: "Falaise",
+                    question: "Une startup de réalité virtuelle a développé un casque innovant, mais le marché est encore trop petit. Après 5 ans, les ventes sont anémiques et les investisseurs ne veulent plus suivre. La trésorerie est négative. Que faire ?",
+                    options: [
+                        "Continuer avec les fonds propres des fondateurs",
+                        "Chercher un acquéreur pour la technologie",
+                        "Pivoter vers la réalité augmentée, plus porteuse",
+                        "Faire une levée de fonds auprès de business angels"
+                    ],
+                    correctAnswer: "Chercher un acquéreur pour la technologie",
+                    explanation: "Avec une trésorerie négative et des investisseurs qui ne suivent plus, la startup est en Falaise. Continuer, c'est se diriger vers la liquidation. Pivoter demande de l'argent et du temps. La meilleure option est de chercher à vendre la technologie ou l'équipe à une entreprise plus grande qui pourra l'exploiter. Cela permet de sauver quelque chose et d'éviter la faillite. C'est un abandon stratégique.",
+                    tip: "Préparez un dossier de vente : mettez en avant votre propriété intellectuelle, vos brevets, votre équipe. Contactez des concurrents ou des grands groupes."
+                },
+                {
+                    thematic: "Falaise",
+                    question: "Un photographe de mariage voit son activité chuter depuis 2 ans. Il a investi dans du matériel coûteux, mais les jeunes mariés préfèrent des photographes moins chers ou des smartphones. Il est endetté. Que faire ?",
+                    options: [
+                        "Continuer en espérant que la tendance s'inverse",
+                        "Se diversifier dans la photo d'entreprise ou les portraits, un marché moins concurrentiel",
+                        "Vendre son matériel pour rembourser ses dettes et se reconvertir",
+                        "Baisser ses prix pour attirer plus de clients"
+                    ],
+                    correctAnswer: "Vendre son matériel pour rembourser ses dettes et se reconvertir",
+                    explanation: "Le photographe est dans une Falaise : endetté, marché en déclin. Baisser les prix ne fera qu'aggraver la situation (marge nulle). Se diversifier est une bonne idée, mais nécessite du temps et peut‑être de l'argent. S'il est trop endetté, il doit d'abord se désendetter en vendant son matériel, puis envisager une reconversion. La priorité est d'éviter la banqueroute. C'est un abandon douloureux mais nécessaire.",
+                    tip: "Si vous êtes endetté, parlez à un conseiller financier. Parfois, une liquidation judiciaire permet de repartir à zéro."
+                },
+                {
+                    thematic: "Falaise",
+                    question: "Un opérateur de téléphonie fixe voit son nombre d'abonnés chuter chaque trimestre. Les infrastructures coûtent cher et les clients passent au mobile. La direction décide de maintenir le réseau. Est‑ce judicieux ?",
+                    options: [
+                        "Oui, il y a encore des clients fidèles",
+                        "Non, c'est une Falaise : ils doivent démanteler le réseau et se concentrer sur le mobile/Internet",
+                        "Ils doivent augmenter les tarifs pour compenser",
+                        "Ils doivent subventionner les abonnements"
+                    ],
+                    correctAnswer: "Non, c'est une Falaise : ils doivent démanteler le réseau et se concentrer sur le mobile/Internet",
+                    explanation: "Maintenir un réseau fixe coûteux alors que les clients fuient, c'est persévérer dans une Falaise. Les pertes vont s'aggraver. La bonne stratégie est d'abandonner progressivement le fixe (ou de le vendre) et de réallouer les ressources vers les activités en croissance (mobile, fibre, services). C'est une décision difficile mais nécessaire pour la survie de l'entreprise.",
+                    tip: "Analysez les coûts fixes. Si une activité est en déclin structurel, désinvestissez‑la rapidement pour éviter de couler avec elle."
+                },
+                {
+                    thematic: "Falaise",
+                    question: "Un influenceur sur un réseau social en perte de vitesse (ex: Snapchat) voit son nombre d'abonnés divisé par 10 en un an. Ses revenus publicitaires s'effondrent. Que devrait‑il faire ?",
+                    options: [
+                        "Continuer à poster sur Snapchat en espérant un rebond",
+                        "Migrer vers les plateformes montantes (TikTok, Instagram Reels) avec un nouveau contenu adapté",
+                        "Abandonner complètement les réseaux sociaux",
+                        "Acheter des abonnés"
+                    ],
+                    correctAnswer: "Migrer vers les plateformes montantes (TikTok, Instagram Reels) avec un nouveau contenu adapté",
+                    explanation: "L'influenceur est dans une Falaise s'il reste sur une plateforme en déclin. Migrer est un abandon stratégique de l'ancienne plateforme pour investir un nouveau Dip. Cela demande du travail (apprendre les codes de la nouvelle plateforme) mais c'est la seule chance de survivre. Continuer sur Snapchat, c'est s'enfoncer. Acheter des abonnés est inutile.",
+                    tip: "Surveillez les tendances. Quand une plateforme décline, partez avant que la chute ne soit trop rapide. Adaptez votre contenu à la nouvelle audience."
+                },
+                {
+                    thematic: "Falaise",
+                    question: "Un fabricant de montres connectées low‑cost voit ses ventes chuter car les grandes marques (Apple, Samsung) proposent des produits à peine plus chers. Il a des stocks invendus. Que faire ?",
+                    options: [
+                        "Baisser encore les prix pour écouler les stocks",
+                        "Cesser la production, liquider les stocks et se tourner vers un autre marché (accessoires, montres de luxe)",
+                        "Lancer un modèle plus cher",
+                        "Attendre que les grandes marques se retirent"
+                    ],
+                    correctAnswer: "Cesser la production, liquider les stocks et se tourner vers un autre marché (accessoires, montres de luxe)",
+                    explanation: "La concurrence des géants est une Falaise pour un low‑cost sans différenciation. Baisser les prix ne fera qu'accélérer la perte. La seule issue est d'arrêter les frais, liquider les stocks (même à perte) pour récupérer du cash, et se réorienter vers un marché où il peut exister (ex: montres de luxe, accessoires connectés pour niches). C'est un abandon radical mais salvateur.",
+                    tip: "Quand vous ne pouvez pas rivaliser sur les prix, il faut changer de terrain. Cherchez des niches oubliées par les géants."
+                },
+                {
+                    thematic: "Falaise",
+                    question: "Un centre de formation propose des cours en présentiel sur des logiciels obsolètes (ex: Word 2007). Les inscriptions ont chuté de 70 % en 2 ans. Que devrait‑il faire ?",
+                    options: [
+                        "Continuer avec les anciens clients",
+                        "Mettre à jour les formations et passer au distanciel, mais cela demande un investissement",
+                        "Fermer le centre",
+                        "Baisser les tarifs"
+                    ],
+                    correctAnswer: "Mettre à jour les formations et passer au distanciel, mais cela demande un investissement",
+                    explanation: "Le centre est dans une Falaise s'il ne change rien. Mais il a une chance de s'en sortir en investissant dans la mise à jour des programmes et le passage au distanciel. C'est un pivot : il abandonne l'ancien modèle pour en adopter un nouveau. Si l'investissement est possible, c'est la bonne voie. Sinon, il devra fermer. La Falaise peut être évitée par un changement radical.",
+                    tip: "Évaluez vos ressources : avez‑vous les fonds pour cette transformation ? Si oui, agissez vite. Si non, préparez une sortie."
+                },
+                {
+                    thematic: "Falaise",
+                    question: "Un opérateur de casinos physiques voit sa fréquentation baisser avec la légalisation des jeux en ligne. Ses coûts fixes (immobilier, personnel) sont énormes. Que devrait‑il faire ?",
+                    options: [
+                        "Investir dans des machines à sous plus modernes",
+                        "Développer une plateforme de jeux en ligne et réduire la voilure sur le physique",
+                        "Fermer les casinos et se reconvertir dans l'hôtellerie",
+                        "Attendre que les clients reviennent"
+                    ],
+                    correctAnswer: "Développer une plateforme de jeux en ligne et réduire la voilure sur le physique",
+                    explanation: "Le déclin du physique est structurel. Persévérer dans le physique mène à la Falaise. La solution est de se réinventer en ligne, tout en réduisant progressivement la voilure physique. C'est un abandon partiel pour traverser un nouveau Dip. L'entreprise a une marque et une expertise qu'elle peut transférer en ligne. C'est une stratégie de survie.",
+                    tip: "Profitez de votre notoriété pour lancer une offre en ligne. Investissez dans le marketing digital et les systèmes de paiement sécurisés."
+                },
+                {
+                    thematic: "Falaise",
+                    question: "Un éditeur de logiciels pour CD‑ROM éducatifs n'a pas migré vers le cloud. Ses produits ne fonctionnent plus sur les nouveaux systèmes d'exploitation. Les ventes sont quasi nulles. Que faire ?",
+                    options: [
+                        "Continuer à vendre aux collectionneurs",
+                        "Développer une version cloud, mais avec quelles compétences ?",
+                        "Fermer l'entreprise et vendre le catalogue",
+                        "Porter plainte contre Microsoft"
+                    ],
+                    correctAnswer: "Fermer l'entreprise et vendre le catalogue",
+                    explanation: "L'éditeur est dans une Falaise : son modèle est obsolète, et il n'a pas les compétences pour migrer. Continuer, c'est perdre de l'argent. La meilleure option est de vendre le catalogue (droits sur les contenus) à une entreprise qui pourrait les réutiliser (ex: plateforme éducative en ligne). Cela permet de récupérer de la valeur. Sinon, fermer proprement.",
+                    tip: "Si votre technologie est obsolète et que vous n'avez pas les moyens de la moderniser, cherchez à vendre votre actif immatériel (marque, droits d'auteur)."
+                },
+                {
+                    thematic: "Falaise",
+                    question: "Un coursier à vélo dans une grande ville voit son activité chuter avec l'arrivée de multiples startups de livraison (Uber Eats, etc.). Il travaille pour une plateforme qui réduit ses tarifs. Il est épuisé. Que faire ?",
+                    options: [
+                        "Continuer en espérant que les prix remontent",
+                        "Se former à un autre métier (livreur poids lourd, coursier en entreprise) moins concurrentiel",
+                        "Changer de plateforme",
+                        "Accepter les baisses de tarifs"
+                    ],
+                    correctAnswer: "Se former à un autre métier (livreur poids lourd, coursier en entreprise) moins concurrentiel",
+                    explanation: "Le marché de la livraison à vélo via plateforme est en voie de commoditisation avec des prix tirés vers le bas. Le coursier est dans une Falaise s'il reste sur ce créneau. Il doit se reconvertir vers un métier plus protégé (livreur avec permis, coursier spécialisé pour entreprises) où la concurrence est moins féroce. C'est un abandon nécessaire pour éviter la précarité.",
+                    tip: "Renseignez‑vous sur les métiers en tension. Obtenez les formations nécessaires (permis, certifications). C'est un investissement pour l'avenir."
+                },
+                {
+                    thematic: "Falaise",
+                    question: "Un fabricant de jouets en plastique voit ses ventes s'effondrer à cause de la prise de conscience écologique. Les parents préfèrent des jouets en bois ou d'occasion. Il a des stocks énormes. Que faire ?",
+                    options: [
+                        "Continuer à produire en espérant un retour en grâce du plastique",
+                        "Lancer une gamme éco‑responsable, mais cela demande du temps et de l'argent",
+                        "Vendre les stocks à prix cassés et investir dans une nouvelle gamme durable",
+                        "Arrêter l'activité"
+                    ],
+                    correctAnswer: "Vendre les stocks à prix cassés et investir dans une nouvelle gamme durable",
+                    explanation: "Le marché du jouet en plastique est en déclin structurel. Continuer, c'est la Falaise. La solution est d'écouler les stocks (même à perte) pour libérer du cash et se réinventer avec des produits durables. C'est un abandon du modèle ancien pour en adopter un nouveau. Si l'entreprise a les moyens de cette transition, elle peut survivre. Sinon, elle devra fermer.",
+                    tip: "Faites une étude de marché pour valider l'intérêt pour des jouets durables. Collaborez avec des designers éco‑responsables."
+                },
+                {
+                    thematic: "Falaise",
+                    question: "Un service de taxi traditionnel voit sa clientèle diminuer avec l'arrivée d'Uber. Il a des licences coûteuses et des voitures anciennes. Il refuse de rejoindre une plateforme. Que devrait‑il faire ?",
+                    options: [
+                        "Continuer seul, certains clients sont fidèles",
+                        "Vendre sa licence tant qu'elle a de la valeur et se reconvertir (VTC, autre métier)",
+                        "Baisser ses tarifs",
+                        "Acheter des voitures plus récentes"
+                    ],
+                    correctAnswer: "Vendre sa licence tant qu'elle a de la valeur et se reconvertir (VTC, autre métier)",
+                    explanation: "Le marché du taxi traditionnel est en déclin face aux VTC. Les licences perdent de la valeur chaque année. C'est une Falaise : il faut vendre tant que c'est possible, et utiliser cet argent pour se reconvertir (devenir VTC sur une plateforme, ou autre métier). S'accrocher, c'est perdre la valeur de la licence et se retrouver sans rien.",
+                    tip: "Si vous avez un actif qui se déprécie, vendez‑le avant qu'il ne perde toute sa valeur. Réinvestissez dans un secteur porteur."
+                },
+                // ========== MATRICE DE DÉCISION (14 questions) ==========
+                {
+                    thematic: "Matrice de décision",
+                    question: "Vous avez une idée de créer une application de gestion de cave à vin pour particuliers. Le marché est assez vaste, mais de nombreux concurrents existent (Vivino, etc.). Comment utiliser la matrice pour décider ?",
+                    options: [
+                        "Potentiel élevé, différenciation difficile → Cul‑de‑Sac probable",
+                        "Potentiel faible, différenciation possible → niche confortable",
+                        "Potentiel élevé, différenciation possible → Dip idéal",
+                        "Potentiel faible, différenciation difficile → abandon"
+                    ],
+                    correctAnswer: "Potentiel élevé, différenciation difficile → Cul‑de‑Sac probable",
+                    explanation: "Selon la matrice, croiser le potentiel de récompense (ici, le marché est vaste donc potentiel élevé) et la capacité de différenciation (difficile face à des concurrents établis) place le projet dans la case 'Cul‑de‑Sac'. Cela signifie qu'il sera très difficile de se démarquer, et l'effort risque de ne pas payer. Il vaut mieux chercher une niche où la différenciation est possible, ou un autre projet.",
+                    tip: "Avant de vous lancer, listez vos concurrents et demandez‑vous : en quoi mon produit est‑il 10 fois meilleur ? Si vous ne trouvez pas, c'est un Cul‑de‑Sac."
+                },
+                {
+                    thematic: "Matrice de décision",
+                    question: "Vous voulez ouvrir une boulangerie dans un village de 500 habitants où il n'y a pas de boulanger. Le potentiel est limité (500 personnes), mais vous serez le seul. Que dit la matrice ?",
+                    options: [
+                        "Potentiel élevé, différenciation facile → Dip idéal",
+                        "Potentiel faible, différenciation facile → niche confortable",
+                        "Potentiel faible, différenciation difficile → Cul‑de‑Sac",
+                        "Potentiel élevé, différenciation difficile → Cul‑de‑Sac"
+                    ],
+                    correctAnswer: "Potentiel faible, différenciation facile → niche confortable",
+                    explanation: "Le marché est petit (potentiel faible), mais vous êtes le seul (différenciation facile). C'est une niche confortable : vous pouvez gagner votre vie, mais vous ne deviendrez pas millionnaire. C'est un bon choix si vous cherchez une vie tranquille. La matrice vous aide à voir que vous ne devez pas vous attendre à une croissance énorme.",
+                    tip: "Dans une niche confortable, vous pouvez prospérer si vos coûts sont maîtrisés. Ne cherchez pas à vous étendre au‑delà du marché naturel."
+                },
+                {
+                    thematic: "Matrice de décision",
+                    question: "Vous êtes développeur et souhaitez créer une entreprise de cybersécurité pour les PME. Le marché est en forte croissance, et vous avez une expertise pointue en détection d'intrusion. Comment qualifier ce projet ?",
+                    options: [
+                        "Potentiel élevé, différenciation possible → Dip idéal",
+                        "Potentiel élevé, différenciation difficile → Cul‑de‑Sac",
+                        "Potentiel faible, différenciation facile → niche confortable",
+                        "Potentiel faible, différenciation difficile → abandon"
+                    ],
+                    correctAnswer: "Potentiel élevé, différenciation possible → Dip idéal",
+                    explanation: "La cybersécurité pour PME est un marché en croissance (potentiel élevé). Vous avez une expertise rare (différenciation possible). C'est la case idéale pour un Dip : il faudra travailler dur pour acquérir des clients, mais la récompense est au bout. C'est le moment de persévérer.",
+                    tip: "Dans un Dip idéal, concentrez‑vous sur votre avantage concurrentiel et construisez une marque autour. Le bouche‑à‑oreille fera le reste."
+                },
+                {
+                    thematic: "Matrice de décision",
+                    question: "Vous hésitez à devenir chauffeur de taxi (licence) alors que les VTC dominent. Le marché est concurrentiel, et vous n'avez pas d'avantage particulier. Que dit la matrice ?",
+                    options: [
+                        "Potentiel élevé, différenciation difficile → Cul‑de‑Sac",
+                        "Potentiel faible, différenciation facile → niche confortable",
+                        "Potentiel faible, différenciation difficile → abandon",
+                        "Potentiel élevé, différenciation possible → Dip idéal"
+                    ],
+                    correctAnswer: "Potentiel élevé, différenciation difficile → Cul‑de‑Sac",
+                    explanation: "Le marché du transport de personnes est vaste (potentiel élevé), mais en tant que taxi individuel face aux plateformes, la différenciation est très difficile. Vous serez en concurrence sur le prix et la disponibilité, sans avantage. C'est un Cul‑de‑Sac : il vaut mieux éviter ou trouver une niche (transport de personnes à mobilité réduite, par exemple).",
+                    tip: "Dans un marché dominé par des gros acteurs, cherchez une sous‑niche où ils ne sont pas présents. Par exemple, transport de chiens, de personnes âgées vers les hôpitaux."
+                },
+                {
+                    thematic: "Matrice de décision",
+                    question: "Vous avez l'opportunité de reprendre un petit camping dans une région peu touristique. La fréquentation est stable mais faible. Vous pourriez le moderniser. Comment évaluer ?",
+                    options: [
+                        "Potentiel faible, différenciation possible (offre haut de gamme, écotourisme) → niche confortable",
+                        "Potentiel élevé, différenciation difficile → Cul‑de‑Sac",
+                        "Potentiel faible, différenciation difficile → abandon",
+                        "Potentiel élevé, différenciation possible → Dip idéal"
+                    ],
+                    correctAnswer: "Potentiel faible, différenciation possible (offre haut de gamme, écotourisme) → niche confortable",
+                    explanation: "Le marché local est petit (potentiel faible), mais vous pouvez vous différencier en créant un camping haut de gamme ou écologique, attirant une clientèle spécifique prête à se déplacer. Cela peut devenir une niche confortable, rentable mais sans croissance explosive. La matrice vous aide à voir que vous ne devez pas viser une expansion nationale.",
+                    tip: "Dans une niche, misez sur la qualité et le bouche‑à‑oreille. Utilisez internet pour toucher des clients au‑delà de la région."
+                },
+                {
+                    thematic: "Matrice de décision",
+                    question: "Vous voulez créer un service de livraison de repas à domicile dans une grande ville, face à Uber Eats, Deliveroo, etc. Quel est le diagnostic matriciel ?",
+                    options: [
+                        "Potentiel élevé, différenciation difficile → Cul‑de‑Sac",
+                        "Potentiel élevé, différenciation possible → Dip idéal",
+                        "Potentiel faible, différenciation facile → niche confortable",
+                        "Potentiel faible, différenciation difficile → abandon"
+                    ],
+                    correctAnswer: "Potentiel élevé, différenciation difficile → Cul‑de‑Sac",
+                    explanation: "Le marché est énorme (potentiel élevé), mais la concurrence est féroce et les barrières à l'entrée sont faibles. Pour vous différencier, il faudrait un avantage énorme (ex: livraison par drones, cuisine unique). Sans cela, vous serez dans un Cul‑de‑Sac, condamné à lutter sur les prix. Il vaut mieux éviter.",
+                    tip: "Si vous voulez entrer sur ce marché, spécialisez‑vous sur une niche oubliée (ex: repas pour personnes âgées, plats végétaliens haut de gamme) et créez une marque forte."
+                },
+                {
+                    thematic: "Matrice de décision",
+                    question: "Vous êtes consultant en transition énergétique. Le marché est en pleine explosion, et vous avez un réseau unique dans l'industrie. Comment la matrice qualifie‑t‑elle cette activité ?",
+                    options: [
+                        "Potentiel élevé, différenciation possible → Dip idéal",
+                        "Potentiel élevé, différenciation difficile → Cul‑de‑Sac",
+                        "Potentiel faible, différenciation facile → niche confortable",
+                        "Potentiel faible, différenciation difficile → abandon"
+                    ],
+                    correctAnswer: "Potentiel élevé, différenciation possible → Dip idéal",
+                    explanation: "La transition énergétique est un marché porteur, et votre réseau vous donne un avantage concurrentiel. C'est un Dip idéal : vous devez persévérer, développer votre offre, et vous imposer comme expert. La récompense peut être très grande.",
+                    tip: "Capitalisez sur votre réseau : demandez des recommandations, écrivez des articles, donnez des conférences. Construisez votre réputation."
+                },
+                {
+                    thematic: "Matrice de décision",
+                    question: "Vous envisagez d'ouvrir un salon de thé dans une petite ville où il n'y en a pas. La population est vieillissante et plutôt aisée. Quel diagnostic ?",
+                    options: [
+                        "Potentiel faible (ville petite), différenciation facile (unique) → niche confortable",
+                        "Potentiel élevé, différenciation possible → Dip idéal",
+                        "Potentiel faible, différenciation difficile → abandon",
+                        "Potentiel élevé, différenciation difficile → Cul‑de‑Sac"
+                    ],
+                    correctAnswer: "Potentiel faible (ville petite), différenciation facile (unique) → niche confortable",
+                    explanation: "Le marché local est limité en nombre de clients (potentiel faible). Mais vous serez le seul salon de thé, donc différenciation facile. C'est une niche confortable : vous pouvez gagner votre vie si les habitants sont friands de ce concept. Attention à ne pas surestimer la demande.",
+                    tip: "Avant d'ouvrir, faites une enquête auprès des habitants. Proposez une dégustation gratuite pour tester l'intérêt."
+                },
+                {
+                    thematic: "Matrice de décision",
+                    question: "Vous êtes développeur et vous voulez créer un nouveau langage de programmation. Le marché est immense mais dominé par des géants (Python, Java, etc.). Quelle case de la matrice ?",
+                    options: [
+                        "Potentiel élevé, différenciation difficile → Cul‑de‑Sac",
+                        "Potentiel élevé, différenciation possible → Dip idéal",
+                        "Potentiel faible, différenciation facile → niche confortable",
+                        "Potentiel faible, différenciation difficile → abandon"
+                    ],
+                    correctAnswer: "Potentiel élevé, différenciation difficile → Cul‑de‑Sac",
+                    explanation: "Créer un nouveau langage généraliste est extrêmement difficile. La différenciation (avantages) doit être énorme pour convaincre les développeurs de changer. C'est un Cul‑de‑Sac sauf si vous ciblez une niche très spécifique (ex: langage pour smart contracts). Dans ce cas, le potentiel devient plus faible mais la différenciation possible.",
+                    tip: "Si vous tenez à créer un langage, ciblez un domaine très précis où les langages existants sont mauvais. Par exemple, un langage pour la programmation quantique."
+                },
+                {
+                    thematic: "Matrice de décision",
+                    question: "Vous voulez ouvrir une agence de voyage spécialisée dans les expéditions polaires. Le marché est restreint (peu de gens partent au pôle), mais vous avez une expertise unique. Que dit la matrice ?",
+                    options: [
+                        "Potentiel faible, différenciation facile → niche confortable",
+                        "Potentiel élevé, différenciation possible → Dip idéal",
+                        "Potentiel faible, différenciation difficile → abandon",
+                        "Potentiel élevé, différenciation difficile → Cul‑de‑Sac"
+                    ],
+                    correctAnswer: "Potentiel faible, différenciation facile → niche confortable",
+                    explanation: "Le marché des expéditions polaires est petit (potentiel faible). Votre expertise vous permet de vous différencier (vous êtes peut‑être l'un des rares). C'est une niche confortable : vous pouvez vivre de cette activité si vous facturez cher et que vous touchez une clientèle fortunée. Mais ne vous attendez pas à une croissance exponentielle.",
+                    tip: "Dans une niche de luxe, misez sur le sur‑mesure et le service exceptionnel. Utilisez le marketing de contenu (blogs, vidéos) pour attirer les passionnés."
+                },
+                {
+                    thematic: "Matrice de décision",
+                    question: "Vous voulez lancer une plateforme de mise en relation pour des services de jardinage. Le marché est très concurrentiel (ex: Yoopies, etc.). Vous n'avez pas de réseau particulier. Quelle case ?",
+                    options: [
+                        "Potentiel élevé, différenciation difficile → Cul‑de‑Sac",
+                        "Potentiel faible, différenciation facile → niche confortable",
+                        "Potentiel élevé, différenciation possible → Dip idéal",
+                        "Potentiel faible, différenciation difficile → abandon"
+                    ],
+                    correctAnswer: "Potentiel élevé, différenciation difficile → Cul‑de‑Sac",
+                    explanation: "Le marché des services à la personne est vaste, mais la concurrence est intense et les barrières faibles. Sans avantage clair (ex: service premium, garanties uniques), vous serez dans un Cul‑de‑Sac. Il vaut mieux éviter ou trouver une niche (jardinage pour personnes âgées, avec accompagnement spécifique).",
+                    tip: "Pour vous différencier, concentrez‑vous sur un aspect négligé : par exemple, des jardiniers formés à l'agriculture biologique, ou un service de conseil en permaculture."
+                },
+                {
+                    thematic: "Matrice de décision",
+                    question: "Vous êtes un expert en intelligence artificielle et vous voulez créer une start‑up proposant des solutions d'IA pour les hôpitaux (diagnostic). Le marché est en plein essor et vous avez des brevets. Quelle case ?",
+                    options: [
+                        "Potentiel élevé, différenciation possible → Dip idéal",
+                        "Potentiel élevé, différenciation difficile → Cul‑de‑Sac",
+                        "Potentiel faible, différenciation facile → niche confortable",
+                        "Potentiel faible, différenciation difficile → abandon"
+                    ],
+                    correctAnswer: "Potentiel élevé, différenciation possible → Dip idéal",
+                    explanation: "L'IA pour la santé est un marché porteur. Vos brevets vous donnent un avantage concurrentiel. C'est un Dip idéal : vous devrez traverser les difficultés réglementaires et commerciales, mais la récompense peut être immense.",
+                    tip: "Protégez votre propriété intellectuelle. Associez‑vous avec des établissements de santé pour des pilotes. Publiez des études de cas."
+                },
+                {
+                    thematic: "Matrice de décision",
+                    question: "Vous voulez ouvrir une librairie généraliste dans une grande ville où il y a déjà plusieurs chaînes et librairies indépendantes. Comment la matrice vous aide‑t‑elle ?",
+                    options: [
+                        "Potentiel élevé, différenciation difficile → Cul‑de‑Sac",
+                        "Potentiel élevé, différenciation possible → Dip idéal",
+                        "Potentiel faible, différenciation facile → niche confortable",
+                        "Potentiel faible, différenciation difficile → abandon"
+                    ],
+                    correctAnswer: "Potentiel élevé, différenciation difficile → Cul‑de‑Sac",
+                    explanation: "Le marché du livre est vaste, mais la concurrence est féroce (grandes surfaces, Amazon, autres librairies). Sans spécialisation (ex: livres rares, librairie‑café, événements), vous serez dans un Cul‑de‑Sac. La matrice vous conseille de chercher une niche ou d'abandonner l'idée.",
+                    tip: "Si vous voulez ouvrir une librairie, choisissez une spécialisation (polar, littérature jeunesse, livres d'art) et créez une communauté autour d'événements."
+                },
+                {
+                    thematic: "Matrice de décision",
+                    question: "Vous êtes artisan ébéniste et vous voulez vendre vos meubles en ligne. Le marché du meuble en ligne est concurrentiel (IKEA, etc.), mais vous proposez du sur‑mesure haut de gamme. Comment évaluer ?",
+                    options: [
+                        "Potentiel élevé, différenciation possible (sur‑mesure, qualité) → Dip idéal",
+                        "Potentiel faible, différenciation facile → niche confortable",
+                        "Potentiel élevé, différenciation difficile → Cul‑de‑Sac",
+                        "Potentiel faible, différenciation difficile → abandon"
+                    ],
+                    correctAnswer: "Potentiel élevé, différenciation possible (sur‑mesure, qualité) → Dip idéal",
+                    explanation: "Le marché du meuble est vaste (potentiel élevé). Vous vous différenciez par le sur‑mesure et la qualité. C'est un Dip idéal : il faudra convaincre les clients de la valeur ajoutée, développer votre marque, mais la récompense est au bout. Vous n'êtes pas en concurrence directe avec IKEA.",
+                    tip: "Mettez en avant votre savoir‑faire à travers des vidéos, des témoignages. Créez un site avec configurateur en ligne pour le sur‑mesure."
+                },
+                // ========== STRATÉGIES D'ABANDON (14 questions) ==========
+                {
+                    thematic: "Stratégies d'abandon",
+                    question: "Vous avez un client difficile qui vous prend beaucoup de temps pour peu de revenu. Il est insatisfait en permanence. Comment appliquer l'abandon stratégique ?",
+                    options: [
+                        "Le garder car un client est un client",
+                        "Augmenter vos tarifs pour qu'il parte ou devienne rentable",
+                        "Le virer immédiatement sans ménagement",
+                        "L'ignorer"
+                    ],
+                    correctAnswer: "Augmenter vos tarifs pour qu'il parte ou devienne rentable",
+                    explanation: "C'est une technique d'abandon respectueux : en augmentant vos tarifs, soit le client accepte et devient rentable, soit il part et vous libère du temps pour des clients plus intéressants. Vous ne brûlez pas les ponts, car c'est une décision commerciale. C'est une façon élégante de se séparer d'un client non stratégique.",
+                    tip: "Avant d'augmenter, prévenez le client des raisons (votre temps, la valeur apportée). Proposez un service allégé moins cher s'il veut rester."
+                },
+                {
+                    thematic: "Stratégies d'abandon",
+                    question: "Vous êtes salarié dans une entreprise qui stagne, sans perspectives d'évolution. Vous avez une opportunité ailleurs. Comment quitter sans brûler les ponts ?",
+                    options: [
+                        "Démissionner du jour au lendemain par mail",
+                        "Annoncer votre départ à votre manager, proposer une transition, former un remplaçant",
+                        "Critiquer l'entreprise lors de l'entretien de départ",
+                        "Ne rien dire et partir"
+                    ],
+                    correctAnswer: "Annoncer votre départ à votre manager, proposer une transition, former un remplaçant",
+                    explanation: "Un départ respectueux consiste à prévenir suffisamment tôt, à assurer la passation, à former votre successeur si possible. Cela préserve votre réputation et votre réseau. Même si l'entreprise stagne, vous pouvez garder des contacts utiles. Laisser une bonne image est toujours bénéfique.",
+                    tip: "Rédigez un document de passation détaillé. Proposez de rester joignable après votre départ pour d'éventuelles questions."
+                },
+                {
+                    thematic: "Stratégies d'abandon",
+                    question: "Vous avez un projet personnel (blog) qui ne décolle pas après 3 ans. Vous y consacrez beaucoup de temps sans résultats. Comment décider d'abandonner ?",
+                    options: [
+                        "Abandonner brutalement sans analyser",
+                        "Faire un bilan : potentiel, différenciation, passion. Si les trois sont faibles, arrêter proprement",
+                        "Continuer coûte que coûte",
+                        "Chercher des subventions"
+                    ],
+                    correctAnswer: "Faire un bilan : potentiel, différenciation, passion. Si les trois sont faibles, arrêter proprement",
+                    explanation: "Avant d'abandonner, analysez objectivement votre projet. Utilisez la matrice : le marché est‑il porteur ? Êtes‑vous différencié ? Avez‑vous encore de la passion ? Si les réponses sont négatives, il est temps d'arrêter pour réinvestir votre énergie ailleurs. Faites‑le proprement : écrivez un dernier article, remerciez vos lecteurs, et fermez.",
+                    tip: "N'abandonnez pas sur un coup de tête. Prenez le temps de dresser une liste des pour et des contre. Parlez‑en à des personnes de confiance."
+                },
+                {
+                    thematic: "Stratégies d'abandon",
+                    question: "Vous êtes associé dans une start‑up qui ne décolle pas. Les relations se tendent. Comment envisager de quitter la société ?",
+                    options: [
+                        "Claquer la porte en accusant les associés",
+                        "Négocier une sortie à l'amiable, avec cession de parts, et un accord de confidentialité",
+                        "Vendre vos parts au premier venu",
+                        "Rester en souffrant"
+                    ],
+                    correctAnswer: "Négocier une sortie à l'amiable, avec cession de parts, et un accord de confidentialité",
+                    explanation: "Quitter une start‑up est délicat. Il faut privilégier une solution négociée pour ne pas brûler les ponts avec les associés, qui peuvent être des contacts futurs. Un accord de confidentialité protège l'entreprise. Si possible, trouvez un repreneur pour vos parts ou un arrangement financier. Partir en bon termes préserve votre réputation.",
+                    tip: "Consultez un avocat pour rédiger un protocole de sortie. Proposez une période de transition pour faciliter le passage."
+                },
+                {
+                    thematic: "Stratégies d'abandon",
+                    question: "Vous avez une collection de montres que vous vendez sur eBay. Les ventes ralentissent. Vous vous demandez si vous devez arrêter. Quelle est la bonne démarche ?",
+                    options: [
+                        "Brader toute la collection",
+                        "Analyser les tendances : la demande est‑elle saisonnière ? Structurelle ? Si elle est en déclin, arrêter progressivement",
+                        "Continuer à stocker en attendant",
+                        "Changer de plateforme"
+                    ],
+                    correctAnswer: "Analyser les tendances : la demande est‑elle saisonnière ? Structurelle ? Si elle est en déclin, arrêter progressivement",
+                    explanation: "Avant d'arrêter, comprenez pourquoi les ventes baissent. Est‑ce la concurrence ? La mode ? Si le marché est en déclin structurel, mieux vaut arrêter et vendre le stock, peut‑être sur une autre plateforme. Si c'est temporaire, vous pouvez attendre. Une analyse objective vous évite de prendre une mauvaise décision.",
+                    tip: "Utilisez des outils comme Google Trends pour voir l'évolution de l'intérêt pour les montres vintage. Discutez avec d'autres vendeurs."
+                },
+                {
+                    thematic: "Stratégies d'abandon",
+                    question: "Vous êtes manager et devez licencier un employé qui ne donne pas satisfaction. Comment faire pour que cela se passe bien ?",
+                    options: [
+                        "Le licencier par mail",
+                        "Organiser un entretien en face à face, expliquer les raisons, proposer un accompagnement (outplacement)",
+                        "Lui mettre la pression pour qu'il démissionne",
+                        "Ignorer le problème"
+                    ],
+                    correctAnswer: "Organiser un entretien en face à face, expliquer les raisons, proposer un accompagnement (outplacement)",
+                    explanation: "Un licenciement est un abandon professionnel. Pour qu'il soit respectueux, il faut être transparent, expliquer les motifs, et aider la personne à rebondir (lettre de recommandation, conseils, formation). Cela préserve la dignité de l'employé et l'image de l'entreprise.",
+                    tip: "Préparez l'entretien, soyez empathique, écoutez ses questions. Proposez un bilan de compétences si possible."
+                },
+                {
+                    thematic: "Stratégies d'abandon",
+                    question: "Vous avez investi dans une formation coûteuse qui ne vous apporte rien. Vous êtes tenté d'abandonner. Que faire ?",
+                    options: [
+                        "Continuer pour ne pas perdre l'argent investi",
+                        "Analyser si vous pouvez récupérer une partie de la valeur (connaissances, réseau) et si non, arrêter",
+                        "Forcer à terminer pour avoir le diplôme",
+                        "Demander un remboursement"
+                    ],
+                    correctAnswer: "Analyser si vous pouvez récupérer une partie de la valeur (connaissances, réseau) et si non, arrêter",
+                    explanation: "L'erreur du coût irrécupérable (sunk cost) pousse à continuer. Mais si la formation ne vous apporte rien, mieux vaut arrêter et consacrer ce temps à autre chose. Faites le point : avez‑vous appris quelque chose ? Des contacts ? Si oui, capitalisez‑les et partez. Sinon, abandonnez sans culpabilité.",
+                    tip: "N'hésitez pas à demander un remboursement partiel si la formation ne correspond pas au programme annoncé."
+                },
+                {
+                    thematic: "Stratégies d'abandon",
+                    question: "Vous êtes dans une relation commerciale exclusive avec un fournisseur qui augmente ses prix sans raison. Comment envisager de changer ?",
+                    options: [
+                        "Changer brutalement sans prévenir",
+                        "Négocier d'abord, et si échec, chercher un autre fournisseur en informant l'ancien de votre décision",
+                        "Accepter les augmentations",
+                        "Menacer de partir"
+                    ],
+                    correctAnswer: "Négocier d'abord, et si échec, chercher un autre fournisseur en informant l'ancien de votre décision",
+                    explanation: "Une rupture commerciale doit se faire en douceur. Commencez par négocier. Si rien n'y fait, trouvez un autre fournisseur, puis informez l'ancien de votre départ en expliquant les raisons (prix). Restez courtois, vous pourriez avoir besoin de lui plus tard. Ne brûlez pas les ponts.",
+                    tip: "Gardez une trace des échanges. Proposez de recommander l'ancien fournisseur si vous avez été satisfait par le passé, cela adoucit la rupture."
+                },
+                {
+                    thematic: "Stratégies d'abandon",
+                    question: "Vous participez à un projet associatif qui vous prend trop de temps et ne vous épanouit plus. Comment arrêter sans décevoir ?",
+                    options: [
+                        "Partir sans prévenir",
+                        "Prévenir le bureau, proposer une période de passation, aider à trouver un remplaçant",
+                        "Faire le minimum jusqu'à la fin de l'année",
+                        "Critiquer le projet avant de partir"
+                    ],
+                    correctAnswer: "Prévenir le bureau, proposer une période de passation, aider à trouver un remplaçant",
+                    explanation: "Dans une association, l'engagement est bénévole. Pour partir en bon termes, annoncez votre décision suffisamment tôt, proposez de former votre successeur et de documenter vos tâches. Ainsi, vous laissez une image positive et l'association peut continuer sans vous.",
+                    tip: "Rédigez un guide de vos responsabilités. Restez disponible pour des questions après votre départ."
+                },
+                {
+                    thematic: "Stratégies d'abandon",
+                    question: "Vous avez un abonnement à un logiciel que vous n'utilisez plus. Que faire ?",
+                    options: [
+                        "Le garder au cas où",
+                        "Résilier immédiatement, mais vérifier les conditions",
+                        "Contacter le support pour négocier une réduction",
+                        "L'ignorer"
+                    ],
+                    correctAnswer: "Résilier immédiatement, mais vérifier les conditions",
+                    explanation: "C'est un abandon simple. Ne laissez pas traîner des coûts inutiles. Vérifiez les conditions de résiliation et faites‑le. Cela libère un budget pour autre chose. C'est une application basique de l'abandon stratégique.",
+                    tip: "Passez en revue tous vos abonnements une fois par an. Résiliez ceux qui ne servent plus."
+                },
+                {
+                    thematic: "Stratégies d'abandon",
+                    question: "Vous êtes en couple avec quelqu'un depuis 5 ans, mais vous sentez que la relation s'essouffle et que vous n'avez plus les mêmes projets. Comment aborder une séparation ?",
+                    options: [
+                        "Partir du jour au lendemain sans explication",
+                        "Engager une discussion ouverte, expliquer vos sentiments, et chercher une solution à l'amiable",
+                        "Attendre que l'autre parte",
+                        "Avoir une liaison pour forcer la rupture"
+                    ],
+                    correctAnswer: "Engager une discussion ouverte, expliquer vos sentiments, et chercher une solution à l'amiable",
+                    explanation: "Même dans la vie personnelle, l'abandon respectueux est important. Une rupture brutale fait souffrir inutilement. Une discussion honnête permet de se séparer en préservant la dignité de chacun, et éventuellement de rester en bons termes. C'est un abandon stratégique d'une relation qui n'a plus d'avenir.",
+                    tip: "Choisissez un moment calme, écoutez l'autre, ne soyez pas accusateur. Proposez une séparation progressive si nécessaire."
+                },
+                {
+                    thematic: "Stratégies d'abandon",
+                    question: "Vous avez un projet de livre que vous n'arrivez pas à terminer. Vous y travaillez depuis 2 ans. Comment décider d'abandonner ?",
+                    options: [
+                        "Le jeter à la poubelle",
+                        "Faire un bilan : le sujet est‑il toujours pertinent ? Avez‑vous encore envie ? Si non, arrêter et passer à autre chose",
+                        "Forcer à finir même bâclé",
+                        "Le laisser dans un tiroir"
+                    ],
+                    correctAnswer: "Faire un bilan : le sujet est‑il toujours pertinent ? Avez‑vous encore envie ? Si non, arrêter et passer à autre chose",
+                    explanation: "Un projet qui n'avance pas peut être un Cul‑de‑Sac. Évaluez si le sujet vous passionne encore, s'il a un public. Si la réponse est non, il est temps d'abandonner pour libérer votre créativité. Vous pouvez garder des notes pour plus tard, mais ne vous forcez pas.",
+                    tip: "Parfois, abandonner un projet permet d'en commencer un nouveau plus prometteur. Ne considérez pas cela comme un échec, mais comme un apprentissage."
+                },
+                {
+                    thematic: "Stratégies d'abandon",
+                    question: "Vous êtes engagé dans un cursus universitaire qui ne vous plaît pas. Vous êtes en deuxième année. Que faire ?",
+                    options: [
+                        "Continuer pour avoir le diplôme",
+                        "Évaluer si ce cursus mène à un métier qui vous intéresse, et si non, se réorienter après avoir exploré d'autres voies",
+                        "Abandonner sans rien d'autre",
+                        "Changer d'université"
+                    ],
+                    correctAnswer: "Évaluer si ce cursus mène à un métier qui vous intéresse, et si non, se réorienter après avoir exploré d'autres voies",
+                    explanation: "Ne restez pas dans une filière qui ne vous convient pas. C'est un Cul‑de‑Sac potentiel. Renseignez‑vous sur d'autres formations, parlez à des professionnels. Si vous trouvez une voie qui vous passionne, n'hésitez pas à vous réorienter, même si cela semble tardif. Mieux vaut perdre une année que de faire un métier qu'on n'aime pas.",
+                    tip: "Consultez un conseiller d'orientation, faites des stages pour confirmer votre choix. Une réorientation est un abandon stratégique payant à long terme."
+                },
+                {
+                    thematic: "Stratégies d'abandon",
+                    question: "Vous avez une vieille voiture qui tombe souvent en panne. Les réparations coûtent cher. Devez-vous la garder ?",
+                    options: [
+                        "Continuer à réparer, elle a une valeur sentimentale",
+                        "Calculer le coût annuel des réparations vs achat d'une voiture fiable. Si c'est plus cher, la vendre",
+                        "La garder pour les petits trajets",
+                        "La donner"
+                    ],
+                    correctAnswer: "Calculer le coût annuel des réparations vs achat d'une voiture fiable. Si c'est plus cher, la vendre",
+                    explanation: "C'est une application du principe de l'abandon : quand un bien coûte plus cher à entretenir qu'à remplacer, il faut s'en séparer. Faites le calcul objectif, sans sentimentalisme. C'est un abandon stratégique pour éviter des pertes continues.",
+                    tip: "Prenez en compte non seulement les coûts, mais aussi le temps perdu en pannes et le stress."
+                },
+                {
+                    thematic: "Stratégies d'abandon",
+                    question: "Vous avez un compte en banque avec des frais élevés. Une banque en ligne propose des frais nuls. Que faire ?",
+                    options: [
+                        "Rester par flemme",
+                        "Changer de banque en suivant la procédure de mobilité bancaire",
+                        "Négocier avec votre banque",
+                        "Ouvrir un second compte sans fermer l'ancien"
+                    ],
+                    correctAnswer: "Changer de banque en suivant la procédure de mobilité bancaire",
+                    explanation: "C'est un abandon simple : vous quittez une banque coûteuse pour une autre. La procédure de mobilité facilite le transfert. C'est un geste stratégique pour économiser de l'argent. N'hésitez pas.",
+                    tip: "Comparez les offres régulièrement. Les banques en ligne sont souvent plus avantageuses pour les profils simples."
+                },
+                // ========== CAS PRATIQUES & REX (14 questions) ==========
+                {
+                    thematic: "Cas pratiques & REX",
+                    question: "Un artisan menuisier a vu son carnet de commandes diminuer. Il a décidé de se spécialiser dans la fabrication de cuisines sur mesure. Après 6 mois, il a plus de travail et des clients plus fortunés. Quel concept illustre cette histoire ?",
+                    options: [
+                        "Un Dip traversé avec succès grâce à la spécialisation",
+                        "Un Cul‑de‑Sac évité par hasard",
+                        "Une Falaise évitée",
+                        "Un abandon stratégique"
+                    ],
+                    correctAnswer: "Un Dip traversé avec succès grâce à la spécialisation",
+                    explanation: "Le menuisier a quitté un marché concurrentiel (meubles standards) pour se spécialiser dans un créneau porteur (cuisines sur mesure). Les premiers mois ont dû être difficiles (recherche de clients, nouveaux processus), mais il a persévéré et a réussi. C'est l'exemple typique d'un Dip où la difficulté mène à l'excellence.",
+                    tip: "La spécialisation est souvent la clé pour sortir d'un Cul‑de‑Sac et entrer dans un Dip. Identifiez un besoin non satisfait."
+                },
+                {
+                    thematic: "Cas pratiques & REX",
+                    question: "Une startup de livraison de repas a pivoté pendant le COVID pour livrer des paniers de produits locaux. Elle a survécu et prospéré. Que montre cet exemple ?",
+                    options: [
+                        "L'importance de l'abandon stratégique d'un modèle pour un autre",
+                        "Un coup de chance",
+                        "Une persévérance aveugle",
+                        "Un échec"
+                    ],
+                    correctAnswer: "L'importance de l'abandon stratégique d'un modèle pour un autre",
+                    explanation: "Face à la crise, la startup a abandonné son modèle initial (livraison de repas) pour un nouveau (paniers de produits locaux). C'est un pivot réussi, un abandon stratégique qui lui a permis de traverser un nouveau Dip. C'est un exemple d'adaptabilité.",
+                    tip: "Surveillez les signaux faibles. Si votre marché s'effondre, n'hésitez pas à changer radicalement d'activité."
+                },
+                {
+                    thematic: "Cas pratiques & REX",
+                    question: "Un commercial a quitté son entreprise après 10 ans, car il n'y avait plus d'évolution. Il a rejoint un concurrent et a doublé son salaire. Que retenir ?",
+                    options: [
+                        "Il a bien fait de quitter un Cul‑de‑Sac",
+                        "Il aurait dû rester fidèle",
+                        "C'est un traître",
+                        "Il a eu de la chance"
+                    ],
+                    correctAnswer: "Il a bien fait de quitter un Cul‑de‑Sac",
+                    explanation: "L'ancienne entreprise était un Cul‑de‑Sac pour lui (stagnation). En partant, il a rejoint un environnement porteur. C'est un abandon stratégique qui a payé. Il a su reconnaître que son potentiel n'était pas exploité là‑bas.",
+                    tip: "Si vous stagnez dans votre emploi, regardez le marché. Parfois, changer d'entreprise est le meilleur moyen de progresser."
+                },
+                {
+                    thematic: "Cas pratiques & REX",
+                    question: "Une boulangerie a résisté à l'arrivée d'une grande surface en se lançant dans les ateliers de pain pour enfants et la vente en ligne. Quel concept illustre ce cas ?",
+                    options: [
+                        "Traverser un Dip en innovant",
+                        "S'entêter dans un Cul‑de‑Sac",
+                        "Subir une Falaise",
+                        "Abandonner"
+                    ],
+                    correctAnswer: "Traverser un Dip en innovant",
+                    explanation: "Face à la concurrence, la boulangerie n'est pas restée passive. Elle a diversifié ses activités (ateliers, vente en ligne) pour créer de nouvelles sources de revenus. C'est un exemple de traversée de Dip : l'innovation a permis de surmonter la difficulté.",
+                    tip: "Quand un concurrent arrive, cherchez à créer des services que lui ne peut pas offrir (expérience, lien social)."
+                },
+                {
+                    thematic: "Cas pratiques & REX",
+                    question: "Un écrivain a auto‑publié son livre après 30 refus d'éditeurs. Il est devenu un best‑seller. Quelle leçon en tirer ?",
+                    options: [
+                        "Les éditeurs ne savent pas reconnaître le talent",
+                        "Il a persévéré dans un Dip (les refus) et a trouvé une autre voie",
+                        "Il aurait dû abandonner plus tôt",
+                        "L'auto‑édition est toujours la solution"
+                    ],
+                    correctAnswer: "Il a persévéré dans un Dip (les refus) et a trouvé une autre voie",
+                    explanation: "L'écrivain a subi le Dip des refus, mais n'a pas abandonné. Il a changé de stratégie (auto‑édition) et a réussi. C'est une persévérance intelligente : il n'a pas abandonné son œuvre, mais a contourné l'obstacle. C'est un exemple de résilience.",
+                    tip: "Si une porte se ferme, cherchez une fenêtre. N'abandonnez pas votre projet, mais changez de méthode."
+                },
+                {
+                    thematic: "Cas pratiques & REX",
+                    question: "Un restaurateur a fermé son restaurant traditionnel pour ouvrir un food‑truck. Il travaille moins et gagne plus. Comment analyser cette décision ?",
+                    options: [
+                        "Abandon stratégique d'un modèle lourd pour un modèle léger",
+                        "Échec du restaurant",
+                        "Coup de tête",
+                        "Chance"
+                    ],
+                    correctAnswer: "Abandon stratégique d'un modèle lourd pour un modèle léger",
+                    explanation: "Le restaurateur a compris que son modèle était trop coûteux (loyer, personnel) et s'est tourné vers un modèle plus agile. C'est un abandon stratégique qui lui a permis de retrouver de la rentabilité. Il a quitté un Cul‑de‑Sac pour un Dip.",
+                    tip: "Parfois, réduire la voilure permet de retrouver de l'élan. N'ayez pas peur de changer de format."
+                },
+                {
+                    thematic: "Cas pratiques & REX",
+                    question: "Un développeur a passé 2 ans sur une application qui n'a jamais décollé. Il a finalement arrêté et rejoint une startup qui a réussi. Que dire de son expérience ?",
+                    options: [
+                        "C'est un échec, il aurait dû persévérer",
+                        "Il a su reconnaître un Cul‑de‑Sac et réinvestir son énergie ailleurs",
+                        "Il a abandonné trop tôt",
+                        "Il n'était pas fait pour être entrepreneur"
+                    ],
+                    correctAnswer: "Il a su reconnaître un Cul‑de‑Sac et réinvestir son énergie ailleurs",
+                    explanation: "Il a fait le bon diagnostic : son application ne décollait pas (Cul‑de‑Sac). Il a abandonné pour rejoindre une startup prometteuse (nouveau Dip). C'est une décision rationnelle, pas un échec. L'expérience acquise a pu être utile.",
+                    tip: "Ne considérez pas un abandon comme un échec, mais comme un réinvestissement de votre temps dans quelque chose de plus prometteur."
+                },
+                {
+                    thematic: "Cas pratiques & REX",
+                    question: "Un café a survécu à la crise sanitaire en proposant de la vente à emporter et des ateliers en ligne. Quel concept illustre ce cas ?",
+                    options: [
+                        "Innovation pour traverser un Dip",
+                        "Résignation",
+                        "Fermeture évitée par miracle",
+                        "Stratégie de prix"
+                    ],
+                    correctAnswer: "Innovation pour traverser un Dip",
+                    explanation: "Le café a dû s'adapter à une situation difficile (crise). En innovant (emporter, ateliers en ligne), il a traversé le Dip. C'est un exemple d'agilité.",
+                    tip: "En période de crise, cherchez de nouveaux canaux de distribution. La créativité est votre meilleure alliée."
+                },
+                {
+                    thematic: "Cas pratiques & REX",
+                    question: "Un community manager a quitté son poste en entreprise pour devenir indépendant. Au début, il a galéré, puis a trouvé des clients. Comment qualifier sa période difficile ?",
+                    options: [
+                        "Un Cul‑de‑Sac",
+                        "Un Dip",
+                        "Une Falaise",
+                        "Un échec"
+                    ],
+                    correctAnswer: "Un Dip",
+                    explanation: "La période de galère au démarrage est typique d'un Dip : il a fallu se faire connaître, trouver des clients, gérer l'incertitude. Ceux qui persistent finissent par réussir. C'est un passage obligé.",
+                    tip: "Quand vous vous lancez en indépendant, prévoyez une réserve financière pour tenir le Dip initial."
+                },
+                {
+                    thematic: "Cas pratiques & REX",
+                    question: "Un libraire a vu ses ventes baisser avec Amazon. Il a organisé des clubs de lecture, des rencontres avec des auteurs, et a créé une communauté fidèle. Ses ventes ont repris. Quelle leçon ?",
+                    options: [
+                        "La différenciation par l'expérience permet de sortir du Cul‑de‑Sac",
+                        "Il a eu de la chance",
+                        "Amazon n'est pas si fort",
+                        "Il faut baisser les prix"
+                    ],
+                    correctAnswer: "La différenciation par l'expérience permet de sortir du Cul‑de‑Sac",
+                    explanation: "Le libraire ne pouvait pas concurrencer Amazon sur les prix. Il a choisi de se différencier en offrant une expérience (événements, conseils). C'est une stratégie de sortie de Cul‑de‑Sac vers un Dip. Il a créé de la valeur unique.",
+                    tip: "Dans un marché concurrentiel, misez sur ce que les géants ne peuvent pas offrir : le contact humain, la personnalisation, l'expertise."
+                },
+                {
+                    thematic: "Cas pratiques & REX",
+                    question: "Un artisan a arrêté de vendre sur les marchés pour vendre uniquement sur Instagram. Ses ventes ont explosé. Que montre cet exemple ?",
+                    options: [
+                        "L'abandon d'un canal traditionnel pour un canal digital porteur",
+                        "Une erreur",
+                        "Un effet de mode",
+                        "Une stratégie risquée"
+                    ],
+                    correctAnswer: "L'abandon d'un canal traditionnel pour un canal digital porteur",
+                    explanation: "Il a abandonné un canal en déclin (marchés) pour un canal en croissance (Instagram). C'est un abandon stratégique qui a payé. Il a su identifier où se trouvaient ses clients.",
+                    tip: "Analysez où sont vos clients. Si un canal ne fonctionne plus, n'hésitez pas à le quitter pour un autre."
+                },
+                {
+                    thematic: "Cas pratiques & REX",
+                    question: "Un coach sportif a cessé les cours collectifs pour se consacrer au coaching en entreprise. Il a multiplié ses revenus par trois. Comment interpréter ?",
+                    options: [
+                        "Il a quitté un marché concurrentiel pour une niche à forte valeur",
+                        "Il a eu de la chance",
+                        "Les cours collectifs sont moins bien",
+                        "C'est un hasard"
+                    ],
+                    correctAnswer: "Il a quitté un marché concurrentiel pour une niche à forte valeur",
+                    explanation: "Les cours collectifs sont souvent peu rentables et très concurrentiels. Le coaching en entreprise est une niche avec des tarifs élevés. Il a abandonné un Cul‑de‑Sac pour un Dip. C'est une décision stratégique.",
+                    tip: "Ciblez les clients qui ont le plus de valeur et les problèmes les plus aigus. Ils sont prêts à payer cher."
+                },
+                {
+                    thematic: "Cas pratiques & REX",
+                    question: "Une entreprise de logiciels a arrêté de vendre des licences perpétuelles pour passer au SaaS. Après une baisse initiale, ses revenus ont fortement augmenté. Quel concept ?",
+                    options: [
+                        "Traverser un Dip (transition difficile) pour un modèle plus rentable",
+                        "Une erreur stratégique",
+                        "Un abandon de clients",
+                        "Une mode"
+                    ],
+                    correctAnswer: "Traverser un Dip (transition difficile) pour un modèle plus rentable",
+                    explanation: "Le passage au SaaS a probablement entraîné une baisse temporaire des revenus (migration des clients, changement de modèle), mais à long terme, les revenus récurrents sont plus stables et élevés. C'est un Dip typique.",
+                    tip: "Quand vous changez de modèle économique, anticipez la transition et communiquez avec vos clients."
+                },
+                {
+                    thematic: "Cas pratiques & REX",
+                    question: "Un photographe a arrêté la photo de mariage (trop de concurrence) pour se spécialiser dans la photo de produits pour e‑commerçants. Il a aujourd'hui un carnet plein. Que montre ce parcours ?",
+                    options: [
+                        "Un pivot réussi d'un Cul‑de‑Sac vers un Dip",
+                        "Un abandon de passion",
+                        "Un choix par défaut",
+                        "Un hasard"
+                    ],
+                    correctAnswer: "Un pivot réussi d'un Cul‑de‑Sac vers un Dip",
+                    explanation: "La photo de mariage est un marché saturé. La photo de produits pour e‑commerce est en pleine croissance. En se spécialisant, il a trouvé une niche où sa compétence est valorisée. C'est un abandon stratégique.",
+                    tip: "Observez les tendances économiques. Les secteurs en croissance offrent souvent des niches accessibles."
+                },
+                {
+                    thematic: "Cas pratiques & REX",
+                    question: "Un consultant a quitté un grand cabinet pour créer sa propre structure. Il a perdu la sécurité de l'emploi mais gagne plus et est plus libre. Comment qualifier ce saut ?",
+                    options: [
+                        "Un saut dans l'inconnu, mais c'est un Dip (période difficile) vers plus de liberté",
+                        "Une folie",
+                        "Un échec annoncé",
+                        "Une chance"
+                    ],
+                    correctAnswer: "Un saut dans l'inconnu, mais c'est un Dip (période difficile) vers plus de liberté",
+                    explanation: "Quitter un emploi stable pour l'indépendance est un Dip : les premiers mois sont incertains, mais si on réussit, la récompense (liberté, revenus) est grande. C'est un choix stratégique.",
+                    tip: "Avant de sauter, testez votre projet en parallèle (soir, week‑end). Ayez des économies pour tenir 6 mois."
+                }
+            ]
+        };
+
+        // DOM Elements
+        const settingsPanelEl = document.getElementById('settings-panel');
+        const quizContentEl = document.getElementById('quiz-content');
+        const questionCountEl = document.getElementById('question-count');
+        const startQuizBtn = document.getElementById('start-quiz-btn');
+        const questionCounterEl = document.getElementById('question-counter');
+        const currentScoreEl = document.getElementById('current-score');
+        const progressBarEl = document.getElementById('progress-bar');
+        const questionTextEl = document.getElementById('question-text');
+        const thematicBadgeEl = document.getElementById('thematic-badge');
+        const optionsContainerEl = document.getElementById('options-container');
+        const explanationBoxEl = document.getElementById('explanation-box');
+        const explanationTitleEl = document.getElementById('explanation-title');
+        const explanationTextEl = document.getElementById('explanation-text');
+        const tipBoxEl = document.getElementById('tip-box');
+        const tipTextEl = document.getElementById('tip-text');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const finishBtn = document.getElementById('finish-btn');
+        
+        const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
+        const finalScoreCorrectEl = document.getElementById('final-score-correct');
+        const finalScoreTotalEl = document.getElementById('final-score-total');
+        const finalScorePercentageEl = document.getElementById('final-score-percentage');
+        const finalRecommendationsEl = document.getElementById('final-recommendations');
+        const dipSkillEl = document.getElementById('dip-skill');
+        const dipSkillTextEl = document.getElementById('dip-skill-text');
+        const culdesacSkillEl = document.getElementById('culdesac-skill');
+        const culdesacSkillTextEl = document.getElementById('culdesac-skill-text');
+        const shortTermEl = document.getElementById('short-term');
+        const longTermEl = document.getElementById('long-term');
+        const restartQuizBtn = document.getElementById('restart-quiz-btn');
+
+        // Quiz state
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let userAnswers = [];
+        let questions = [];
+        let selectedQuestionCount = 40;
+
+        // Mapping badge classes
+        const badgeClasses = {
+            "Le Dip": "badge-dip",
+            "Cul-de-Sac": "badge-culdesac",
+            "Falaise": "badge-cliff",
+            "Matrice de décision": "badge-matrice",
+            "Stratégies d'abandon": "badge-strategie",
+            "Cas pratiques & REX": "badge-cas"
+        };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function filterQuestionsByDomain() {
+            const domains = {
+                'domain-dip': "Le Dip",
+                'domain-culdesac': "Cul-de-Sac",
+                'domain-cliff': "Falaise",
+                'domain-matrice': "Matrice de décision",
+                'domain-strategie': "Stratégies d'abandon",
+                'domain-cas': "Cas pratiques & REX"
+            };
+            
+            const selectedDomains = [];
+            for (const [id, domain] of Object.entries(domains)) {
+                if (document.getElementById(id)?.checked) {
+                    selectedDomains.push(domain);
+                }
+            }
+            
+            if (selectedDomains.length === 0) {
+                return [...quizData.questions];
+            }
+            
+            return quizData.questions.filter(q => selectedDomains.includes(q.thematic));
+        }
+
+        function startQuiz() {
+            selectedQuestionCount = parseInt(questionCountEl.value);
+            
+            let filteredQuestions = filterQuestionsByDomain();
+            
+            if (filteredQuestions.length === 0) {
+                alert('Veuillez sélectionner au moins un domaine.');
+                return;
+            }
+            
+            if (filteredQuestions.length < selectedQuestionCount) {
+                alert(`Seulement ${filteredQuestions.length} questions disponibles. Le quiz sera limité à ce nombre.`);
+                selectedQuestionCount = filteredQuestions.length;
+            }
+            
+            const shuffledQuestions = shuffleArray(filteredQuestions);
+            questions = shuffledQuestions.slice(0, selectedQuestionCount);
+            
+            currentQuestionIndex = 0;
+            score = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            
+            settingsPanelEl.classList.add('d-none');
+            quizContentEl.classList.remove('d-none');
+            
+            displayQuestion(currentQuestionIndex);
+            updateScoreDisplay();
+            resultsModal.hide();
+        }
+
+        function displayQuestion(index) {
+            explanationBoxEl.classList.add('d-none');
+            tipBoxEl.classList.add('d-none');
+            
+            const question = questions[index];
+            questionTextEl.textContent = question.question;
+            
+            thematicBadgeEl.textContent = question.thematic;
+            thematicBadgeEl.className = 'thematic-badge';
+            thematicBadgeEl.classList.add(badgeClasses[question.thematic] || 'badge-dip');
+            
+            optionsContainerEl.innerHTML = '';
+            
+            const shuffledOptions = shuffleArray([...question.options]);
+            shuffledOptions.forEach(optionText => {
+                const button = document.createElement('button');
+                button.textContent = optionText;
+                button.classList.add('btn', 'option-btn');
+                button.onclick = () => selectAnswer(button, optionText, index);
+                optionsContainerEl.appendChild(button);
+            });
+            
+            updateNavigation();
+            updateProgressBar();
+            
+            if (userAnswers[index] !== null) {
+                showAnswerFeedback(index);
+            }
+        }
+
+        function selectAnswer(button, selectedAnswer, questionIndex) {
+            if (userAnswers[questionIndex] !== null) return;
+            
+            const question = questions[questionIndex];
+            const isCorrect = selectedAnswer === question.correctAnswer;
+            
+            userAnswers[questionIndex] = {
+                selected: selectedAnswer,
+                correct: question.correctAnswer,
+                isCorrect: isCorrect
+            };
+            
+            if(isCorrect) {
+                score++;
+            }
+            updateScoreDisplay();
+            showAnswerFeedback(questionIndex);
+        }
+
+        function showAnswerFeedback(index) {
+            const userAnswer = userAnswers[index];
+            if (!userAnswer) return;
+
+            const question = questions[index];
+
+            const optionButtons = optionsContainerEl.querySelectorAll('.option-btn');
+            optionButtons.forEach(btn => {
+                btn.disabled = true;
+                if (btn.textContent === userAnswer.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.textContent === userAnswer.selected) {
+                    btn.classList.add('incorrect');
+                }
+            });
+
+            explanationTextEl.textContent = question.explanation;
+            if (userAnswer.isCorrect) {
+                explanationTitleEl.textContent = "✅ Correct !";
+                explanationBoxEl.className = 'explanation-correct';
+            } else {
+                explanationTitleEl.textContent = "💡 À retenir";
+                explanationBoxEl.className = 'explanation-incorrect';
+            }
+            explanationBoxEl.classList.remove('d-none');
+            
+            if (question.tip) {
+                tipTextEl.textContent = question.tip;
+                tipBoxEl.classList.remove('d-none');
+            }
+        }
+
+        function updateNavigation() {
+            prevBtn.disabled = currentQuestionIndex === 0;
+            nextBtn.classList.toggle('d-none', currentQuestionIndex === questions.length - 1);
+            finishBtn.classList.toggle('d-none', currentQuestionIndex !== questions.length - 1);
+        }
+
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+            progressBarEl.style.width = `${progress}%`;
+            progressBarEl.setAttribute('aria-valuenow', progress);
+            questionCounterEl.textContent = `Question ${currentQuestionIndex + 1} / ${questions.length}`;
+        }
+        
+        function updateScoreDisplay() {
+            currentScoreEl.textContent = `Score: ${score}/${questions.length}`;
+        }
+
+        function handleNext() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion(currentQuestionIndex);
+            }
+        }
+
+        function handlePrev() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion(currentQuestionIndex);
+            }
+        }
+
+        function calculateSkillLevels() {
+            const thematicScores = {};
+            let dipCorrect = 0, dipTotal = 0;
+            let culdesacCorrect = 0, culdesacTotal = 0;
+            
+            userAnswers.forEach((answer, index) => {
+                if (answer !== null) {
+                    const question = questions[index];
+                    const thematic = question.thematic;
+                    
+                    if (!thematicScores[thematic]) {
+                        thematicScores[thematic] = { correct: 0, total: 0 };
+                    }
+                    thematicScores[thematic].total++;
+                    if (answer.isCorrect) {
+                        thematicScores[thematic].correct++;
+                    }
+                    
+                    if (thematic === "Le Dip") {
+                        dipTotal++;
+                        if (answer.isCorrect) dipCorrect++;
+                    } else if (thematic === "Cul-de-Sac") {
+                        culdesacTotal++;
+                        if (answer.isCorrect) culdesacCorrect++;
+                    }
+                }
+            });
+            
+            return {
+                dipScore: dipTotal > 0 ? (dipCorrect / dipTotal) * 100 : 0,
+                culdesacScore: culdesacTotal > 0 ? (culdesacCorrect / culdesacTotal) * 100 : 0,
+                thematicScores
+            };
+        }
+
+        function showFinalResults() {
+            const percentage = (score / questions.length) * 100;
+            const skills = calculateSkillLevels();
+            
+            let level, recommendationsHtml, shortTerm, longTerm;
+            
+            if (percentage >= 90) {
+                level = "Expert du Dip";
+                recommendationsHtml = `<h5><i class="fas fa-crown text-warning"></i> Félicitations !</h5><p>Vous maîtrisez parfaitement les concepts de Seth Godin. Vous pouvez aider d'autres personnes à faire les bons choix.</p>`;
+                shortTerm = "Partagez vos connaissances (blog, conférences).";
+                longTerm = "Devenez mentor en stratégie.";
+            } else if (percentage >= 75) {
+                level = "Avancé";
+                recommendationsHtml = `<h5><i class="fas fa-medal text-info"></i> Très bon niveau</h5><p>Vous avez une solide compréhension. Approfondissez les cas concrets.</p>`;
+                shortTerm = "Analysez des études de cas réelles dans votre secteur.";
+                longTerm = "Mettez en pratique en coaching.";
+            } else if (percentage >= 60) {
+                level = "Intermédiaire";
+                recommendationsHtml = `<h5><i class="fas fa-graduation-cap text-warning"></i> Bonnes bases</h5><p>Renforcez vos connaissances sur la matrice et les stratégies d'abandon.</p>`;
+                shortTerm = "Relisez les explications des questions où vous avez échoué.";
+                longTerm = "Appliquez la matrice à vos propres projets.";
+            } else if (percentage >= 40) {
+                level = "Débutant";
+                recommendationsHtml = `<h5><i class="fas fa-book-open text-primary"></i> En progression</h5><p>Consolidez les fondamentaux : les trois territoires, la matrice.</p>`;
+                shortTerm = "Étudiez le livre 'The Dip' de Seth Godin.";
+                longTerm = "Pratiquez avec des exemples de votre quotidien.";
+            } else {
+                level = "À renforcer";
+                recommendationsHtml = `<h5><i class="fas fa-exclamation-triangle text-danger"></i> Nécessite des bases</h5><p>Reprenez les définitions du Dip, Cul‑de‑Sac et Falaise.</p>`;
+                shortTerm = "Refaites le quiz en mode découverte (20 questions).";
+                longTerm = "Lisez des résumés du livre.";
+            }
+
+            finalScoreCorrectEl.textContent = score;
+            finalScoreTotalEl.textContent = questions.length;
+            finalScorePercentageEl.textContent = `${percentage.toFixed(0)}% - ${level}`;
+            
+            dipSkillEl.style.width = `${skills.dipScore}%`;
+            culdesacSkillEl.style.width = `${skills.culdesacScore}%`;
+            dipSkillTextEl.textContent = `Reconnaissance du Dip : ${skills.dipScore.toFixed(0)}%`;
+            culdesacSkillTextEl.textContent = `Détection des Culs‑de‑Sac : ${skills.culdesacScore.toFixed(0)}%`;
+            
+            finalRecommendationsEl.innerHTML = recommendationsHtml;
+            shortTermEl.textContent = shortTerm || "Pratiquez avec des cas concrets.";
+            longTermEl.textContent = longTerm || "Approfondissez par la lecture et l'expérimentation.";
+            
+            const thematicAnalysis = Object.entries(skills.thematicScores)
+                .map(([theme, scores]) => {
+                    const themePercentage = (scores.correct / scores.total) * 100;
+                    return `<div class="mb-2"><small>${theme}: <strong>${themePercentage.toFixed(0)}%</strong> (${scores.correct}/${scores.total})</small><div class="progress" style="height:5px;"><div class="progress-bar" style="width: ${themePercentage}%"></div></div></div>`;
+                }).join('');
+            
+            if (thematicAnalysis) {
+                finalRecommendationsEl.innerHTML += `<div class="mt-3"><h6><i class="fas fa-chart-bar"></i> Par domaine</h6>${thematicAnalysis}</div>`;
+            }
+
+            resultsModal.show();
+        }
+
+        function restartQuiz() {
+            settingsPanelEl.classList.remove('d-none');
+            quizContentEl.classList.add('d-none');
+            resultsModal.hide();
+        }
+
+        startQuizBtn.addEventListener('click', startQuiz);
+        nextBtn.addEventListener('click', handleNext);
+        prevBtn.addEventListener('click', handlePrev);
+        finishBtn.addEventListener('click', showFinalResults);
+        restartQuizBtn.addEventListener('click', restartQuiz);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            settingsPanelEl.classList.remove('d-none');
+            quizContentEl.classList.add('d-none');
+        });
+    </script>
+</body>
+</html>
