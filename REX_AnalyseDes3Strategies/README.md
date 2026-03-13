@@ -139,3 +139,33 @@ Le restaurant est **dans un Dip** : une phase difficile mais surmontable. En met
 ---
 
 Ce guide peut être utilisé par le propriétaire pour piloter son restaurant et prendre des décisions éclairées face aux défis actuels.
+
+## 15 Questions clés pour diagnostiquer votre situation
+
+Répondez honnêtement à ces questions pour confirmer si vous êtes dans un Dip, un Cul‑de‑Sac ou une Falaise. Les réponses sont basées sur le contexte de votre restaurant.
+
+| # | Question | Votre réponse (exemple) | Interprétation |
+|---|----------|--------------------------|----------------|
+| 1 | Votre chiffre d’affaires est‑il stable ou en légère baisse sur les 6 derniers mois ? | Stable, autour de 120 plats/jour | ✅ Dip : la stabilité indique une demande résistante. |
+| 2 | Vos clients réguliers reviennent‑ils souvent ? | Oui, nous avons une clientèle fidèle qui apprécie nos plats. | ✅ Dip : la fidélité est un atout à capitaliser. |
+| 3 | Pouvez‑vous citer au moins deux choses qui rendent votre restaurant unique (recette, ambiance, service) ? | Recettes authentiques transmises par ma grand‑mère, ambiance chaleureuse. | ✅ Dip : une différenciation existe, il faut la renforcer. |
+| 4 | Le marché de la cuisine africaine à Cocody est‑il en croissance, stable ou en déclin ? | Plutôt stable, voire en croissance avec l’intérêt pour les plats traditionnels. | ✅ Dip : un marché porteur permet d’envisager l’avenir. |
+| 5 | Vos principaux concurrents ont‑ils des avantages que vous n’avez pas (prix, livraison, notoriété) ? | Oui, certains sont moins chers ou livrent plus vite. | ⚠️ Dip : c’est un défi à relever, pas une impasse. |
+| 6 | Avez‑vous déjà tenté des actions pour améliorer la situation (communication, nouveaux plats) ? | Quelques affichages, mais pas de stratégie suivie. | ✅ Dip : des leviers d’action existent et n’ont pas été exploités. |
+| 7 | Le moral de votre équipe est‑il bas à cause des conditions de travail (transport, salaires) ? | Oui, turn‑over élevé, fatigue. | ⚠️ Dip : problème interne à résoudre, pas une fatalité. |
+| 8 | L’inflation des ingrédients vous oblige‑t‑elle à rogner sur la qualité ? | Non, nous maintenons la qualité malgré la hausse des coûts. | ✅ Dip : la qualité est préservée, c’est un point fort. |
+| 9 | Avez‑vous des difficultés à recruter ou à fidéliser du personnel ? | Oui, nous perdons souvent nos employés. | ⚠️ Dip : point à améliorer, mais des solutions existent. |
+| 10 | Les services de livraison vous coûtent‑ils cher sans apporter de volume suffisant ? | Oui, les commissions sont élevées. | ✅ Dip : c’est un problème opérationnel, pas structurel. |
+| 11 | Avez‑vous identifié des segments de clientèle que vous ne touchez pas (jeunes, touristes, entreprises) ? | Oui, nous pourrions développer la vente à emporter pour les bureaux. | ✅ Dip : des opportunités de croissance existent. |
+| 12 | Vos marges sont‑elles en train de s’effondrer ou restent‑elles acceptables ? | Marges stables, mais sous pression. | ⚠️ Dip : situation tendue mais pas catastrophique. |
+| 13 | Avez‑vous des idées d’amélioration qui vous semblent réalisables à court terme ? | Oui, revoir la carte, améliorer les horaires. | ✅ Dip : la capacité à envisager des solutions est positive. |
+| 14 | Pensez‑vous que votre restaurant pourrait devenir une référence dans le quartier si vous résolviez les problèmes actuels ? | Oui, je crois au potentiel. | ✅ Dip : la vision d’un avenir meilleur est un moteur. |
+| 15 | Si vous ne changiez rien, la situation empirerait‑elle rapidement ? | Non, elle resterait stable, mais on stagnerait. | ✅ Dip : l’absence de déclin rapide permet de prendre le temps d’agir. |
+
+### Interprétation des résultats
+
+- **Majorité de ✅ Dip** : vous êtes dans un Dip. Les difficultés sont réelles mais surmontables. Mettez en œuvre un plan d’action structuré.
+- **Plusieurs ⚠️ avec des réponses négatives sur la demande ou la différenciation** : pourrait indiquer un Cul‑de‑Sac. Approfondissez l’analyse.
+- **Si la plupart des réponses montrent une tendance au déclin accéléré** : peut‑être une Falaise. Dans ce cas, préparez une sortie.
+
+Dans votre cas, la quasi‑totalité des réponses penche vers **Dip**. Vous avez toutes les cartes pour rebondir.
