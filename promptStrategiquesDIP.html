@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>21 Prompts Stratégiques · The Dip · Format R0TCCDF</title>
+    <title>Guide Stratégique · 42 Prompts R0TCCDF · The Dip</title>
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -182,19 +183,33 @@
         .copy-btn:hover {
             background: #0d6efd;
         }
+        .guide-intro {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1><i class="fas fa-mountain me-2"></i>21 Prompts Stratégiques R0TCCDF</h1>
-            <p class="lead">Inspiré de <strong>The Dip</strong> de Seth Godin — des canevas prêts à l'emploi, modifiables, avec affichage structuré pour vos outils d'IA.</p>
+            <h1><i class="fas fa-mountain me-2"></i>42 Prompts Stratégiques · Guide Complet</h1>
+            <p class="lead">Inspiré de <strong>The Dip</strong> de Seth Godin — 42 canevas pour analyser, décider, mettre en œuvre et suivre vos projets.</p>
             <div class="mt-4">
-                <button class="btn category-btn active" data-category="diagnostic">🔍 Diagnostic & Choix</button>
-                <button class="btn category-btn" data-category="miseoeuvre">⚙️ Mise en œuvre</button>
-                <button class="btn category-btn" data-category="suivi">📊 Suivi & Ajustement</button>
+                <button class="btn category-btn active" data-category="diagnostic">🔍 Diagnostic & Choix (14)</button>
+                <button class="btn category-btn" data-category="miseoeuvre">⚙️ Mise en œuvre (14)</button>
+                <button class="btn category-btn" data-category="suivi">📊 Suivi & Ajustement (14)</button>
             </div>
+        </div>
+
+        <!-- Introduction au guide -->
+        <div class="guide-intro">
+            <h4><i class="fas fa-compass me-2"></i>Comment utiliser ce guide</h4>
+            <p>Chaque prompt est conçu pour vous aider à structurer votre réflexion face à une situation stratégique. Remplissez les champs avec votre contexte, puis cliquez sur <strong>"Voir le prompt structuré"</strong> pour générer une requête prête à l'emploi au format R0TCCDF (Rôle, Objectifs, Tâche, Contexte, Contraintes, Dirigeabilité, Format). Vous pouvez copier ce texte et l'utiliser dans un outil d'IA pour obtenir des recommandations personnalisées.</p>
+            <p class="mb-0"><i class="fas fa-lightbulb text-warning me-1"></i>Les exemples fournis sont réalistes mais modifiables. Utilisez le bouton <strong>Réinitialiser</strong> pour revenir à l'exemple par défaut.</p>
         </div>
 
         <!-- Accordéon des prompts -->
@@ -223,14 +238,14 @@
     </div>
 
     <footer class="footer">
-        <p class="small">Cliquez sur un prompt pour ouvrir le template — modifiez les champs, puis utilisez le bouton "Voir le prompt structuré".</p>
+        <p class="small">42 prompts — version 2.0 — tous modifiables, avec export R0TCCDF.</p>
     </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // ---------- DONNÉES DES PROMPTS ----------
+        // ---------- DONNÉES DES PROMPTS (42 prompts) ----------
         const promptsData = {
             diagnostic: [
                 {
@@ -243,7 +258,8 @@
                         { label: "Mon avantage concurrentiel", type: "textarea", placeholder: "ex: Algorithme unique de personnalisation", default: "Algorithme unique de personnalisation" },
                         { label: "Niveau de passion (1-10)", type: "number", min: 1, max: 10, default: "8" },
                         { label: "Résultats des 6 derniers mois", type: "textarea", placeholder: "ex: CA stable, utilisateurs stagnent", default: "CA stable, utilisateurs stagnent" },
-                        { label: "Concurrents directs", type: "textarea", placeholder: "ex: 3 applis similaires bien financées", default: "3 applis similaires bien financées" }
+                        { label: "Concurrents directs", type: "textarea", placeholder: "ex: 3 applis similaires bien financées", default: "3 applis similaires bien financées" },
+                        { label: "Présence de barrières à l'entrée", type: "select", options: ["Oui", "Non", "Partiellement"], default: "Oui" }
                     ]
                 },
                 {
@@ -255,6 +271,7 @@
                         { label: "Croissance du marché", type: "select", options: ["Forte", "Moyenne", "Faible"], default: "Forte" },
                         { label: "Capacité à me différencier", type: "select", options: ["Facile", "Moyenne", "Difficile"], default: "Moyenne" },
                         { label: "Avantage spécifique", type: "textarea", default: "Réseau de formateurs reconnus" },
+                        { label: "Existe‑t‑il des substituts ?", type: "select", options: ["Oui", "Non", "Peu"], default: "Oui" },
                         { label: "Résultat de la matrice", type: "text", default: "Dip idéal (persévérer)" }
                     ]
                 },
@@ -267,7 +284,8 @@
                         { label: "Équipe mobilisable", type: "text", default: "2 associés + 1 freelance" },
                         { label: "Compétences manquantes", type: "textarea", default: "Marketing digital" },
                         { label: "Soutien externe (mentor, réseau)", type: "textarea", default: "Accélérateur, 2 mentors" },
-                        { label: "Capacité à tenir sans revenu (mois)", type: "number", default: "6" }
+                        { label: "Capacité à tenir sans revenu (mois)", type: "number", default: "6" },
+                        { label: "Accès au crédit / investisseurs", type: "select", options: ["Oui", "Non", "Peut‑être"], default: "Peut‑être" }
                     ]
                 },
                 {
@@ -279,6 +297,7 @@
                         { label: "Puis‑je citer 3 exemples de réussite dans ce domaine ?", type: "textarea", default: "Non, je ne connais personne" },
                         { label: "Mon travail me procure‑t‑il de l'énergie ?", type: "select", options: ["Oui", "Non", "Parfois"], default: "Non" },
                         { label: "Ai‑je appris une nouvelle compétence récemment ?", type: "select", options: ["Oui", "Non"], default: "Non" },
+                        { label: "Les clients reviennent‑ils ?", type: "select", options: ["Oui", "Non", "Peu"], default: "Peu" },
                         { label: "Conclusion", type: "text", default: "Probable Cul‑de‑Sac" }
                     ]
                 },
@@ -291,6 +310,7 @@
                         { label: "Délais de paiement allongés ?", type: "select", options: ["Oui", "Non"], default: "Oui" },
                         { label: "Moral de l’équipe", type: "select", options: ["Bon", "Moyen", "Mauvais"], default: "Mauvais" },
                         { label: "Existe‑t‑il une chance de retournement ?", type: "select", options: ["Oui", "Non", "Incertain"], default: "Non" },
+                        { label: "Taux d'endettement critique ?", type: "select", options: ["Oui", "Non"], default: "Oui" },
                         { label: "Décision urgente", type: "text", default: "Préparer sortie immédiate" }
                     ]
                 },
@@ -301,7 +321,8 @@
                         { label: "Liste des parties prenantes (clients, équipe, famille…)", type: "textarea", default: "2 associés, 3 employés, 10 clients réguliers" },
                         { label: "Leur intérêt dans la réussite", type: "textarea", default: "Associés : survie ; employés : emploi ; clients : service" },
                         { label: "Leur pouvoir d'influence", type: "textarea", default: "Associés peuvent bloquer, clients peuvent partir" },
-                        { label: "Comment les impliquer dans la décision ?", type: "textarea", default: "Réunion de crise, transparence" }
+                        { label: "Comment les impliquer dans la décision ?", type: "textarea", default: "Réunion de crise, transparence" },
+                        { label: "Opposition potentielle ?", type: "textarea", default: "Un associé peut refuser le pivot" }
                     ]
                 },
                 {
@@ -312,13 +333,89 @@
                         { label: "Preuves / indicateurs", type: "textarea", default: "Marché en croissance, mais stagnation personnelle" },
                         { label: "Ressources pour persévérer", type: "textarea", default: "Trésorerie 6 mois, mentor" },
                         { label: "Coût de l'abandon", type: "textarea", default: "Perte de réputation, chômage" },
+                        { label: "Scénario de pivot possible ?", type: "textarea", default: "Passer du B2C au B2B" },
                         { label: "Décision", type: "select", options: ["Persévérer", "Abandonner", "Pivoter", "Analyser encore"], default: "Persévérer" }
+                    ]
+                },
+                {
+                    title: "8. Analyse SWOT accélérée",
+                    description: "Forces, Faiblesses, Opportunités, Menaces.",
+                    fields: [
+                        { label: "Forces internes", type: "textarea", default: "Expertise technique, équipe soudée" },
+                        { label: "Faiblesses internes", type: "textarea", default: "Manque de notoriété, trésorerie limitée" },
+                        { label: "Opportunités externes", type: "textarea", default: "Marché en croissance, nouvelles technologies" },
+                        { label: "Menaces externes", type: "textarea", default: "Concurrents agressifs, inflation" },
+                        { label: "Synthèse", type: "textarea", default: "Opportunités > menaces, mais faiblesses à corriger" }
+                    ]
+                },
+                {
+                    title: "9. Analyse de la concurrence",
+                    description: "Positionnement par rapport aux concurrents.",
+                    fields: [
+                        { label: "Concurrent principal n°1", type: "text", default: "Startup A" },
+                        { label: "Ses forces", type: "textarea", default: "Grosse levée de fonds, notoriété" },
+                        { label: "Ses faiblesses", type: "textarea", default: "Service client défaillant" },
+                        { label: "Concurrent principal n°2", type: "text", default: "Startup B" },
+                        { label: "Ses forces", type: "textarea", default: "Prix bas" },
+                        { label: "Ses faiblesses", type: "textarea", default: "Qualité médiocre" },
+                        { label: "Notre avantage compétitif", type: "textarea", default: "Qualité et personnalisation" }
+                    ]
+                },
+                {
+                    title: "10. Analyse des tendances longues",
+                    description: "Facteurs macro‑économiques et technologiques.",
+                    fields: [
+                        { label: "Tendance technologique", type: "textarea", default: "IA générative" },
+                        { label: "Tendance sociétale", type: "textarea", default: "Recherche de sens au travail" },
+                        { label: "Tendance réglementaire", type: "textarea", default: "RGPD renforcé" },
+                        { label: "Impact sur notre activité", type: "textarea", default: "Opportunité d'automatisation, mais contraintes légales" }
+                    ]
+                },
+                {
+                    title: "11. Évaluation de la motivation personnelle",
+                    description: "Facteurs humains.",
+                    fields: [
+                        { label: "Niveau d'énergie actuel (1-10)", type: "number", min:1, max:10, default: "6" },
+                        { label: "Soutien de l'entourage", type: "select", options: ["Fort", "Moyen", "Faible"], default: "Moyen" },
+                        { label: "Raisons profondes de continuer", type: "textarea", default: "Passion, volonté de prouver" },
+                        { label: "Raisons d'arrêter", type: "textarea", default: "Épuisement, conflits" },
+                        { label: "Conclusion", type: "text", default: "Motivation en baisse, besoin de soutien" }
+                    ]
+                },
+                {
+                    title: "12. Scénarios prospectifs",
+                    description: "Imaginez 3 futurs possibles.",
+                    fields: [
+                        { label: "Scénario optimiste", type: "textarea", default: "Croissance rapide, levée de fonds" },
+                        { label: "Scénario pessimiste", type: "textarea", default: "Faillite dans 12 mois" },
+                        { label: "Scénario réaliste", type: "textarea", default: "Croissance lente mais régulière" },
+                        { label: "Quel scénario privilégier ?", type: "text", default: "Réaliste" }
+                    ]
+                },
+                {
+                    title: "13. Coût d'opportunité",
+                    description: "Que perdez‑vous à continuer ?",
+                    fields: [
+                        { label: "Autre projet possible", type: "textarea", default: "Lancer une activité de conseil" },
+                        { label: "Revenu potentiel de ce projet", type: "text", default: "60 k€ / an" },
+                        { label: "Temps investi actuellement", type: "text", default: "50 h / semaine" },
+                        { label: "Coût d'opportunité estimé", type: "text", default: "Élevé" }
+                    ]
+                },
+                {
+                    title: "14. Décision en comité",
+                    description: "Préparation d'une réunion de décision.",
+                    fields: [
+                        { label: "Participants", type: "textarea", default: "Associés, mentor, comptable" },
+                        { label: "Ordre du jour", type: "textarea", default: "1. Bilan ; 2. Options ; 3. Vote" },
+                        { label: "Documents à fournir", type: "textarea", default: "Prévisionnels, SWOT" },
+                        { label: "Critères de décision", type: "textarea", default: "Rentabilité, alignement avec la mission" }
                     ]
                 }
             ],
             miseoeuvre: [
                 {
-                    title: "8. Plan d’action pour traverser un Dip",
+                    title: "15. Plan d’action pour traverser un Dip",
                     description: "Détaillez les étapes concrètes.",
                     fields: [
                         { label: "Objectif à 6 mois", type: "textarea", default: "Atteindre 100 clients payants" },
@@ -326,11 +423,12 @@
                         { label: "Actions clés (3‑5)", type: "textarea", default: "1. Campagne de content marketing\n2. Partenariats avec influenceurs\n3. Amélioration du produit" },
                         { label: "Responsable(s)", type: "text", default: "Moi + freelance marketing" },
                         { label: "Budget alloué (€)", type: "text", default: "15 000 €" },
-                        { label: "Échéances", type: "text", default: "T0+3 mois : 50 clients" }
+                        { label: "Échéances", type: "text", default: "T0+3 mois : 50 clients" },
+                        { label: "KPIs de suivi", type: "text", default: "Nb clients, CA, taux de conversion" }
                     ]
                 },
                 {
-                    title: "9. Stratégie d’abandon respectueux",
+                    title: "16. Stratégie d’abandon respectueux",
                     description: "Comment arrêter sans brûler les ponts.",
                     fields: [
                         { label: "Projet / relation à abandonner", type: "text", default: "Client difficile (e‑commerce)" },
@@ -338,11 +436,12 @@
                         { label: "Plan de transition", type: "textarea", default: "Proposer un successeur, finir les missions en cours" },
                         { label: "Message à l’autre partie", type: "textarea", default: "Expliquer que je me recentre sur une offre plus pointue" },
                         { label: "Suivi post‑abandon", type: "textarea", default: "Recommander, rester en contact LinkedIn" },
-                        { label: "Date de sortie", type: "text", default: "31/12/2025" }
+                        { label: "Date de sortie", type: "text", default: "31/12/2025" },
+                        { label: "Gestion des sentiments", type: "textarea", default: "Préparer une communication empathique" }
                     ]
                 },
                 {
-                    title: "10. Plan de pivot",
+                    title: "17. Plan de pivot",
                     description: "Changer de cap tout en capitalisant sur l’existant.",
                     fields: [
                         { label: "Activité actuelle", type: "text", default: "Vente de formations en présentiel" },
@@ -350,11 +449,12 @@
                         { label: "Atouts réutilisables", type: "textarea", default: "Contenu pédagogique, liste de clients" },
                         { label: "Compétences à acquérir", type: "textarea", default: "Marketing digital, production vidéo" },
                         { label: "Coût du pivot", type: "text", default: "5 000 €" },
-                        { label: "Délai de mise en œuvre", type: "text", default: "4 mois" }
+                        { label: "Délai de mise en œuvre", type: "text", default: "4 mois" },
+                        { label: "Risques du pivot", type: "textarea", default: "Perte de clients traditionnels" }
                     ]
                 },
                 {
-                    title: "11. Gestion des risques",
+                    title: "18. Gestion des risques",
                     description: "Anticiper ce qui pourrait mal tourner.",
                     fields: [
                         { label: "Risque n°1", type: "textarea", default: "Nouveau concurrent arrive" },
@@ -364,11 +464,15 @@
                         { label: "Risque n°2", type: "textarea", default: "Tensions de trésorerie" },
                         { label: "Probabilité (1‑5)", default: "4" },
                         { label: "Impact (1‑5)", default: "5" },
-                        { label: "Plan de mitigation", type: "textarea", default: "Ligne de crédit, report d'investissements" }
+                        { label: "Plan de mitigation", type: "textarea", default: "Ligne de crédit, report d'investissements" },
+                        { label: "Risque n°3", type: "textarea", default: "Départ d'un membre clé" },
+                        { label: "Probabilité (1‑5)", default: "2" },
+                        { label: "Impact (1‑5)", default: "4" },
+                        { label: "Plan de mitigation", type: "textarea", default: "Documentation, polyvalence" }
                     ]
                 },
                 {
-                    title: "12. Budget prévisionnel",
+                    title: "19. Budget prévisionnel",
                     description: "Détail des coûts et revenus attendus.",
                     fields: [
                         { label: "Coûts fixes mensuels (€)", type: "text", default: "3 000 € (loyer, salaires)" },
@@ -376,34 +480,113 @@
                         { label: "Investissements ponctuels", type: "text", default: "8 000 € (dev site)" },
                         { label: "Revenu mensuel actuel", type: "text", default: "2 500 €" },
                         { label: "Seuil de rentabilité", type: "text", default: "50 clients / mois" },
-                        { label: "Cash disponible (€)", type: "text", default: "25 000 €" }
+                        { label: "Cash disponible (€)", type: "text", default: "25 000 €" },
+                        { label: "Marge brute cible", type: "text", default: "70 %" }
                     ]
                 },
                 {
-                    title: "13. Communication de la décision",
+                    title: "20. Communication de la décision",
                     description: "Comment annoncer votre choix (persévérer ou abandonner) aux parties prenantes.",
                     fields: [
                         { label: "Public cible", type: "textarea", default: "Équipe, clients, partenaires" },
                         { label: "Message principal", type: "textarea", default: "Nous recentrons nos efforts sur notre offre premium" },
                         { label: "Canaux de communication", type: "textarea", default: "Email, réunion, réseaux sociaux" },
                         { label: "Calendrier", type: "text", default: "Annonce le 15 du mois" },
-                        { label: "Gestion des objections", type: "textarea", default: "Prévoir FAQ, hotline" }
+                        { label: "Gestion des objections", type: "textarea", default: "Prévoir FAQ, hotline" },
+                        { label: "Porte‑parole", type: "text", default: "Le fondateur" }
                     ]
                 },
                 {
-                    title: "14. Plan B (filet de sécurité)",
+                    title: "21. Plan B (filet de sécurité)",
                     description: "Que faire si le plan A échoue ?",
                     fields: [
                         { label: "Scénario d’échec envisagé", type: "textarea", default: "Ventes < 20 clients après 6 mois" },
                         { label: "Déclencheur", type: "text", default: "Seuil à 6 mois" },
                         { label: "Plan B", type: "textarea", default: "Se reconvertir en freelance / vendre la base de données" },
-                        { label: "Ressources nécessaires", type: "textarea", default: "Réseau, CV à jour" }
+                        { label: "Ressources nécessaires", type: "textarea", default: "Réseau, CV à jour" },
+                        { label: "Délai de mise en œuvre", type: "text", default: "1 mois" }
+                    ]
+                },
+                {
+                    title: "22. Plan de développement commercial",
+                    description: "Actions pour acquérir des clients.",
+                    fields: [
+                        { label: "Cible prioritaire", type: "text", default: "PME de 10‑50 salariés" },
+                        { label: "Canaux d'acquisition", type: "textarea", default: "LinkedIn, salons, partenariats" },
+                        { label: "Offre de lancement", type: "textarea", default: "Premier mois gratuit" },
+                        { label: "Objectif mensuel de leads", type: "text", default: "50 leads" },
+                        { label: "Budget marketing mensuel", type: "text", default: "2 000 €" }
+                    ]
+                },
+                {
+                    title: "23. Plan de développement produit",
+                    description: "Améliorations à apporter.",
+                    fields: [
+                        { label: "Fonctionnalité prioritaire", type: "text", default: "Application mobile" },
+                        { label: "Délai de développement", type: "text", default: "3 mois" },
+                        { label: "Coût estimé", type: "text", default: "15 000 €" },
+                        { label: "Retour attendu", type: "textarea", default: "Augmentation de l'engagement" },
+                        { label: "Risques techniques", type: "textarea", default: "Complexité de synchronisation" }
+                    ]
+                },
+                {
+                    title: "24. Plan de recrutement",
+                    description: "Renforcer l'équipe.",
+                    fields: [
+                        { label: "Poste à pourvoir", type: "text", default: "Développeur front‑end" },
+                        { label: "Compétences requises", type: "textarea", default: "React, Vue.js" },
+                        { label: "Fourchette de salaire", type: "text", default: "40‑50 k€" },
+                        { label: "Date souhaitée", type: "text", default: "Septembre 2025" },
+                        { label: "Processus de recrutement", type: "textarea", default: "Entretiens techniques, test" }
+                    ]
+                },
+                {
+                    title: "25. Plan de financement",
+                    description: "Recherche de fonds.",
+                    fields: [
+                        { label: "Montant recherché", type: "text", default: "200 000 €" },
+                        { label: "Type de financement", type: "select", options: ["Fonds propres", "Dette", "Subvention", "Business angel"], default: "Business angel" },
+                        { label: "Utilisation des fonds", type: "textarea", default: "Marketing, R&D" },
+                        { label: "Prévisionnel sur 3 ans", type: "textarea", default: "CA : 100k, 300k, 600k" },
+                        { label: "Contacts potentiels", type: "textarea", default: "Réseau d'investisseurs" }
+                    ]
+                },
+                {
+                    title: "26. Plan de partenariat",
+                    description: "Identifier et approcher des partenaires.",
+                    fields: [
+                        { label: "Partenaire cible", type: "text", default: "Fédération sportive" },
+                        { label: "Valeur pour le partenaire", type: "textarea", default: "Visibilité, innovation" },
+                        { label: "Valeur pour nous", type: "textarea", default: "Accès à leur réseau" },
+                        { label: "Type de partenariat", type: "text", default: "Co‑branding" },
+                        { label: "Personne à contacter", type: "text", default: "Directeur marketing" }
+                    ]
+                },
+                {
+                    title: "27. Plan de communication interne",
+                    description: "Mobiliser l'équipe autour du projet.",
+                    fields: [
+                        { label: "Objectif de communication", type: "textarea", default: "Fédérer autour du pivot" },
+                        { label: "Messages clés", type: "textarea", default: "Nouvelle vision, rôles de chacun" },
+                        { label: "Outils", type: "textarea", default: "Réunion plénière, Slack" },
+                        { label: "Fréquence", type: "text", default: "Hebdomadaire" }
+                    ]
+                },
+                {
+                    title: "28. Plan de formation",
+                    description: "Monter en compétence.",
+                    fields: [
+                        { label: "Compétence à acquérir", type: "text", default: "Growth Hacking" },
+                        { label: "Type de formation", type: "select", options: ["En ligne", "Présentiel", "Autodidacte"], default: "En ligne" },
+                        { label: "Budget", type: "text", default: "500 €" },
+                        { label: "Durée", type: "text", default: "2 mois" },
+                        { label: "Objectif post‑formation", type: "textarea", default: "Mener une campagne" }
                     ]
                 }
             ],
             suivi: [
                 {
-                    title: "15. Revue mensuelle de progression",
+                    title: "29. Revue mensuelle de progression",
                     description: "Mesurez l’avancement et ajustez.",
                     fields: [
                         { label: "Mois", type: "text", default: "Mars 2025" },
@@ -411,11 +594,12 @@
                         { label: "Réalisé", type: "textarea", default: "8 clients, newsletter créée mais pas envoyée" },
                         { label: "Écarts / raisons", type: "textarea", default: "Surcharge de travail, besoin d'automatisation" },
                         { label: "Actions correctives", type: "textarea", default: "Embaucher un assistant à temps partiel" },
-                        { label: "Budget consommé", type: "text", default: "2 300 € sur 3 000 €" }
+                        { label: "Budget consommé", type: "text", default: "2 300 € sur 3 000 €" },
+                        { label: "Nouveaux objectifs mois suivant", type: "textarea", default: "10 clients, envoi newsletter" }
                     ]
                 },
                 {
-                    title: "16. Indicateurs clés (KPIs)",
+                    title: "30. Indicateurs clés (KPIs)",
                     description: "Définissez et suivez vos KPIs.",
                     fields: [
                         { label: "KPI n°1", type: "text", default: "Nombre de clients actifs" },
@@ -426,32 +610,37 @@
                         { label: "Objectif", type: "text", default: "8 000 €" },
                         { label: "KPI n°3 (qualitatif)", type: "text", default: "Taux de satisfaction client" },
                         { label: "Valeur actuelle", type: "text", default: "4,2/5" },
-                        { label: "Objectif", type: "text", default: "4,5/5" }
+                        { label: "Objectif", type: "text", default: "4,5/5" },
+                        { label: "KPI n°4", type: "text", default: "Taux de conversion" },
+                        { label: "Valeur actuelle", type: "text", default: "2 %" },
+                        { label: "Objectif", type: "text", default: "3 %" }
                     ]
                 },
                 {
-                    title: "17. Analyse des écarts",
+                    title: "31. Analyse des écarts",
                     description: "Comparez prévisions et réalité.",
                     fields: [
                         { label: "Écart sur le CA (€)", type: "text", default: "-1 200 €" },
                         { label: "Cause principale", type: "textarea", default: "Moins de commandes que prévu" },
                         { label: "Actions pour réduire l’écart", type: "textarea", default: "Relancer les prospects, offrir une promo" },
-                        { label: "Nouvelle prévision", type: "text", default: "CA = 5 800 € le mois prochain" }
+                        { label: "Nouvelle prévision", type: "text", default: "CA = 5 800 € le mois prochain" },
+                        { label: "Impact sur trésorerie", type: "textarea", default: "Décalage de 2 semaines" }
                     ]
                 },
                 {
-                    title: "18. Réévaluation de la stratégie",
+                    title: "32. Réévaluation de la stratégie",
                     description: "La situation a‑t‑elle changé ? Faut‑il ajuster le cap ?",
                     fields: [
                         { label: "Évolution du marché", type: "textarea", default: "Nouveau concurrent low‑cost" },
                         { label: "Notre position actuelle", type: "textarea", default: "Leader sur la qualité, mais prix élevé" },
                         { label: "Forces / faiblesses", type: "textarea", default: "Force : réputation ; faiblesse : coût de production" },
                         { label: "Opportunités / menaces", type: "textarea", default: "Opportunité : segment premium ; menace : guerre des prix" },
-                        { label: "Ajustement stratégique", type: "textarea", default: "Renforcer le service client, pas de baisse de prix" }
+                        { label: "Ajustement stratégique", type: "textarea", default: "Renforcer le service client, pas de baisse de prix" },
+                        { label: "Nouveaux objectifs", type: "textarea", default: "Fidéliser, développer le premium" }
                     ]
                 },
                 {
-                    title: "19. Bilan d’étape (3 mois)",
+                    title: "33. Bilan d’étape (3 mois)",
                     description: "Faites le point après un trimestre.",
                     fields: [
                         { label: "Objectifs initiaux", type: "textarea", default: "50 clients, CA 10 k€" },
@@ -459,22 +648,24 @@
                         { label: "Ce qui a fonctionné", type: "textarea", default: "Bouche‑à‑oreille" },
                         { label: "Ce qui n’a pas fonctionné", type: "textarea", default: "Campagne Ads trop chère" },
                         { label: "Leçons apprises", type: "textarea", default: "Miser sur le contenu plutôt que la pub" },
-                        { label: "Prochains objectifs", type: "textarea", default: "60 clients, CA 12 k€" }
+                        { label: "Prochains objectifs", type: "textarea", default: "60 clients, CA 12 k€" },
+                        { label: "Ajustements", type: "textarea", default: "Arrêt des Ads, recrutement d'un community manager" }
                     ]
                 },
                 {
-                    title: "20. Test de résilience",
+                    title: "34. Test de résilience",
                     description: "Simulez une crise pour vérifier la robustesse.",
                     fields: [
                         { label: "Scénario de crise", type: "textarea", default: "Perte du client principal (30 % CA)" },
                         { label: "Impact immédiat", type: "textarea", default: "Trésorerie négative en 2 mois" },
                         { label: "Mesures d’urgence", type: "textarea", default: "Réduction des coûts fixes, recherche de financement" },
                         { label: "Délai de récupération", type: "text", default: "4 mois" },
-                        { label: "Leçons pour l’avenir", type: "textarea", default: "Diversifier la clientèle" }
+                        { label: "Leçons pour l’avenir", type: "textarea", default: "Diversifier la clientèle" },
+                        { label: "Nouveau plan de prévention", type: "textarea", default: "Plafonner la part d'un client à 20 %" }
                     ]
                 },
                 {
-                    title: "21. Décision finale : continuer ou arrêter ?",
+                    title: "35. Décision finale : continuer ou arrêter ?",
                     description: "Synthèse de tous les éléments pour trancher.",
                     fields: [
                         { label: "Situation actuelle", type: "textarea", default: "Toujours dans le Dip, mais progrès lents" },
@@ -483,7 +674,90 @@
                         { label: "Coût de l’arrêt", type: "textarea", default: "Perte d’image, liquidation" },
                         { label: "Coût de la poursuite", type: "textarea", default: "Stress, investissement supplémentaire" },
                         { label: "Décision", type: "select", options: ["Continuer", "Arrêter", "Pivoter"], default: "Continuer" },
-                        { label: "Justification", type: "textarea", default: "Les indicateurs s’améliorent, un gros contrat en vue" }
+                        { label: "Justification", type: "textarea", default: "Les indicateurs s’améliorent, un gros contrat en vue" },
+                        { label: "Date de la prochaine revue", type: "text", default: "Dans 1 mois" }
+                    ]
+                },
+                {
+                    title: "36. Revue des risques",
+                    description: "Mise à jour de la matrice des risques.",
+                    fields: [
+                        { label: "Risque toujours d'actualité ?", type: "textarea", default: "Oui, concurrence" },
+                        { label: "Nouveaux risques apparus", type: "textarea", default: "Inflation" },
+                        { label: "Efficacité des mitigations", type: "textarea", default: "Moyenne" },
+                        { label: "Ajustements nécessaires", type: "textarea", default: "Renégocier fournisseurs" }
+                    ]
+                },
+                {
+                    title: "37. Satisfaction client",
+                    description: "Recueil et analyse des retours.",
+                    fields: [
+                        { label: "Méthode de collecte", type: "textarea", default: "Enquête NPS" },
+                        { label: "Taux de réponse", type: "text", default: "30 %" },
+                        { label: "Score moyen", type: "text", default: "8/10" },
+                        { label: "Principaux points positifs", type: "textarea", default: "Qualité, service" },
+                        { label: "Points négatifs", type: "textarea", default: "Délais de livraison" },
+                        { label: "Actions d'amélioration", type: "textarea", default: "Optimiser la logistique" }
+                    ]
+                },
+                {
+                    title: "38. Veille concurrentielle",
+                    description: "Surveillance des concurrents.",
+                    fields: [
+                        { label: "Nouveaux entrants", type: "textarea", default: "Startup C lancée ce mois" },
+                        { label: "Mouvements des concurrents", type: "textarea", default: "Startup A a levé des fonds" },
+                        { label: "Impact sur notre position", type: "textarea", default: "Nécessité d'accélérer" },
+                        { label: "Réaction envisagée", type: "textarea", default: "Communiquer sur notre différence" }
+                    ]
+                },
+                {
+                    title: "39. Revue de budget",
+                    description: "Suivi financier mensuel.",
+                    fields: [
+                        { label: "Dépenses réelles", type: "text", default: "4 200 €" },
+                        { label: "Budget prévu", type: "text", default: "4 000 €" },
+                        { label: "Écart", type: "text", default: "-200 €" },
+                        { label: "Explications", type: "textarea", default: "Achat de matériel imprévu" },
+                        { label: "Actions correctives", type: "textarea", default: "Réduire les frais de déplacement" }
+                    ]
+                },
+                {
+                    title: "40. Revue des objectifs personnels",
+                    description: "Équilibre vie pro / perso.",
+                    fields: [
+                        { label: "Charge de travail ressentie", type: "select", options: ["Trop élevée", "Correcte", "Faible"], default: "Trop élevée" },
+                        { label: "Temps passé en famille", type: "text", default: "10 h/semaine" },
+                        { label: "Stress (1-10)", type: "number", min:1, max:10, default: "7" },
+                        { label: "Objectif d'amélioration", type: "textarea", default: "Déléguer plus, se fixer des horaires" }
+                    ]
+                },
+             {
+    title: "41. Préparation de la prochaine étape (3 mois)",
+    description: "Anticiper les actions clés, les ressources et les jalons pour les trois prochains mois.",
+    fields: [
+        { label: "Grands jalons à atteindre", type: "textarea", default: "1. Finaliser la version 2 du produit\n2. Recruter un commercial\n3. Participer à un salon professionnel" },
+        { label: "Ressources nécessaires (humaines, financières, techniques)", type: "textarea", default: "Humaines : dev front-end, commercial\nFinancières : 20 k€ (salaires, salon)\nTechniques : serveurs supplémentaires" },
+        { label: "Budget alloué (€)", type: "text", default: "25 000 €" },
+        { label: "Responsable(s)", type: "text", default: "Moi (PM), CTO, futur commercial" },
+        { label: "Dépendances / prérequis", type: "textarea", default: "Recrutement finalisé avant le salon ; validation des fonctionnalités par les clients pilotes" },
+        { label: "Indicateurs de succès", type: "textarea", default: "Version 2 livrée ; commercial embauché ; 10 leads qualifiés générés au salon" },
+        { label: "Risques potentiels", type: "textarea", default: "Retard de développement ; absence de candidats ; faible fréquentation du salon" },
+        { label: "Plan de contingence si retard", type: "textarea", default: "Décaler le salon ; externaliser certaines tâches ; élargir la recherche de candidats" },
+        { label: "Date de début prévue", type: "text", default: "01/04/2025" },
+        { label: "Date de fin prévue", type: "text", default: "30/06/2025" }
+    ]
+                },
+                {
+                    title: "42. Bilan annuel et perspectives",
+                    description: "Synthèse de l'année écoulée et planification de l'année suivante.",
+                    fields: [
+                        { label: "Réalisations marquantes de l'année", type: "textarea", default: "Lancement du nouveau produit, 100 clients" },
+                        { label: "Difficultés rencontrées", type: "textarea", default: "Retards de développement, turnover" },
+                        { label: "Ce qui a le mieux fonctionné", type: "textarea", default: "Marketing de contenu" },
+                        { label: "Ce qui doit être amélioré", type: "textarea", default: "Processus de recrutement" },
+                        { label: "Objectifs pour l'année prochaine", type: "textarea", default: "Doubler le CA, recruter 3 personnes" },
+                        { label: "Budget prévisionnel annuel", type: "text", default: "120 k€" },
+                        { label: "Principaux risques à anticiper", type: "textarea", default: "Concurrence, conjoncture" }
                     ]
                 }
             ]
